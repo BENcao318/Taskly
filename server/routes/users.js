@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const users = require('../controller/user.controller')
 
 router.get('/', (req, res) => {
   res.send('User List')
@@ -9,12 +10,8 @@ router.get('/new', (req, res) => {
   res.send('User New Form')
 })
 
-router.get('/:id', (req, res) => {
-  res.send(`User id: ${req.params.id}`)
-})
+router.get('/:id', users.findOne)
 
-router.post('/', (req, res) => {
-  res.send('Create user')
-})
+router.post('/', users.create)
 
 module.exports = router
