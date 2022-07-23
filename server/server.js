@@ -25,6 +25,6 @@ app.use('/users', userRouter)
 
 app.listen(PORT, async () => {
   console.log(`App listening on port: ${PORT}`)
-  await db.sequelize.sync({ force: true }) //drop existing tables and re-sync database, turn off in production
-  console.log('Synced db.')
+  await db.sequelize.authenticate()
+  console.log('Database Connected!')
 })
