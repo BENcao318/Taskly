@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: [
+    './src/**/*.{js,jsx,ts,tsx}',
+    'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
+  ],
   darkMode: 'class',
   theme: {
     minWidth: {
@@ -27,6 +30,9 @@ module.exports = {
     },
     fontFamily: {
       poppins: ['Poppins', 'sans-serif'],
+      sans: ['ui-sans-serif', 'system-ui'],
+      serif: ['ui-serif', 'Georgia'],
+      mono: ['ui-monospace', 'SFMono-Regular'],
     },
     screens: {
       xxl: { min: '1620px' },
@@ -39,7 +45,6 @@ module.exports = {
     borderRadius: {
       none: '0',
       sm: '0.125rem',
-      DEFAULT: '0.25rem',
       DEFAULT: '4px',
       md: '0.375rem',
       lg: '0.5rem',
@@ -48,5 +53,5 @@ module.exports = {
       xl: '26px',
     },
   },
-  plugins: [],
+  plugins: [require('flowbite/plugin')],
 }
