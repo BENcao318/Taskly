@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import landingPagePic from '../assets/Project.jpg'
+import landingPagePic from '../assets/Project6.png'
 
 export const LandingPage = () => {
   const navigate = useNavigate()
@@ -17,7 +17,7 @@ export const LandingPage = () => {
         <p className="text-lg font-normal ">
           Get customizable forms with Taskly creations
         </p>
-        <div className="flex justify-center gap-6 mt-3">
+        <div className="flex gap-6 mt-3">
           <button
             type="button"
             class="text-sky-800 bg-sky-200 hover:bg-sky-300 focus:ring-4 focus:ring-blue-300 font-normal rounded-md text-md px-6 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-sky-400 focus:outline-none dark:focus:ring-blue-600"
