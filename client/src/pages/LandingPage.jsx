@@ -1,46 +1,183 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import landingPagePic from '../assets/Project6.png'
+import { ReactComponent as PencilLogo } from '../assets/pencil.svg'
+import { ReactComponent as HeroLogo } from '../assets/hero.svg'
+import { Navbar, Button, Footer, Modal } from 'flowbite-react'
+import { HiOutlineArrowRight, HiUsers, HiFlag } from 'react-icons/hi'
+import { FaChevronRight, FaClipboard } from 'react-icons/fa'
+import { BsFillCheckCircleFill, BsGithub } from 'react-icons/bs'
+import { useState } from 'react'
+import { SignupModal } from './SignupModal'
 
 export const LandingPage = () => {
   const navigate = useNavigate()
+  const [openSignupModal, setOpenSignupModal] = useState(false)
+
+  const toggleSignupModal = () => {
+    setOpenSignupModal(!openSignupModal)
+  }
 
   return (
-    <div className="flex items-center justify-center w-screen h-screen gap-12">
-      <div className="flex flex-col gap-3">
-        <h1 className="font-sans text-xl font-bold text-orange-600 ">TASKLY</h1>
-        <div>
-          <p className="font-serif text-6xl font-semibold ">Provide you</p>
-          <p className="font-serif text-6xl font-semibold ">a fresh way to</p>
-          <p className="font-serif text-6xl font-semibold ">create new tasks</p>
+    <div className="max-w-6xl mx-auto">
+      <Navbar>
+        <React.Fragment key=".0">
+          <Navbar.Brand href="http://localhost:3000">
+            <PencilLogo className="h-6 mr-3 sm:h-9" alt="Pencil Logo" />
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+              Taskly
+            </span>
+          </Navbar.Brand>
+          <div className="flex md:order-2">
+            <a
+              href="http://localhost:3000/login"
+              className="block py-2 pl-3 pr-6 font-medium text-gray-700 rounded hover:text-sky-600 dark:text-gray-400 dark:hover:text-white text-md dark:border-gray-700"
+            >
+              Log in
+            </a>
+            <Button onClick={toggleSignupModal}>Get started</Button>
+            <Navbar.Toggle />
+          </div>
+          <Navbar.Collapse>
+            <Navbar.Link href="/navbars">Features</Navbar.Link>
+            <Navbar.Link href="/navbars">Pricing</Navbar.Link>
+          </Navbar.Collapse>
+        </React.Fragment>
+      </Navbar>
+
+      <section className="container flex flex-col justify-between w-full gap-12 mx-auto mt-24 lg:flex-row">
+        <div className="flex flex-col gap-6 lg:w-2/5">
+          <div className="font-serif tracking-tight">
+            <h1 className="text-6xl text-gray-900">
+              <span className="font-bold ">A </span>
+              <span className="font-extrabold text-blue-600 ">
+                task management
+              </span>
+            </h1>
+            <h1 className="text-6xl font-bold text-gray-900">
+              system for small
+            </h1>
+            <h1 className="text-6xl font-bold text-gray-900">businesses</h1>
+          </div>
+          <p className="text-lg font-normal text-gray-500">
+            Taskly is the ultimate productivity tool. Create cusom tasks, assign
+            them to your clients, track the status of outstanding tasks, send
+            reminders, and manage client responses all on a single platform.
+          </p>
+          <div className="flex flex-wrap gap-4 mt-3">
+            <Button onClick={toggleSignupModal}>
+              Get started
+              <HiOutlineArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+            <button
+              type="button"
+              className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-sky-300 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+            >
+              Login in
+            </button>
+          </div>
         </div>
-        <p className="text-lg font-normal ">
-          Get customizable forms with Taskly creations
-        </p>
-        <div className="flex gap-6 mt-3">
-          <button
-            type="button"
-            class="text-sky-800 bg-sky-200 hover:bg-sky-300 focus:ring-4 focus:ring-blue-300 font-normal rounded-md text-md px-6 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-sky-400 focus:outline-none dark:focus:ring-blue-600"
-            onClick={() => {
-              navigate('/signin')
-            }}
-          >
-            Sign in
-          </button>
-          <button
-            type="button"
-            class="text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:ring-blue-300 font-normal rounded-md text-md px-6 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            onClick={() => {
-              navigate('/signup')
-            }}
-          >
-            Sign up
-          </button>
+
+        <div className="w-1/3">
+          <HeroLogo />
         </div>
-      </div>
-      <div className="w-1/2">
-        <img src={landingPagePic} alt="landingPagePic" className="w-full" />
-      </div>
+      </section>
+
+      <section className="container flex flex-col items-center justify-between w-full mx-auto mt-36 lg:flex-row">
+        <div className="flex flex-col gap-6 lg:w-1/3">
+          <h1 className="text-3xl font-bold text-gray-900">Easy as 1,2,3</h1>
+          <p className="text-lg font-normal text-gray-500 text">
+            A task management system suited for all industries and all
+            workflows.
+          </p>
+          <a
+            href="#123"
+            className="flex items-center gap-2 font-semibold text-sky-600 hover:text-sky-300"
+          >
+            <span>Get started</span>
+            <FaChevronRight />
+          </a>
+        </div>
+
+        <div className="grid w-3/5 grid-cols-2 grid-rows-2 gap-8">
+          <div className="flex flex-col gap-3">
+            <div className="w-10 p-2 bg-blue-200 rounded-lg">
+              <FaClipboard
+                className="text-blue-600 bg-blue-200 "
+                size="1.5rem"
+              />
+            </div>
+            <h1 className="mt-2 text-xl font-bold text-gray-900">
+              1. Create a custom task
+            </h1>
+            <p className="text-lg font-normal text-gray-500 text">
+              Add any task related to your business needs including file
+              uploads, short answers, date selectors, etc!
+            </p>
+          </div>
+          <div className="flex flex-col gap-3">
+            <div className="w-10 p-2 bg-blue-200 rounded-lg ">
+              <HiUsers className="text-blue-600 bg-blue-200 " size="1.5rem" />
+            </div>
+            <h1 className="mt-2 text-xl font-bold text-gray-900 ">
+              2. Add a client
+            </h1>
+            <p className="text-lg font-normal text-gray-500 text">
+              Add your client's information including their contact information,
+              business needs, and other relevant information.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3">
+            <div className="w-10 p-2 bg-blue-200 rounded-lg">
+              <HiFlag className="text-blue-600 bg-blue-200 " size="1.5rem" />
+            </div>
+            <h1 className="mt-2 text-xl font-bold text-gray-900 ">
+              3. Assign tasks to your client
+            </h1>
+            <p className="text-lg font-normal text-gray-500 text">
+              Choose to assign any number of your tasks to any number of your
+              clients! Easily track what tasks have been completed and which are
+              still outstanding.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3">
+            <div className="w-10 p-2 bg-blue-200 rounded-lg">
+              <BsFillCheckCircleFill
+                className="text-blue-600 bg-blue-200 "
+                size="1.5rem"
+              />
+            </div>
+            <h1 className="mt-2 text-xl font-bold text-gray-900 ">
+              4. Collect their responses
+            </h1>
+            <p className="text-lg font-normal text-gray-500 text">
+              Once your client has completed a task you will automatically be
+              notified and will be able to view their responses.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-4 mt-32">
+        <Footer container={true}>
+          <Footer.Brand href="http://localhost:3000">
+            <PencilLogo className="h-6 mr-3 sm:h-9" alt="Pencil Logo" />
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+              Taskly
+            </span>
+          </Footer.Brand>
+          <Footer.Copyright href="#" by="Taskly™" year={2022} />
+          <Footer.LinkGroup>
+            <Footer.Icon href="#" icon={BsGithub} />
+          </Footer.LinkGroup>
+        </Footer>
+      </section>
+
+      <Modal show={openSignupModal} onClose={toggleSignupModal}>
+        <Modal.Header />
+        <Modal.Body>
+          <SignupModal />
+        </Modal.Body>
+      </Modal>
     </div>
   )
 }

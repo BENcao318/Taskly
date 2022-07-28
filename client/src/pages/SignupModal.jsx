@@ -5,8 +5,9 @@ import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import { useEffect } from 'react'
 import { useRef } from 'react'
+import { Label, TextInput } from 'flowbite-react'
 
-export const SignupPage = () => {
+export const SignupModal = () => {
   const [showPageOne, setShowPageOne] = useState(true)
   const [showPageTwo, setShowPageTwo] = useState(false)
   const timer = useRef(null)
@@ -44,8 +45,8 @@ export const SignupPage = () => {
   }, [timer])
 
   return (
-    <div className="flex flex-col items-center justify-center w-screen h-screen bg-gray-300">
-      <div className="">
+    <div className="flex flex-col items-center justify-center">
+      <div>
         <Transition
           as="div"
           show={showPageOne}
@@ -53,8 +54,8 @@ export const SignupPage = () => {
           enterFrom="opacity-0 scale-50"
           enterTo="opacity-100 scale-100"
           leave="transform duration-200 transition ease-in-out"
-          leaveFrom="opacity-100 scale-100 "
-          leaveTo="opacity-0 scale-95 "
+          leaveFrom="opacity-100 scale-100 translate-x-0"
+          leaveTo="opacity-0 scale-95 -translate-x-full"
         >
           <div className="flex flex-col items-center">
             <Formik
@@ -77,12 +78,19 @@ export const SignupPage = () => {
                         {({ field, meta }) => {
                           return (
                             <div>
-                              <input
+                              <div className="block mb-2">
+                                <Label
+                                  htmlFor="username3"
+                                  color="green"
+                                  value="Company name"
+                                />
+                              </div>
+                              <TextInput
                                 {...field}
-                                type="text"
-                                autoComplete="new-username"
-                                className="block w-full p-2 font-medium border rounded border-grey-light focus:outline-none focus:ring focus:ring-sky-600"
-                                placeholder="Username"
+                                id="username"
+                                placeholder="Bonnie Green"
+                                required={true}
+                                color="green"
                               />
                               {meta.touched && meta.error ? (
                                 <div className="mt-2 text-sm font-semibold text-red-400">
@@ -176,115 +184,6 @@ export const SignupPage = () => {
               className="px-4 py-2 mt-8 text-sm font-medium text-white transition transform bg-black rounded-md backface-visibility-hidden bg-opacity-20 hover:scale-105 hover:bg-opacity-30 focus:outline-none active:bg-opacity-40"
             >
               <span className="text-lg text-white">Next</span>
-            </button>
-          </div>
-        </Transition>
-
-        <Transition
-          as="div"
-          show={showPageTwo}
-          enter="transform transition duration-[400ms]"
-          enterFrom="opacity-0 scale-50"
-          enterTo="opacity-100 scale-100"
-          leave="transform duration-200 transition ease-in-out"
-          leaveFrom="opacity-100 scale-100 "
-          leaveTo="opacity-0 scale-95 "
-        >
-          <div className="flex flex-col items-center">
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={(values, { setSubmitting }) => {
-                handleSubmit(values)
-                setSubmitting(false)
-              }}
-            >
-              <Form className="text-center">
-                <div className="flex flex-col items-center justify-center px-2 mx-auto">
-                  <div className="w-full px-6 py-6 text-black rounded-lg shadow-lg bg-emerald-400">
-                    <h1 className="mb-8 text-2xl font-semibold text-center text-gray-800">
-                      Business info 🧑‍🚀
-                    </h1>
-
-                    <div className="w-full p-3">
-                      <Field name="companyName">
-                        {({ field, meta }) => {
-                          return (
-                            <div>
-                              <input
-                                {...field}
-                                type="text"
-                                autoComplete="new-companyname"
-                                className="block w-full p-2 font-medium border rounded border-grey-light focus:outline-none focus:ring focus:ring-sky-600"
-                                placeholder="Company name"
-                              />
-                              {meta.touched && meta.error ? (
-                                <div className="mt-2 text-sm font-semibold text-red-400">
-                                  {meta.error}
-                                </div>
-                              ) : null}
-                            </div>
-                          )
-                        }}
-                      </Field>
-                    </div>
-
-                    <div className="w-full p-3">
-                      <Field name="companyLogo">
-                        {({ field, meta }) => {
-                          return (
-                            <div>
-                              <input
-                                {...field}
-                                type="text"
-                                autoComplete="new-company-logo"
-                                className="block w-full p-2 font-medium border rounded border-grey-light focus:outline-none focus:ring focus:ring-sky-600"
-                                placeholder="Company logo"
-                              />
-                              {meta.touched && meta.error ? (
-                                <div className="mt-2 text-sm font-semibold text-red-400">
-                                  {meta.error}
-                                </div>
-                              ) : null}
-                            </div>
-                          )
-                        }}
-                      </Field>
-                    </div>
-
-                    <div className="w-full p-3">
-                      <Field name="companyTheme">
-                        {({ field, meta }) => {
-                          return (
-                            <div>
-                              <input
-                                {...field}
-                                type="text"
-                                autoComplete="new-company-theme"
-                                className="block w-full p-2 font-medium border rounded border-grey-light focus:outline-none focus:ring focus:ring-sky-600"
-                                placeholder="Company theme"
-                              />
-                              {meta.touched && meta.error ? (
-                                <div className="mt-2 text-sm font-semibold text-red-400">
-                                  {meta.error}
-                                </div>
-                              ) : null}
-                            </div>
-                          )
-                        }}
-                      </Field>
-                    </div>
-                  </div>
-                </div>
-              </Form>
-            </Formik>
-
-            <button
-              //todo
-              onClick={() => {}}
-              className="px-4 py-2 mt-8 text-sm font-medium text-white transition transform bg-black rounded-md backface-visibility-hidden bg-opacity-20 hover:scale-105 hover:bg-opacity-30 focus:outline-none active:bg-opacity-40"
-            >
-              <span className="text-lg text-white">Submit</span>
             </button>
           </div>
         </Transition>
