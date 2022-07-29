@@ -1,5 +1,4 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { ReactComponent as PencilLogo } from '../assets/pencil.svg'
 import { ReactComponent as HeroLogo } from '../assets/hero.svg'
 import { Navbar, Button, Footer, Modal } from 'flowbite-react'
@@ -8,14 +7,11 @@ import { FaChevronRight, FaClipboard } from 'react-icons/fa'
 import { BsFillCheckCircleFill, BsGithub } from 'react-icons/bs'
 import { useState } from 'react'
 import { SignupModal } from './SignupModal'
+import { SigninModal } from './SigninModal'
 
 export const LandingPage = () => {
-  const navigate = useNavigate()
   const [openSignupModal, setOpenSignupModal] = useState(false)
-
-  const toggleSignupModal = () => {
-    setOpenSignupModal(!openSignupModal)
-  }
+  const [openSigninModal, setOpenSigninModal] = useState(false)
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -28,24 +24,26 @@ export const LandingPage = () => {
             </span>
           </Navbar.Brand>
           <div className="flex md:order-2">
-            <a
-              href="http://localhost:3000/login"
-              className="block py-2 pl-3 pr-6 font-medium text-gray-700 rounded hover:text-sky-600 dark:text-gray-400 dark:hover:text-white text-md dark:border-gray-700"
+            <span
+              className="block py-2 pl-3 pr-6 font-medium text-gray-700 rounded cursor-pointer hover:text-sky-600 dark:text-gray-400 dark:hover:text-white text-md dark:border-gray-700"
+              onClick={() => setOpenSigninModal(true)}
             >
               Log in
-            </a>
-            <Button onClick={toggleSignupModal}>Get started</Button>
+            </span>
+            <Button onClick={() => setOpenSignupModal(true)}>
+              Get started
+            </Button>
             <Navbar.Toggle />
           </div>
           <Navbar.Collapse>
-            <Navbar.Link href="/navbars">Features</Navbar.Link>
+            <Navbar.Link href="#features">Features</Navbar.Link>
             <Navbar.Link href="/navbars">Pricing</Navbar.Link>
           </Navbar.Collapse>
         </React.Fragment>
       </Navbar>
 
       <section className="container flex flex-col justify-between w-full gap-12 mx-auto mt-24 lg:flex-row">
-        <div className="flex flex-col gap-6 lg:w-2/5">
+        <div className="flex flex-col gap-6 lg:w-1/2">
           <div className="font-serif tracking-tight">
             <h1 className="text-6xl text-gray-900">
               <span className="font-bold ">A </span>
@@ -64,13 +62,14 @@ export const LandingPage = () => {
             reminders, and manage client responses all on a single platform.
           </p>
           <div className="flex flex-wrap gap-4 mt-3">
-            <Button onClick={toggleSignupModal}>
+            <Button onClick={() => setOpenSignupModal(true)}>
               Get started
               <HiOutlineArrowRight className="w-5 h-5 ml-2" />
             </Button>
             <button
               type="button"
               className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-sky-300 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+              onClick={() => setOpenSigninModal(true)}
             >
               Login in
             </button>
@@ -82,20 +81,23 @@ export const LandingPage = () => {
         </div>
       </section>
 
-      <section className="container flex flex-col items-center justify-between w-full mx-auto mt-36 lg:flex-row">
+      <section
+        id="features"
+        className="container flex flex-col items-center justify-between w-full mx-auto mt-36 lg:flex-row"
+      >
         <div className="flex flex-col gap-6 lg:w-1/3">
           <h1 className="text-3xl font-bold text-gray-900">Easy as 1,2,3</h1>
           <p className="text-lg font-normal text-gray-500 text">
             A task management system suited for all industries and all
             workflows.
           </p>
-          <a
-            href="#123"
+          <div
             className="flex items-center gap-2 font-semibold text-sky-600 hover:text-sky-300"
+            onClick={() => setOpenSignupModal(true)}
           >
             <span>Get started</span>
             <FaChevronRight />
-          </a>
+          </div>
         </div>
 
         <div className="grid w-3/5 grid-cols-2 grid-rows-2 gap-8">
@@ -172,10 +174,23 @@ export const LandingPage = () => {
         </Footer>
       </section>
 
-      <Modal show={openSignupModal} onClose={toggleSignupModal}>
+      <Modal show={openSignupModal} onClose={() => setOpenSignupModal(false)}>
+        <Modal.Header size="1x1" />
+        <Modal.Body>
+          <SignupModal
+            setOpenSigninModal={setOpenSigninModal}
+            setOpenSignupModal={setOpenSignupModal}
+          />
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={openSigninModal} onClose={() => setOpenSigninModal(false)}>
         <Modal.Header />
         <Modal.Body>
-          <SignupModal />
+          <SigninModal
+            setOpenSigninModal={setOpenSigninModal}
+            setOpenSignupModal={setOpenSignupModal}
+          />
         </Modal.Body>
       </Modal>
     </div>
