@@ -180,6 +180,7 @@ export const LandingPage = () => {
           <SignupModal
             setOpenSigninModal={setOpenSigninModal}
             setOpenSignupModal={setOpenSignupModal}
+            openSignupModal={openSignupModal}
           />
         </Modal.Body>
       </Modal>
@@ -190,6 +191,7 @@ export const LandingPage = () => {
           <SigninModal
             setOpenSigninModal={setOpenSigninModal}
             setOpenSignupModal={setOpenSignupModal}
+            openSigninModal={openSigninModal}
           />
         </Modal.Body>
       </Modal>

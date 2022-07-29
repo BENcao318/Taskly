@@ -12,12 +12,6 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      company_logo_url: {
-        type: DataTypes.STRING,
-      },
-      company_theme: {
-        type: DataTypes.STRING,
-      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,

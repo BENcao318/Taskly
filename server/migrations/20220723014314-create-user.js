@@ -28,15 +28,12 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      user_logo: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       admin_id: {
         type: DataTypes.INTEGER,
       },
       client_id: {
         type: DataTypes.INTEGER,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,

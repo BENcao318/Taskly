@@ -4,15 +4,49 @@ const PORT = process.env.PORT || 8080
 const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+const session = require('express-session')
 const cors = require('cors')
 const app = express()
 
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(cors())
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
+    credentials: true,
+  })
+)
+app.use(
+  session({
+    secret: 'user-secret',
+    resave: false,
+    saveUninitialized: false,
+  })
+)
 
 const db = require('./models')
+
+const isAuth = (req, res, next) => {
+  if (req.session.user) {
+    next()
+  } else {
+    res.send({
+      success: false,
+    })
+  }
+}
+
+app.get('/me', isAuth, (req, res) => {
+  const user = req.session.user
+  res.status(200).send({
+    success: true,
+    message: 'Login success',
+    messge2: null,
+    user,
+  })
+})
 
 //Todo
 app.get('/', (req, res) => {
