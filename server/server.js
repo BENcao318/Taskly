@@ -8,6 +8,9 @@ const session = require('express-session')
 const cors = require('cors')
 const app = express()
 
+const userRouter = require('./routes/users')
+const taskRouter = require('./routes/tasks')
+
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -25,6 +28,9 @@ app.use(
     saveUninitialized: false,
   })
 )
+
+app.use('/users', userRouter)
+app.use('/tasks', taskRouter)
 
 const db = require('./models')
 
@@ -52,10 +58,6 @@ app.get('/me', isAuth, (req, res) => {
 app.get('/', (req, res) => {
   res.status(200).json({ message: 'Hi' })
 })
-
-const userRouter = require('./routes/users')
-
-app.use('/users', userRouter)
 
 app.listen(PORT, async () => {
   console.log(`App listening on port: ${PORT}`)

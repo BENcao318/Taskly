@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,39 +6,38 @@ import {
   Navigate,
 } from 'react-router-dom'
 import { LandingPage } from './pages/LandingPage'
-import { AdminPage } from './pages/AdminPage'
+import { MainPage } from './pages/MainPage'
 import serverAPI from './hooks/useAxios'
+
+export const UserContext = React.createContext()
 
 const App = () => {
   const [authed, setAuthed] = useState(false)
+  const [user, setUser] = useState()
 
   useEffect(() => {
     serverAPI.get('/me').then((response) => {
       if (response.data.success) {
-        console.log('test')
         setAuthed(true)
+        setUser(response.data.user)
       }
     })
   }, [])
 
   return (
-    <Router>
-      <Routes>
-        {authed ? (
-          <Route path="/" element={<Navigate to="/main" />}>
-            {' '}
-          </Route>
-        ) : (
-          <Route path="/" element={<LandingPage />}>
-            {' '}
-          </Route>
-        )}
+    <UserContext.Provider value={{ user, setUser }}>
+      <Router>
+        <Routes>
+          {authed ? (
+            <Route path="/" element={<Navigate to="/main" />}></Route>
+          ) : (
+            <Route path="/" element={<LandingPage />}></Route>
+          )}
 
-        <Route path="/main" element={<AdminPage />}>
-          {' '}
-        </Route>
-      </Routes>
-    </Router>
+          <Route path="/main" element={<MainPage />}></Route>
+        </Routes>
+      </Router>
+    </UserContext.Provider>
   )
 }
 

@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
+import { UserContext } from '../App'
 
-export const AdminPage = () => {
+export const MainPage = () => {
   const { signOut } = useAuth()
   const navigate = useNavigate()
+  const { user } = useContext(UserContext)
 
+  console.log('main page', user)
   return (
     <div>
       AdminPage
@@ -14,6 +17,7 @@ export const AdminPage = () => {
           className="bg-blue-200"
           onClick={() => {
             signOut()
+            // console.log('signout')
             navigate('/')
           }}
         >

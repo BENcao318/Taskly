@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Transition } from '@headlessui/react'
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import serverAPI from '../hooks/useAxios'
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../App'
 
 export const SignupModal = ({
   openSignupModal,
@@ -11,6 +12,8 @@ export const SignupModal = ({
   setOpenSignupModal,
 }) => {
   const [emailIsTaken, setEmailIsTaken] = useState(false)
+  const navigate = useNavigate()
+  const { setUser } = useContext(UserContext)
 
   const handleSubmit = (formInfo) => {
     const user = {
@@ -23,8 +26,11 @@ export const SignupModal = ({
 
     serverAPI
       .post('/users/newAdmin', user)
-      .then((data) => {
-        if (data && data.status === 200) {
+      .then((response) => {
+        if (response && response.data.success) {
+          setUser(response.data.user)
+          navigate('/main')
+          // console.log('signup page', response.data.user)
           console.log('Successfully created account')
         }
       })

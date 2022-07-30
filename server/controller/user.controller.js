@@ -30,7 +30,7 @@ exports.createAdmin = async (req, res) => {
 
     let hashedPassword = await hash(req.body.password, 10)
 
-    const user = {
+    const userInfo = {
       email: req.body.email.toLowerCase(),
       first_name: req.body.first_name,
       last_name: req.body.last_name,
@@ -39,9 +39,22 @@ exports.createAdmin = async (req, res) => {
       client_id: null,
     }
 
-    const userData = await User.create(user)
+    const userData = await User.create(userInfo)
 
-    res.status(200).send(userData)
+    const user = {
+      email: userData.email,
+      first_name: userData.first_name,
+      last_name: userData.last_name,
+      company_name: adminData.company_name,
+    }
+
+    req.session.user = user
+    res.status(200).send({
+      success: true,
+      message: 'Signup success',
+      messge2: null,
+      user,
+    })
   } catch (err) {
     res.status(500).send({
       message: err.message || 'Some error occurred while creating the User',
@@ -76,7 +89,7 @@ exports.signIn = async (req, res) => {
           company_name: user[0].dataValues.admin.dataValues.company_name,
         }
 
-        req.session.user = email
+        req.session.user = userData
         res.status(200).send({
           success: true,
           message: 'Login success',

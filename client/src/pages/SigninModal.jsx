@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import { Transition } from '@headlessui/react'
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import useAuth from '../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { UserContext } from '../App'
 
 export const SigninModal = ({
   openSigninModal,
@@ -14,6 +14,7 @@ export const SigninModal = ({
   const { signIn } = useAuth()
   const navigate = useNavigate()
   const [signInError, setSignInError] = useState(false)
+  const { setUser } = useContext(UserContext)
 
   const handleSubmit = (formInfo) => {
     const user = {
@@ -24,6 +25,7 @@ export const SigninModal = ({
       if (!response.data.success) {
         setSignInError(true)
       } else {
+        setUser(response.data.user)
         navigate('/main')
       }
     })
