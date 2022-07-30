@@ -1,66 +1,70 @@
-import React, { useState } from 'react'
-import { ReactComponent as PencilLogo } from '../assets/pencil.svg'
-import { ReactComponent as DropdownMenu } from '../assets/dropdownMenu.svg'
+import React from "react";
 
-export const Navbar = () => {
-  const [expandNavbar, setExpandNavbar] = useState(false)
-
+export const NavBar = () => {
   return (
-    <div>
-      <nav className="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
-        <div className="container flex flex-wrap items-center justify-between mx-auto">
-          <a href="http://localhost:3000/" className="flex items-center">
-            <PencilLogo className="h-6 mr-3 sm:h-9" alt="Pencil Logo" />
-            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+    <nav class="bg-white border-b border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+      <div class="flex flex-wrap justify-between items-center">
+        <div class="flex items-center ml-2">
+          <svg
+            aria-hidden="true"
+            class="w-6 h-6 mr-2 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fillRule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clipRule="evenodd"
+            />
+          </svg>
+          <a href="https://flowbite.com/" class="flex items-center">
+            <img
+              src="https://flowbite.com/docs/images/logo.svg"
+              class="mr-3 h-6 sm:h-9"
+              alt="Flowbite Logo"
+            />
+            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
               Taskly
             </span>
           </a>
-          <div className="flex md:order-2">
-            <button
-              type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Get started
-            </button>
-            <button
-              onClick={() => setExpandNavbar(!expandNavbar)}
-              type="button"
-              className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-              aria-controls="navbar-sticky"
-              aria-expanded="false"
-            >
-              <span className="sr-only">Open main menu</span>
-              <DropdownMenu />
-            </button>
-          </div>
-          <div
-            className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${
-              expandNavbar ? '' : 'hidden'
-            }`}
-            id="navbar-sticky"
-          >
-            <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-              <li>
-                <a
-                  href="#123"
-                  className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                  aria-current="page"
-                >
-                  Features
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#123"
-                  className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Pricing
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
-      </nav>
-    </div>
-  )
-}
+        <div class="flex items-center mr-2">
+          <svg
+            aria-hidden="true"
+            class="w-6 h-6 mr-2 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+          </svg>
+          <svg
+            aria-hidden="true"
+            class="w-6 h-6 mr-2 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+          </svg>
+          <button
+            type="button"
+            class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            id="user-menu-button"
+            aria-expanded="false"
+            data-dropdown-toggle="user-dropdown"
+            data-dropdown-placement="bottom"
+          >
+            <span class="sr-only">Open user menu</span>
+            <img
+              class="w-8 h-8 rounded-full"
+              src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
+              alt="user photo"
+            />
+          </button>
+        </div>
+      </div>
+    </nav>
+  );
+};
