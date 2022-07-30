@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
-import { UserContext } from '../App'
+import { useUser } from '../hooks/UserContext'
 
 export const MainPage = () => {
   const { signOut } = useAuth()
   const navigate = useNavigate()
-  const { user } = useContext(UserContext)
+  const { user, setUser } = useUser()
 
   console.log('main page', user)
   return (
@@ -16,9 +16,13 @@ export const MainPage = () => {
         <button
           className="bg-blue-200"
           onClick={() => {
-            signOut()
-            // console.log('signout')
-            navigate('/')
+            signOut().then((response) => {
+              if (response.data.success) {
+                setUser(null)
+                console.log('signout')
+                navigate('/')
+              }
+            })
           }}
         >
           Sign out
