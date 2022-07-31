@@ -7,7 +7,7 @@ import { FaChevronRight, FaClipboard } from 'react-icons/fa'
 import { BsFillCheckCircleFill, BsGithub } from 'react-icons/bs'
 import { useState } from 'react'
 import { SignupModal } from '../components/SignupModal'
-import { SigninModal } from './components/SigninModal'
+import { SigninModal } from '../components/SigninModal'
 import { useNavigate } from 'react-router-dom'
 import serverAPI from '../hooks/useAxios'
 import { useUser } from '../hooks/UserContext'
@@ -52,7 +52,7 @@ export const LandingPage = () => {
           </div>
           <Navbar.Collapse>
             <Navbar.Link href="#features">Features</Navbar.Link>
-            <Navbar.Link href="/navbars">Pricing</Navbar.Link>
+            <Navbar.Link href="#">Pricing</Navbar.Link>
           </Navbar.Collapse>
         </React.Fragment>
       </Navbar>
@@ -107,7 +107,7 @@ export const LandingPage = () => {
             workflows.
           </p>
           <div
-            className="flex items-center gap-2 font-semibold text-sky-600 hover:text-sky-300"
+            className="flex items-center gap-2 font-semibold cursor-pointer text-sky-600 hover:text-sky-300"
             onClick={() => setOpenSignupModal(true)}
           >
             <span>Get started</span>
@@ -184,7 +184,10 @@ export const LandingPage = () => {
           </Footer.Brand>
           <Footer.Copyright href="#" by="Taskly™" year={2022} />
           <Footer.LinkGroup>
-            <Footer.Icon href="#" icon={BsGithub} />
+            <Footer.Icon
+              href="https://github.com/BENcao318/Taskly"
+              icon={BsGithub}
+            />
           </Footer.LinkGroup>
         </Footer>
       </section>

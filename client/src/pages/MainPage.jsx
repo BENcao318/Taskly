@@ -1,5 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { NavBar } from '../components/Navbar'
+import { Sidebar } from '../components/Sidebar'
 import useAuth from '../hooks/useAuth'
 import { useUser } from '../hooks/UserContext'
 
@@ -11,8 +13,10 @@ export const MainPage = () => {
   console.log('main page', user)
   return (
     <div>
-      MainPage
       <div>
+        <NavBar />
+        <Sidebar />
+
         <button
           className="bg-blue-200"
           onClick={() => {
