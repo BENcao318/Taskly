@@ -1,7 +1,10 @@
+import { NavBar } from '../components/Navbar'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 import { useUser } from '../hooks/UserContext'
+import { NewClient } from '../components/NewClient'
+import { Sidebar } from '../components/Sidebar'
 
 export const MainPage = () => {
   const { signOut } = useAuth()
@@ -11,8 +14,9 @@ export const MainPage = () => {
   console.log('main page', user)
   return (
     <div>
-      AdminPage
       <div>
+        <NavBar></NavBar>
+        <Sidebar></Sidebar>
         <button
           className="bg-blue-200"
           onClick={() => {

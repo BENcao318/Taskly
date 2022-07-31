@@ -107,7 +107,7 @@ export const LandingPage = () => {
             workflows.
           </p>
           <div
-            className="flex items-center gap-2 font-semibold text-sky-600 hover:text-sky-300"
+            className="flex items-center gap-2 font-semibold cursor-pointer text-sky-600 hover:text-sky-300"
             onClick={() => setOpenSignupModal(true)}
           >
             <span>Get started</span>

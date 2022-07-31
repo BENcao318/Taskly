@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react'
 
 export const NavBar = () => {
   return (
-    <nav class="bg-white border-b border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
-      <div class="flex flex-wrap justify-between items-center">
-        <div class="flex items-center ml-2">
+    <nav className="bg-white border-b border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+      <div className="flex flex-wrap items-center justify-between">
+        <div className="flex items-center ml-2">
           <svg
             aria-hidden="true"
-            class="w-6 h-6 mr-2 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            className="w-6 h-6 mr-2 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -18,21 +18,21 @@ export const NavBar = () => {
               clipRule="evenodd"
             />
           </svg>
-          <a href="https://flowbite.com/" class="flex items-center">
+          <a href="https://flowbite.com/" className="flex items-center">
             <img
               src="https://flowbite.com/docs/images/logo.svg"
-              class="mr-3 h-6 sm:h-9"
+              className="h-6 mr-3 sm:h-9"
               alt="Flowbite Logo"
             />
-            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
               Taskly
             </span>
           </a>
         </div>
-        <div class="flex items-center mr-2">
+        <div className="flex items-center mr-2">
           <svg
             aria-hidden="true"
-            class="w-6 h-6 mr-2 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            className="w-6 h-6 mr-2 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ export const NavBar = () => {
           </svg>
           <svg
             aria-hidden="true"
-            class="w-6 h-6 mr-2 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            className="w-6 h-6 mr-2 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -50,21 +50,21 @@ export const NavBar = () => {
           </svg>
           <button
             type="button"
-            class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
             id="user-menu-button"
             aria-expanded="false"
             data-dropdown-toggle="user-dropdown"
             data-dropdown-placement="bottom"
           >
-            <span class="sr-only">Open user menu</span>
+            <span className="sr-only">Open user menu</span>
             <img
-              class="w-8 h-8 rounded-full"
+              className="w-8 h-8 rounded-full"
               src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-              alt="user photo"
+              alt="user"
             />
           </button>
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
