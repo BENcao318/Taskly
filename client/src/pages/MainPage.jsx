@@ -1,22 +1,30 @@
-import { NavBar } from '../components/Navbar'
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { NavBar } from '../components/Navbar'
+import { Sidebar } from '../components/Sidebar'
 import useAuth from '../hooks/useAuth'
 import { useUser } from '../hooks/UserContext'
-import { NewClient } from '../components/NewClient'
-import { Sidebar } from '../components/Sidebar'
+import { ClientSection } from '../sections/ClientSection'
+import { TaskSection } from '../sections/TaskSection'
 
 export const MainPage = () => {
   const { signOut } = useAuth()
   const navigate = useNavigate()
   const { user, setUser } = useUser()
+  const [section, setSection] = useState('clientSection')
 
+  //todo
+  // Add the user info into localstoreage
   console.log('main page', user)
   return (
     <div>
       <div>
-        <NavBar></NavBar>
-        <Sidebar></Sidebar>
+        <NavBar />
+        <div className="flex ">
+          <Sidebar setSection={setSection} />
+          {section === 'clientSection' && <ClientSection />}
+          {section === 'taskSection' && <TaskSection />}
+        </div>
         <button
           className="bg-blue-200"
           onClick={() => {

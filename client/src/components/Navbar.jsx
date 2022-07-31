@@ -1,4 +1,5 @@
 import React from 'react'
+import { ReactComponent as PencilLogo } from '../assets/pencil.svg'
 
 export const NavBar = () => {
   return (
@@ -18,13 +19,9 @@ export const NavBar = () => {
               clipRule="evenodd"
             />
           </svg>
-          <a href="https://flowbite.com/" className="flex items-center">
-            <img
-              src="https://flowbite.com/docs/images/logo.svg"
-              className="h-6 mr-3 sm:h-9"
-              alt="Flowbite Logo"
-            />
-            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+          <a href="http://localhost:3000" className="flex items-center">
+            <PencilLogo />
+            <span className="self-center px-2 text-xl font-semibold whitespace-nowrap dark:text-white">
               Taskly
             </span>
           </a>

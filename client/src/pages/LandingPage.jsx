@@ -52,7 +52,7 @@ export const LandingPage = () => {
           </div>
           <Navbar.Collapse>
             <Navbar.Link href="#features">Features</Navbar.Link>
-            <Navbar.Link href="/navbars">Pricing</Navbar.Link>
+            <Navbar.Link href="#">Pricing</Navbar.Link>
           </Navbar.Collapse>
         </React.Fragment>
       </Navbar>
@@ -184,7 +184,10 @@ export const LandingPage = () => {
           </Footer.Brand>
           <Footer.Copyright href="#" by="Taskly™" year={2022} />
           <Footer.LinkGroup>
-            <Footer.Icon href="#" icon={BsGithub} />
+            <Footer.Icon
+              href="https://github.com/BENcao318/Taskly"
+              icon={BsGithub}
+            />
           </Footer.LinkGroup>
         </Footer>
       </section>
