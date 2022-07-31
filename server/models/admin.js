@@ -22,8 +22,6 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: { msg: 'Company name must not be empty' },
         },
       },
-      company_logo_url: DataTypes.STRING,
-      company_theme: DataTypes.STRING,
     },
     {
       sequelize,

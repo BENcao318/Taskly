@@ -1,53 +1,53 @@
-import React from "react";
+import React from 'react'
 
 export const Sidebar = () => {
   return (
-    <aside class="w-64 border-r h-screen" aria-label="Sidebar">
-      <div class="overflow-y-auto py-4 px-3 rounded dark:bg-gray-800">
-        <ul class="space-y-2">
+    <aside className="w-64 h-screen border-r" aria-label="Sidebar">
+      <div className="px-3 py-4 overflow-y-auto rounded dark:bg-gray-800">
+        <ul className="space-y-2">
           <li>
             <a
               href="#"
-              class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <svg
                 aria-hidden="true"
-                class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
               </svg>
-              <span class="ml-3">Home</span>
+              <span className="ml-3">Home</span>
             </a>
           </li>
 
           <li>
             <a
               href="#"
-              class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <svg
                 aria-hidden="true"
-                class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
               </svg>
-              <span class="flex-1 ml-3 whitespace-nowrap">Clients</span>
+              <span className="flex-1 ml-3 whitespace-nowrap">Clients</span>
             </a>
           </li>
           <li>
             <a
               href="#"
-              class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <svg
                 aria-hidden="true"
-                class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -55,19 +55,19 @@ export const Sidebar = () => {
                 <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
                 <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
               </svg>
-              <span class="flex-1 ml-3 whitespace-nowrap">Tasks</span>
+              <span className="flex-1 ml-3 whitespace-nowrap">Tasks</span>
             </a>
           </li>
         </ul>
-        <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
+        <ul className="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
           <li>
             <a
               href="#"
-              class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group"
+              className="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group"
             >
               <svg
                 aria-hidden="true"
-                class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -78,11 +78,11 @@ export const Sidebar = () => {
                   clip-rule="evenodd"
                 ></path>
               </svg>
-              <span class="ml-3">Help</span>
+              <span className="ml-3">Help</span>
             </a>
           </li>
         </ul>
       </div>
     </aside>
-  );
-};
+  )
+}

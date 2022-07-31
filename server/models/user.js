@@ -49,8 +49,8 @@ module.exports = (sequelize, DataTypes) => {
       },
       client_id: {
         type: DataTypes.INTEGER,
+        allowNull: true,
       },
-      user_logo: DataTypes.STRING,
     },
     {
       sequelize,

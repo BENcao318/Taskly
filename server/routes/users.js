@@ -10,9 +10,12 @@ router.get('/new', (req, res) => {
   res.send('User New Form')
 })
 
-router.get('/:email', users.findOne)
+router.get('/signout', users.signOut)
+// router.get('/:email', () => console.log('test'))
 
-router.post('/admin', users.createAdmin)
+router.post('/newAdmin', users.createAdmin)
+
+router.post('/signin', users.signIn)
 
 router.get('/admin/:companyName', users.findAdmin)
 
