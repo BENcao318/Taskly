@@ -1,11 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 import { ReactComponent as DownChevron } from '../assets/downChevron.svg'
-import { ReactComponent as TaskLogo } from '../assets/taskLogo.svg'
 import { ReactComponent as PenLogo } from '../assets/penLogo.svg'
 import { ReactComponent as TrashCanLogo } from '../assets/trashcanLogo.svg'
+import { ReactComponent as UserLogo } from '../assets/userLogo.svg'
 
-export const Task = ({ name, numberOfQuestions }) => {
+export const Client = ({
+  name,
+  phoneNumber,
+  outstandingTasks,
+  completedTasks,
+}) => {
   const [toggleActionMenu, setToggleActionMenu] = useState(false)
   const buttonRef = useRef(null)
 
@@ -31,15 +36,21 @@ export const Task = ({ name, numberOfQuestions }) => {
       >
         {name}
       </th>
-      <td className="px-6 py-4 text-center ">
+      <td className="px-6 py-4 font-semibold text-center">{phoneNumber}</td>
+      <td className="px-6 py-4 text-center">
         <div className="flex justify-center">
-          <div className="flex items-center justify-center w-6 h-6 font-semibold text-white rounded-full bg-sky-600">
-            {numberOfQuestions}
+          <div className="flex items-center justify-center w-6 h-6 font-semibold text-white rounded-full bg-amber-600">
+            {outstandingTasks}
           </div>
         </div>
       </td>
-      <td className="px-6 py-4"></td>
-      <td className="px-6 py-4"></td>
+      <td className="px-6 py-4 text-center">
+        <div className="flex justify-center">
+          <div className="flex items-center justify-center w-6 h-6 font-semibold text-white rounded-full bg-lime-600">
+            {completedTasks}
+          </div>
+        </div>
+      </td>
       <td className="px-6 py-4 text-center">
         <button
           className="inline-flex items-center px-4 py-2 text-sm font-semibold rounded-lg bg-white-700 hover:bg-slate-300 focus:ring-4 focus:outline-none focus:ring-slate-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ring-2 ring-slate-300"
@@ -60,20 +71,20 @@ export const Task = ({ name, numberOfQuestions }) => {
           >
             <li>
               <div className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                <TaskLogo className="w-5 fill-slate-600" />
-                Preview Task
+                <UserLogo className="w-5 fill-slate-600" />
+                View Client
               </div>
             </li>
             <li>
               <div className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                 <PenLogo className="w-5 fill-slate-600" />
-                Edit Task
+                Edit Client
               </div>
             </li>
             <li>
               <div className="flex items-center gap-2 px-4 py-2 text-red-600 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ">
                 <TrashCanLogo className="w-5 " />
-                Delete Task
+                Delete Client
               </div>
             </li>
           </ul>

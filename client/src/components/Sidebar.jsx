@@ -10,7 +10,7 @@ export const Sidebar = ({ setSection }) => {
       <div className="px-3 py-4 overflow-y-auto rounded dark:bg-gray-800">
         <ul className="space-y-2">
           <li>
-            <div className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+            <div className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
               <HomeLogo />
               <span className="ml-3">Home</span>
             </div>
@@ -18,7 +18,7 @@ export const Sidebar = ({ setSection }) => {
 
           <li>
             <div
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
               onClick={() => setSection('clientSection')}
             >
               <ClientLogo />
@@ -27,11 +27,11 @@ export const Sidebar = ({ setSection }) => {
           </li>
           <li>
             <div
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
               onClick={() => setSection('taskSection')}
             >
               <TaskLogo />
-              <span className="flex-1 ml-3 whitespace-nowrap">Tasks</span>
+              <span className="flex-1 ml-3 whitespace-nowrap">Tasks </span>
             </div>
           </li>
         </ul>
@@ -39,7 +39,7 @@ export const Sidebar = ({ setSection }) => {
           <li>
             <div
               href="#"
-              className="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group"
+              className="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white group"
             >
               <HelpLogo />
               <span className="ml-3">Help</span>

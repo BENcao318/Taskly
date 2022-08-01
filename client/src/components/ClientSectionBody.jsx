@@ -1,39 +1,51 @@
 import React from 'react'
-import { Task } from './Task'
+import { Client } from './Client'
 import { ReactComponent as AlertLogo } from '../assets/alertLogo.svg'
 
-const sampleTasks = [
+const sampleClients = [
   {
-    name: 'Initial Onboarding',
-    number: 6,
+    name: 'Geneva Zola',
+    phoneNumber: '(657) 985-3372',
+    outstandingTasks: 6,
+    completedTasks: 6,
   },
   {
-    name: 'Financial Summary',
-    number: 2,
+    name: 'Thornton Isbel',
+    phoneNumber: '(925) 442-1656',
+    outstandingTasks: 6,
+    completedTasks: 6,
   },
   {
-    name: 'Proof of Income',
-    number: 3,
+    name: 'Maverick Fredric',
+    phoneNumber: '(941) 401-3670',
+    outstandingTasks: 2,
+    completedTasks: 6,
   },
   {
-    name: 'Leter of Intent',
-    number: 1,
+    name: 'Thornton Moira',
+    phoneNumber: '(833) 780-1933',
+    outstandingTasks: 4,
+    completedTasks: 4,
   },
   {
-    name: 'Finiancial Background',
-    number: 2,
+    name: 'Harland Melva',
+    phoneNumber: '(795) 867-89292',
+    outstandingTasks: 3,
+    completedTasks: 6,
   },
   {
-    name: 'Job Offer',
-    number: 6,
+    name: 'Lucky Genesis',
+    phoneNumber: '(702) 221-2760',
+    outstandingTasks: 3,
+    completedTasks: 6,
   },
 ]
 
-export const TaskSectionBody = () => {
+export const ClientSectionBody = () => {
   return (
     <div>
       <div className="relative overflow-x-auto sm:rounded-lg">
-        {sampleTasks.length === 0 ? (
+        {sampleClients.length === 0 ? (
           <>
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-sky-200 dark:bg-gray-700 dark:text-gray-400">
@@ -42,10 +54,14 @@ export const TaskSectionBody = () => {
                     Name
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
-                    Number of Questions
+                    Phone Number
                   </th>
-                  <th scope="col" className="px-6 py-3"></th>
-                  <th scope="col" className="px-6 py-3"></th>
+                  <th scope="col" className="px-6 py-3 text-center">
+                    Outstanding Tasks
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-center">
+                    Completed Tasks
+                  </th>
                   <th scope="col" className="px-6 py-3">
                     <span className="sr-only">Actions </span>
                   </th>
@@ -59,7 +75,7 @@ export const TaskSectionBody = () => {
               <AlertLogo />
               <div>
                 <span className="font-medium">
-                  You have not added any tasks.{' '}
+                  You have not added any clients.{' '}
                 </span>
                 {/* todo */}
                 <span className="font-bold underline cursor-pointer">
@@ -77,22 +93,28 @@ export const TaskSectionBody = () => {
                   Name
                 </th>
                 <th scope="col" className="px-6 py-3 text-center">
-                  Number of Questions
+                  Phone Number
                 </th>
-                <th scope="col" className="px-6 py-3"></th>
-                <th scope="col" className="px-6 py-3"></th>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Outstanding Tasks
+                </th>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Completed Tasks
+                </th>
                 <th scope="col" className="px-6 py-3">
                   <span className="sr-only">Actions </span>
                 </th>
               </tr>
             </thead>
             <tbody>
-              {sampleTasks.map((task, index) => {
+              {sampleClients.map((task, index) => {
                 return (
-                  <Task
+                  <Client
                     key={index}
                     name={task.name}
-                    numberOfQuestions={task.number}
+                    phoneNumber={task.phoneNumber}
+                    outstandingTasks={task.outstandingTasks}
+                    completedTasks={task.completedTasks}
                   />
                 )
               })}
