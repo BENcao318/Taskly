@@ -1,7 +1,13 @@
 import React from 'react'
 import { ReactComponent as PencilLogo } from '../assets/pencil.svg'
+import { Popover } from '@headlessui/react'
+import useAuth from '../hooks/useAuth'
+import { useNavigate } from 'react-router-dom'
 
 export const NavBar = () => {
+  const { signOut } = useAuth()
+  const navigate = useNavigate()
+
   return (
     <nav className="bg-white border-b border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
       <div className="flex flex-wrap items-center justify-between">
@@ -45,21 +51,38 @@ export const NavBar = () => {
           >
             <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
           </svg>
-          <button
-            type="button"
-            className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-            id="user-menu-button"
-            aria-expanded="false"
-            data-dropdown-toggle="user-dropdown"
-            data-dropdown-placement="bottom"
-          >
-            <span className="sr-only">Open user menu</span>
-            <img
-              className="w-8 h-8 rounded-full"
-              src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-              alt="user"
-            />
-          </button>
+
+          <Popover className="relative">
+            <Popover.Button
+              className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+              id="user-menu-button"
+              aria-expanded="false"
+            >
+              <span className="sr-only">Open user menu</span>
+              <img
+                className="w-8 h-8 rounded-full"
+                src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
+                alt="user"
+              />
+            </Popover.Button>
+
+            <Popover.Panel className="absolute z-10">
+              <button
+                className="w-24 px-4 py-2 mt-2 font-medium -translate-x-12 rounded-lg bg-sky-200 hover:bg-sky-600 hover:text-white"
+                onClick={() => {
+                  signOut().then((response) => {
+                    if (response.data.success) {
+                      // localStorage.removeItem('tasklyUser')
+                      console.log('signout')
+                      navigate('/')
+                    }
+                  })
+                }}
+              >
+                Sign out
+              </button>
+            </Popover.Panel>
+          </Popover>
         </div>
       </div>
     </nav>

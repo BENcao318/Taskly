@@ -1,14 +1,14 @@
 import React from 'react'
 
-export const NewClient = () => {
+export const NewClientModal = () => {
   return (
-    <form className="mt-20 ml-80 mr-80">
+    <form className="w-full ">
       <div className="mb-6">
         <p className="text-2xl dark:text-white">Add new client</p>
       </div>
       <div className="mb-6">
         <label
-          for="fname"
+          htmlFor="fname"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
         >
           First name
@@ -22,7 +22,7 @@ export const NewClient = () => {
       </div>
       <div className="mb-6">
         <label
-          for="lname"
+          htmlFor="lname"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
         >
           Last name
@@ -36,7 +36,7 @@ export const NewClient = () => {
       </div>
       <div className="mb-6">
         <label
-          for="email-address-icon"
+          htmlFor="email-address-icon"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
         >
           Email
@@ -64,7 +64,7 @@ export const NewClient = () => {
       </div>
       <div className="mb-6">
         <label
-          for="phone-number-icon"
+          htmlFor="phone-number-icon"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
         >
           Phone number
@@ -91,7 +91,7 @@ export const NewClient = () => {
       </div>
       <div className="mb-6">
         <label
-          for="message"
+          htmlFor="message"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
         >
           Summary of needs
@@ -105,7 +105,7 @@ export const NewClient = () => {
       </div>
       <div className="mb-6">
         <label
-          for="task-icon"
+          htmlFor="task-icon"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
         >
           Assign tasks
@@ -127,7 +127,7 @@ export const NewClient = () => {
             type="text"
             id="task-icon"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Quick search for tasks"
+            placeholder="Quick search htmlFor tasks"
           />
         </div>
       </div>

@@ -32,7 +32,7 @@ const sampleClients = [
   },
   {
     name: 'Harland Melva',
-    phoneNumber: '(795) 867-89292',
+    phoneNumber: '(795) 867-8929',
     outstandingTasks: 3,
     completedTasks: 6,
   },
@@ -67,7 +67,7 @@ export const ClientSectionBody = () => {
         leaveFrom="opacity-100 scale-100 translate-x-0"
         leaveTo="opacity-0 scale-95 -translate-x-full"
       >
-        <div className="relative overflow-x-auto sm:rounded-lg">
+        <div className="relative overflow-x-auto sm:rounded-t-lg">
           {sampleClients.length === 0 ? (
             <>
               <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">

@@ -6,7 +6,7 @@ import { ReactComponent as HelpLogo } from '../assets/helpLogo.svg'
 
 export const Sidebar = ({ setSection }) => {
   return (
-    <aside className="w-64 h-screen border-r" aria-label="Sidebar">
+    <aside className="w-64 h-screen border-r " aria-label="Sidebar">
       <div className="px-3 py-4 overflow-y-auto rounded dark:bg-gray-800">
         <ul className="space-y-2">
           <li>

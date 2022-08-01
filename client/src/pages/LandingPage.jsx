@@ -1,32 +1,29 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ReactComponent as PencilLogo } from '../assets/pencil.svg'
 import { ReactComponent as HeroLogo } from '../assets/hero.svg'
 import { Navbar, Button, Footer, Modal } from 'flowbite-react'
 import { HiOutlineArrowRight, HiUsers, HiFlag } from 'react-icons/hi'
 import { FaChevronRight, FaClipboard } from 'react-icons/fa'
 import { BsFillCheckCircleFill, BsGithub } from 'react-icons/bs'
-import { useState } from 'react'
 import { SignupModal } from '../components/SignupModal'
 import { SigninModal } from '../components/SigninModal'
 import { useNavigate } from 'react-router-dom'
 import serverAPI from '../hooks/useAxios'
-import { useUser } from '../hooks/UserContext'
 
 export const LandingPage = () => {
   const [openSignupModal, setOpenSignupModal] = useState(false)
   const [openSigninModal, setOpenSigninModal] = useState(false)
-  const { setUser } = useUser()
 
   const navigate = useNavigate()
 
   useEffect(() => {
     serverAPI.get('/me').then((response) => {
       if (response.data.success) {
-        setUser(response.data.user)
+        // localStorage.setItem('tasklyUser', response.data.user)
         navigate('/main')
       }
     })
-  }, [navigate, setUser])
+  }, [navigate])
 
   return (
     <div className="max-w-6xl mx-auto">

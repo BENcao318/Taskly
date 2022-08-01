@@ -4,7 +4,6 @@ import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import serverAPI from '../hooks/useAxios'
 import { useNavigate } from 'react-router-dom'
-import { useUser } from '../hooks/UserContext'
 
 export const SignupModal = ({
   openSignupModal,
@@ -13,7 +12,6 @@ export const SignupModal = ({
 }) => {
   const [emailIsTaken, setEmailIsTaken] = useState(false)
   const navigate = useNavigate()
-  const { setUser } = useUser()
 
   const handleSubmit = (formInfo) => {
     const user = {
@@ -28,7 +26,7 @@ export const SignupModal = ({
       .post('/users/newAdmin', user)
       .then((response) => {
         if (response && response.data.success) {
-          setUser(response.data.user)
+          // localStorage.setItem('tasklyUser', JSON.stringify(response.data.user))
           navigate('/main')
           // console.log('signup page', response.data.user)
           console.log('Successfully created account')

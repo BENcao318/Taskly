@@ -4,7 +4,6 @@ import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import useAuth from '../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
-import { useUser } from '../hooks/UserContext'
 
 export const SigninModal = ({
   openSigninModal,
@@ -14,7 +13,6 @@ export const SigninModal = ({
   const { signIn } = useAuth()
   const navigate = useNavigate()
   const [signInError, setSignInError] = useState(false)
-  const { setUser } = useUser()
 
   const handleSubmit = (formInfo) => {
     const user = {
@@ -25,7 +23,7 @@ export const SigninModal = ({
       if (!response.data.success) {
         setSignInError(true)
       } else {
-        setUser(response.data.user)
+        // localStorage.setItem('tasklyUser', JSON.stringify(response.data.user))
         navigate('/main')
       }
     })
