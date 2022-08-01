@@ -5,46 +5,11 @@ import { Transition } from '@headlessui/react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 
-const sampleClients = [
-  {
-    name: 'Geneva Zola',
-    phoneNumber: '(657) 985-3372',
-    outstandingTasks: 6,
-    completedTasks: 6,
-  },
-  {
-    name: 'Thornton Isbel',
-    phoneNumber: '(925) 442-1656',
-    outstandingTasks: 6,
-    completedTasks: 6,
-  },
-  {
-    name: 'Maverick Fredric',
-    phoneNumber: '(941) 401-3670',
-    outstandingTasks: 2,
-    completedTasks: 6,
-  },
-  {
-    name: 'Thornton Moira',
-    phoneNumber: '(833) 780-1933',
-    outstandingTasks: 4,
-    completedTasks: 4,
-  },
-  {
-    name: 'Harland Melva',
-    phoneNumber: '(795) 867-8929',
-    outstandingTasks: 3,
-    completedTasks: 6,
-  },
-  {
-    name: 'Lucky Genesis',
-    phoneNumber: '(702) 221-2760',
-    outstandingTasks: 3,
-    completedTasks: 6,
-  },
-]
-
-export const ClientSectionBody = () => {
+export const ClientSectionBody = ({
+  sampleClients,
+  filteredClients,
+  searchClientText,
+}) => {
   const [showContent, setShowContent] = useState(false)
 
   useEffect(() => {
@@ -130,17 +95,29 @@ export const ClientSectionBody = () => {
                 </tr>
               </thead>
               <tbody>
-                {sampleClients.map((task, index) => {
-                  return (
-                    <Client
-                      key={index}
-                      name={task.name}
-                      phoneNumber={task.phoneNumber}
-                      outstandingTasks={task.outstandingTasks}
-                      completedTasks={task.completedTasks}
-                    />
-                  )
-                })}
+                {searchClientText
+                  ? filteredClients.map((client, index) => {
+                      return (
+                        <Client
+                          key={index}
+                          name={client.name}
+                          phoneNumber={client.phoneNumber}
+                          outstandingTasks={client.outstandingTasks}
+                          completedTasks={client.completedTasks}
+                        />
+                      )
+                    })
+                  : sampleClients.map((client, index) => {
+                      return (
+                        <Client
+                          key={index}
+                          name={client.name}
+                          phoneNumber={client.phoneNumber}
+                          outstandingTasks={client.outstandingTasks}
+                          completedTasks={client.completedTasks}
+                        />
+                      )
+                    })}
               </tbody>
             </table>
           )}
