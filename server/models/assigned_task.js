@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     static associate({ Task }) {
       // define association here
-      this.hasOne(Task, { foreignKey: 'task_id', as: 'task' })
+      this.hasMany(Task, { foreignKey: 'task_id', as: 'task' })
     }
 
     toJSON() {
@@ -26,9 +26,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Assigned_Task.init(
     {
-      assigned_task_id: {
-        type: DataTypes.INTEGER,
-      },
       client_id: {
         type: DataTypes.INTEGER,
       },

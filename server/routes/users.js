@@ -19,4 +19,6 @@ router.post('/signin', users.signIn)
 
 router.get('/admin/:companyName', users.findAdmin)
 
+router.get('/test', users.test)
+
 module.exports = router

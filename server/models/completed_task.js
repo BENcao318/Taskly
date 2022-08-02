@@ -14,9 +14,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Completed_Task.init(
     {
-      completed_task_id: {
-        type: DataTypes.INTEGER,
-      },
       assigned_task_id: {
         type: DataTypes.INTEGER,
       },

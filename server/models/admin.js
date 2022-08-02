@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Admin.init(
     {
+
       company_name: {
         type: DataTypes.STRING,
         allowNull: false,

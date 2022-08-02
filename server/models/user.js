@@ -12,16 +12,17 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(Admin, { foreignKey: 'admin_id', as: 'admin' })
     }
 
+    static associate({ Client }) {
+      // define association here
+      this.belongsTo(Client, { foreignKey: 'client_id', as: 'client' })
+    }
+
     toJSON() {
       return { ...this.get(), id: undefined } //Hide the user id for safety
     }
   }
   User.init(
     {
-      uuid: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,

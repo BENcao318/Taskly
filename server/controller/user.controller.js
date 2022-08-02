@@ -156,3 +156,12 @@ exports.update = (req, res) => {}
 exports.delete = (req, res) => {}
 
 exports.deleteAll = (req, res) => {}
+
+exports.test = async (req, res) => {
+  try {
+    const user = await User.findAll({include: ['client']})
+    console.log(user)
+    } catch (err) {
+      console.log(err)
+    }
+} 
