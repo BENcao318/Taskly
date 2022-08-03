@@ -50,7 +50,7 @@ export const ClientSection = () => {
 
   useEffect(() => {
     let clientsArr = sampleClients.filter((client) =>
-      client.name.toLowerCase().includes(searchClientText)
+      client.name.toLowerCase().includes(searchClientText.toLowerCase())
     )
     setFilteredClients(clientsArr)
   }, [searchClientText])

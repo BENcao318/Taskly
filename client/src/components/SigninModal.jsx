@@ -4,6 +4,7 @@ import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import useAuth from '../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
+import { GoogleLogin } from 'react-google-login'
 
 export const SigninModal = ({
   openSigninModal,
@@ -40,6 +41,10 @@ export const SigninModal = ({
       .required('Email required'),
     password: Yup.string().required('Password required'),
   })
+
+  const handleGoogleLogin = (googleData) => {
+    console.log('googledata', googleData)
+  }
 
   return (
     <Transition
@@ -156,6 +161,16 @@ export const SigninModal = ({
                 >
                   Signup here
                 </span>
+              </div>
+
+              <div className="text-center">
+                <GoogleLogin
+                  clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                  buttonText="Log in with Google"
+                  onSuccess={handleGoogleLogin}
+                  onFailure={() => console.log('failed')}
+                  cookiePolicy={'single_host_origin'}
+                />
               </div>
             </div>
           </Form>
