@@ -64,7 +64,7 @@ export const Client = ({
         <div
           className={`${
             toggleActionMenu ? '' : 'hidden'
-          } z-40 min-w-62 bg-slate-200 rounded-lg divide-y divide-gray-100 shadow-lg dark:bg-gray-700 fixed mt-2 right-24`}
+          } z-40 min-w-62 bg-white rounded-lg divide-y divide-gray-100 shadow-lg shadow-neutral-400 dark:bg-gray-700 fixed mt-2 right-24`}
         >
           <Transition
             as="div"
@@ -81,19 +81,19 @@ export const Client = ({
               aria-labelledby="dropdownDefault"
             >
               <li>
-                <div className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">
                   <UserLogo className="w-5 fill-slate-600" />
                   View Client
                 </div>
               </li>
               <li>
-                <div className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white ">
                   <PenLogo className="w-5 fill-slate-600" />
                   Edit Client
                 </div>
               </li>
               <li>
-                <div className="flex items-center gap-2 px-4 py-2 text-red-600 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ">
+                <div className="flex items-center gap-2 px-4 py-2 text-red-600 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">
                   <TrashCanLogo className="w-5 " />
                   Delete Client
                 </div>

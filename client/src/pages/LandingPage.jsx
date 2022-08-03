@@ -20,7 +20,7 @@ export const LandingPage = () => {
     serverAPI.get('/me').then((response) => {
       if (response.data.success) {
         // localStorage.setItem('tasklyUser', response.data.user)
-        navigate('/main')
+        navigate('/client')
       }
     })
   }, [navigate])

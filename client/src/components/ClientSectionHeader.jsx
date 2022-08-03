@@ -1,7 +1,11 @@
 import React from 'react'
 import { ReactComponent as SearchLogo } from '../assets/searchLogo.svg'
 
-export const ClientSectionHeader = ({ setOpenNewClientModal }) => {
+export const ClientSectionHeader = ({
+  setOpenNewClientModal,
+  setSearchClientText,
+  searchClientText,
+}) => {
   return (
     <div className="flex flex-col gap-4 py-6 mx-6">
       <h1 className="text-2xl font-semibold">All clients</h1>
@@ -15,7 +19,10 @@ export const ClientSectionHeader = ({ setOpenNewClientModal }) => {
             id="search"
             className="block w-full px-6 py-3 pl-10 text-sm text-gray-900 bg-gray-100 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search for clients"
-          ></input>
+            onChange={(e) => {
+              setSearchClientText(e.target.value)
+            }}
+          />
         </div>
 
         <button
