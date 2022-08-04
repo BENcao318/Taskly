@@ -3,7 +3,7 @@ import { ClientInfo } from "../components/ClientInfo";
 import { AssignedTasks } from "../components/AssignedTasks";
 import { TaskOverview } from "../components/TaskOverview";
 
-export const ClientDetailPage = () => {
+export const ClientDetail = () => {
   return (
     <div className="w-full h-screen flex">
       <ClientInfo
