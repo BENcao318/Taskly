@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { ReactComponent as PencilLogo } from '../assets/pencil.svg'
 import { ReactComponent as HeroLogo } from '../assets/hero.svg'
 import { Navbar, Button, Footer, Modal } from 'flowbite-react'
@@ -9,21 +9,23 @@ import { SignupModal } from '../components/SignupModal'
 import { SigninModal } from '../components/SigninModal'
 import { useNavigate } from 'react-router-dom'
 import serverAPI from '../hooks/useAxios'
+import { authContext } from '../context/AuthContext'
 
 export const LandingPage = () => {
   const [openSignupModal, setOpenSignupModal] = useState(false)
   const [openSigninModal, setOpenSigninModal] = useState(false)
-
+  const { setAuth } = useContext(authContext)
   const navigate = useNavigate()
 
   useEffect(() => {
     serverAPI.get('/me').then((response) => {
       if (response.data.success) {
+        setAuth(response.data.user)
         // localStorage.setItem('tasklyUser', response.data.user)
         navigate('/client')
       }
     })
-  }, [navigate])
+  }, [navigate, setAuth])
 
   return (
     <div className="max-w-6xl mx-auto">

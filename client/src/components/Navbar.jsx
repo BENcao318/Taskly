@@ -1,12 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { ReactComponent as PencilLogo } from '../assets/pencil.svg'
 import { Popover } from '@headlessui/react'
-import useAuth from '../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
+import serverAPI from '../hooks/useAxios'
+import { authContext } from '../context/AuthContext'
 
 export const NavBar = () => {
-  const { signOut } = useAuth()
+  const { setAuth } = useContext(authContext)
   const navigate = useNavigate()
+
+  const signOut = () => {
+    serverAPI.get('/users/signout').then((response) => {
+      if (response.data.success) {
+        // localStorage.removeItem('tasklyUser')
+        setAuth(null)
+        // console.log('signout')
+        navigate('/')
+      }
+    })
+  }
 
   return (
     <nav className="bg-white border-b border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
@@ -70,13 +82,7 @@ export const NavBar = () => {
               <button
                 className="w-24 px-4 py-2 mt-2 font-medium -translate-x-12 rounded-lg bg-sky-200 hover:bg-sky-600 hover:text-white"
                 onClick={() => {
-                  signOut().then((response) => {
-                    if (response.data.success) {
-                      // localStorage.removeItem('tasklyUser')
-                      console.log('signout')
-                      navigate('/')
-                    }
-                  })
+                  signOut()
                 }}
               >
                 Sign out

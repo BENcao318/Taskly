@@ -1,33 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Transition } from '@headlessui/react'
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
-import useAuth from '../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
-import { GoogleLogin } from 'react-google-login'
+import serverAPI from '../hooks/useAxios'
+import { authContext } from '../context/AuthContext'
 
 export const SigninModal = ({
   openSigninModal,
   setOpenSigninModal,
   setOpenSignupModal,
 }) => {
-  const { signIn } = useAuth()
   const navigate = useNavigate()
   const [signInError, setSignInError] = useState(false)
+  const { setAuth } = useContext(authContext)
+
+  const signIn = (user) => {
+    serverAPI.post('/users/signin', user).then((response) => {
+      if (!response.data.success) {
+        setSignInError(true)
+      } else {
+        setAuth(response.data.user)
+        // localStorage.setItem('tasklyUser', JSON.stringify(response.data.user))
+        navigate('/client')
+      }
+    })
+  }
 
   const handleSubmit = (formInfo) => {
     const user = {
       email: formInfo.email,
       password: formInfo.password,
     }
-    signIn(user).then((response) => {
-      if (!response.data.success) {
-        setSignInError(true)
-      } else {
-        // localStorage.setItem('tasklyUser', JSON.stringify(response.data.user))
-        navigate('/main')
-      }
-    })
+    signIn(user)
   }
 
   const initialValues = {
@@ -41,10 +46,6 @@ export const SigninModal = ({
       .required('Email required'),
     password: Yup.string().required('Password required'),
   })
-
-  const handleGoogleLogin = (googleData) => {
-    console.log('googledata', googleData)
-  }
 
   return (
     <Transition
@@ -161,16 +162,6 @@ export const SigninModal = ({
                 >
                   Signup here
                 </span>
-              </div>
-
-              <div className="text-center">
-                <GoogleLogin
-                  clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                  buttonText="Log in with Google"
-                  onSuccess={handleGoogleLogin}
-                  onFailure={() => console.log('failed')}
-                  cookiePolicy={'single_host_origin'}
-                />
               </div>
             </div>
           </Form>

@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Transition } from '@headlessui/react'
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import serverAPI from '../hooks/useAxios'
 import { useNavigate } from 'react-router-dom'
+import { authContext } from '../context/AuthContext'
 
 export const SignupModal = ({
   openSignupModal,
@@ -12,6 +13,26 @@ export const SignupModal = ({
 }) => {
   const [emailIsTaken, setEmailIsTaken] = useState(false)
   const navigate = useNavigate()
+  const { setAuth } = useContext(authContext)
+
+  const signUp = (user) => {
+    serverAPI
+      .post('/users/newAdmin', user)
+      .then((response) => {
+        if (response && response.data.success) {
+          // localStorage.setItem('tasklyUser', JSON.stringify(response.data.user))
+          setAuth(response.data.user)
+          navigate('/client')
+          // console.log('signup page', response.data.user)
+          // console.log('Successfully created account')
+        }
+      })
+      .catch((err) => {
+        if (err && err.response.status === 403) {
+          setEmailIsTaken(true)
+        }
+      })
+  }
 
   const handleSubmit = (formInfo) => {
     const user = {
@@ -21,22 +42,7 @@ export const SignupModal = ({
       password: formInfo.password,
       company_name: formInfo.companyName,
     }
-
-    serverAPI
-      .post('/users/newAdmin', user)
-      .then((response) => {
-        if (response && response.data.success) {
-          // localStorage.setItem('tasklyUser', JSON.stringify(response.data.user))
-          navigate('/client')
-          // console.log('signup page', response.data.user)
-          console.log('Successfully created account')
-        }
-      })
-      .catch((err) => {
-        if (err && err.response.status === 403) {
-          setEmailIsTaken(true)
-        }
-      })
+    signUp(user)
   }
 
   const initialValues = {
