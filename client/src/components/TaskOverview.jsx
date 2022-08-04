@@ -7,7 +7,7 @@ export function TaskOverview(props) {
   const { taskTitle, form } = props;
 
   return (
-    <div className="w-1/4 h-full bg-gray-50 p-4 border-l border-neutral-200">
+    <div className="w-1/4 h-full p-4 border-l border-neutral-200">
       <p className="my-2 text-xl font-bold text-gray-900">Overview of Tasks</p>
       <TaskList outstanding={true} />
       <TaskList complete={true} />
