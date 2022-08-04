@@ -9,7 +9,7 @@ export function AssignedTasks(props) {
   const { summary, phoneNumber, email } = props;
 
   return (
-    <div className="w-2/4 h-full bg-gray-50 p-4">
+    <div className="w-2/4 h-full p-4">
       <p className="my-2 text-xl font-bold text-gray-900">Assigned Tasks</p>
       <div className="mb-2">
         <Card>
