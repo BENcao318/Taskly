@@ -1,0 +1,47 @@
+.svc-toolbox {
+  height: 1000px;
+}
+
+#svd-settings {
+  display: none;
+}
+
+.svc-side-bar {
+  display: none;
+}
+
+.svc-creator__banner {
+  display: none;
+}
+
+.svc-tabbed-menu-item {
+  display: none;
+}
+
+body #creatorElement {
+  /* SurveyJS Creator V1 */
+  --primary-color: #1c64f2;
+  --secondary-color: #1c64f2;
+  --primary-text-color: #111928;
+  --secondary-text-color: #111928;
+  --inverted-text-color: #111928;
+  --primary-hover-color: #1c64f2;
+  --selection-border-color: #1c64f2;
+  --primary-icon-color: #3d4d5d;
+  --primary-bg-color: #f8f8f8;
+  --secondary-bg-color: #f4f4f4;
+  --primary-border-color: #e7eaec;
+  --secondary-border-color: #ddd;
+  --error-color: #ed5565;
+}
+body {
+  /* SurveyJS Creator V2 */
+  --primary: #1c64f2;
+  --primary-light: rgba(26, 183, 250, 0.1);
+  --foreground: #111928;
+  --primary-foreground: #ffffff;
+  --secondary: #1c64f2;
+  --background: #ffffff;
+  --background-dim: #f9fafb;
+  --background-dim-light: #ffffff;
+}
