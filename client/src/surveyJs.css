@@ -18,6 +18,18 @@
   display: none;
 }
 
+.sd-body__page {
+  background-color: #ffffff;
+}
+
+.sd-footer {
+  background-color: #ffffff;
+}
+
+h3 {
+  display: none;
+}
+
 body #creatorElement {
   /* SurveyJS Creator V1 */
   --primary-color: #1c64f2;
@@ -34,6 +46,7 @@ body #creatorElement {
   --secondary-border-color: #ddd;
   --error-color: #ed5565;
 }
+
 body {
   /* SurveyJS Creator V2 */
   --primary: #1c64f2;
