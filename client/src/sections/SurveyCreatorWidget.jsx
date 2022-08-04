@@ -62,8 +62,8 @@ export function SurveyCreatorWidget() {
   const creator = new SurveyCreator(creatorOptions);
   // creator.text = window.localStorage.getItem("survey-json") || JSON.stringify();
   creator.saveSurveyFunc = (saveNo, callback) => {
-    // window.localStorage.setItem("survey-json", creator.text);
-    // callback(saveNo, true);
+    window.localStorage.setItem("survey-json", creator.text);
+    callback(saveNo, true);
     alert(creator.text);
     // saveSurveyJson(
     //     "https://your-web-service.com/",
