@@ -19,6 +19,26 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          company_name: 'Tesla',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          company_name: 'Microsoft',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          company_name: 'Meta',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          company_name: 'Google',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     )
