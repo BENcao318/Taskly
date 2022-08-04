@@ -15,8 +15,12 @@ router.get('/signout', users.signOut)
 
 router.post('/newAdmin', users.createAdmin)
 
+router.post('/newClient', users.createClient)
+
 router.post('/signin', users.signIn)
 
 router.get('/admin/:companyName', users.findAdmin)
+
+router.get('/client', users.findAllClents)
 
 module.exports = router

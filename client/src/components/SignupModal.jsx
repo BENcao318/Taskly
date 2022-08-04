@@ -27,7 +27,7 @@ export const SignupModal = ({
       .then((response) => {
         if (response && response.data.success) {
           // localStorage.setItem('tasklyUser', JSON.stringify(response.data.user))
-          navigate('/main')
+          navigate('/client')
           // console.log('signup page', response.data.user)
           console.log('Successfully created account')
         }

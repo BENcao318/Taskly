@@ -1,5 +1,5 @@
 const db = require('../models')
-const { User, Admin } = db
+const { User, Admin, Client } = db
 const Op = db.Sequelize.Op
 const { hash, compare } = require('bcrypt')
 
@@ -62,7 +62,50 @@ exports.createAdmin = async (req, res) => {
   }
 }
 
-exports.findAll = (req, res) => {}
+exports.createClient = async (req, res) => {
+  const { admin_id, phone_number, summary_of_needs } = req.body
+
+  try {
+    const clientData = await Client.create({
+      admin_id,
+      phone_number,
+      summary_of_needs,
+    })
+
+    res.status(200).send({
+      success: true,
+      message: 'Client created successfully',
+      messge2: null,
+      clientData,
+    })
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || 'Some error occurred while creating the Task',
+    })
+  }
+}
+
+exports.findAllClents = async (req, res) => {
+  try {
+    const clientData = await Client.findAll({
+      where: {
+        admin_id: 1,
+      },
+      include: ['user', 'assigned_task', 'admin'],
+    })
+
+    res.status(200).send({
+      success: true,
+      message: 'Found all clients',
+      messge2: null,
+      clientData,
+    })
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || 'Some error occurred while creating the Task',
+    })
+  }
+}
 
 exports.signIn = async (req, res) => {
   const { email, password } = req.body

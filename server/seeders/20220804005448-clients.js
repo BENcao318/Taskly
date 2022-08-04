@@ -11,6 +11,19 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
+    return queryInterface.bulkInsert(
+      'clients',
+      [
+        {
+          admin_id: 1,
+          phone_number: '800-263-3394',
+          summary_of_needs: 'Need to automate apple subscriptions',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      {}
+    )
   },
 
   async down(queryInterface, Sequelize) {
