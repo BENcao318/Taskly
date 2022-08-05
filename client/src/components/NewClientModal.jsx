@@ -1,6 +1,11 @@
 import React from 'react'
+import { useState } from 'react'
+import { AssignedTaskTags } from './AssignedTaskTags'
+import { AssignTaskInput } from './AssignTaskInput'
 
 export const NewClientModal = () => {
+  const [assignedTasks, setAssignedTasks] = useState([])
+
   return (
     <form className="w-full ">
       <div className="mb-6">
@@ -103,34 +108,11 @@ export const NewClientModal = () => {
           placeholder="Write text here..."
         ></textarea>
       </div>
-      <div className="mb-6">
-        <label
-          htmlFor="task-icon"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >
-          Assign tasks
-        </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <svg
-              aria-hidden="true"
-              className="w-5 h-5 text-gray-500 dark:text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-              <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-            </svg>
-          </div>
-          <input
-            type="text"
-            id="task-icon"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Quick search for tasks"
-          />
-        </div>
-      </div>
+      <AssignTaskInput setAssignedTasks={setAssignedTasks} />
+      <AssignedTaskTags
+        assignedTasks={assignedTasks}
+        setAssignedTasks={setAssignedTasks}
+      />
       <button
         type="submit"
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
