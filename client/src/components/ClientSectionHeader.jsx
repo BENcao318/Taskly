@@ -4,7 +4,6 @@ import { ReactComponent as SearchLogo } from '../assets/searchLogo.svg'
 export const ClientSectionHeader = ({
   setOpenNewClientModal,
   setSearchClientText,
-  searchClientText,
 }) => {
   return (
     <div className="flex flex-col gap-4 py-6 mx-6">

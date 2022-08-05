@@ -1,9 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Client } from './Client'
 import { ReactComponent as AlertLogo } from '../assets/alertLogo.svg'
 import { Transition } from '@headlessui/react'
-import { useEffect } from 'react'
-import { useState } from 'react'
 
 export const ClientSectionBody = ({
   sampleClients,

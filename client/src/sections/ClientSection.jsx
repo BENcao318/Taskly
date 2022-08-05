@@ -60,7 +60,6 @@ export const ClientSection = () => {
       <ClientSectionHeader
         setOpenNewClientModal={setOpenNewClientModal}
         setSearchClientText={setSearchClientText}
-        searchClientText={searchClientText}
       />
       <ClientSectionBody
         sampleClients={sampleClients}

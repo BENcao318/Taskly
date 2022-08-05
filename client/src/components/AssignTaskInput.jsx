@@ -1,5 +1,5 @@
 import { Transition } from '@headlessui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ReactComponent as TaskLogo } from '../assets/taskLogo.svg'
 import { ReactComponent as CloseLogo } from '../assets/closeLogo.svg'
 
@@ -32,6 +32,15 @@ const sampleTasks = [
 
 export const AssignTaskInput = ({ setAssignedTasks }) => {
   const [taskSelectionDropdown, setTaskSelectionDropdown] = useState(false)
+  const [searchTaskText, setSearchTaskText] = useState('')
+  const [filteredTasks, setFilteredTasks] = useState([])
+
+  useEffect(() => {
+    let tasksArr = sampleTasks.filter((task) =>
+      task.name.toLowerCase().includes(searchTaskText.toLowerCase())
+    )
+    setFilteredTasks(tasksArr)
+  }, [searchTaskText])
 
   return (
     <div className="mb-6">
@@ -51,20 +60,24 @@ export const AssignTaskInput = ({ setAssignedTasks }) => {
             <TaskLogo />
           </span>
           <input
-            type="search"
+            type="text"
             id="assign-task-input"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Quick search for tasks"
             onFocus={() => setTaskSelectionDropdown(true)}
-            // onBlur={() => setTaskSelectionDropdown(false)}
+            onChange={(e) => setSearchTaskText(e.target.value)}
+            value={searchTaskText}
           />
           <span
-            className={`absolute inset-y-0 right-2 items-center pl-3 text-blue-600 font-bold text-xl  ${
+            className={`absolute inset-y-0 right-2 items-center pl-3 text-blue-600 font-bold text-xl hover:text-blue-200 ${
               taskSelectionDropdown
                 ? 'bottom-40 top-2 cursor-pointer'
                 : 'hidden'
             }`}
-            onClick={() => setTaskSelectionDropdown(false)}
+            onClick={() => {
+              setTaskSelectionDropdown(false)
+              setSearchTaskText('')
+            }}
           >
             <CloseLogo />
           </span>
@@ -87,27 +100,50 @@ export const AssignTaskInput = ({ setAssignedTasks }) => {
                 className="py-1 font-semibold text-gray-700 text-md dark:text-gray-200"
                 aria-labelledby="dropdownDefault"
               >
-                {sampleTasks.map((task, index) => {
-                  return (
-                    <li key={index}>
-                      <div
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                        onClick={() => {
-                          setAssignedTasks((prev) => {
-                            if (!prev.includes(task.name)) {
-                              return [...prev, task.name]
-                            } else {
-                              return prev
-                            }
-                          })
-                          setTaskSelectionDropdown(false)
-                        }}
-                      >
-                        {task.name}
-                      </div>
-                    </li>
-                  )
-                })}
+                {searchTaskText
+                  ? filteredTasks.map((task, index) => {
+                      return (
+                        <li key={index}>
+                          <div
+                            className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                            onClick={() => {
+                              setAssignedTasks((prev) => {
+                                setSearchTaskText('')
+                                if (!prev.includes(task.name)) {
+                                  return [...prev, task.name]
+                                } else {
+                                  return prev
+                                }
+                              })
+                              setTaskSelectionDropdown(false)
+                            }}
+                          >
+                            {task.name}
+                          </div>
+                        </li>
+                      )
+                    })
+                  : sampleTasks.map((task, index) => {
+                      return (
+                        <li key={index}>
+                          <div
+                            className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                            onClick={() => {
+                              setAssignedTasks((prev) => {
+                                if (!prev.includes(task.name)) {
+                                  return [...prev, task.name]
+                                } else {
+                                  return prev
+                                }
+                              })
+                              setTaskSelectionDropdown(false)
+                            }}
+                          >
+                            {task.name}
+                          </div>
+                        </li>
+                      )
+                    })}
               </ul>
             </Transition>
           </div>
