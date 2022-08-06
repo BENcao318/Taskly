@@ -21,6 +21,6 @@ router.post('/signin', users.signIn)
 
 router.get('/admin/:companyName', users.findAdmin)
 
-router.get('/client', users.findAllClents)
+router.get('/clients', users.findAllClents)
 
 module.exports = router

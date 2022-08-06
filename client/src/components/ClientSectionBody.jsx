@@ -4,7 +4,7 @@ import { ReactComponent as AlertLogo } from '../assets/alertLogo.svg'
 import { Transition } from '@headlessui/react'
 
 export const ClientSectionBody = ({
-  sampleClients,
+  clients,
   filteredClients,
   searchClientText,
 }) => {
@@ -31,7 +31,7 @@ export const ClientSectionBody = ({
         leaveTo="opacity-0 scale-95 -translate-x-full"
       >
         <div className="relative overflow-x-auto sm:rounded-t-lg">
-          {sampleClients.length === 0 ? (
+          {clients.length === 0 ? (
             <>
               <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-sky-200 dark:bg-gray-700 dark:text-gray-400">
@@ -94,25 +94,27 @@ export const ClientSectionBody = ({
               </thead>
               <tbody>
                 {searchClientText
-                  ? filteredClients.map((client, index) => {
+                  ? filteredClients.map((client) => {
                       return (
                         <Client
-                          key={index}
-                          name={client.name}
+                          key={client.uuid}
+                          firstName={client.firstName}
+                          lastName={client.lastName}
                           phoneNumber={client.phoneNumber}
-                          outstandingTasks={client.outstandingTasks}
-                          completedTasks={client.completedTasks}
+                          outstandingTasks={0}
+                          completedTasks={6}
                         />
                       )
                     })
-                  : sampleClients.map((client, index) => {
+                  : clients.map((client, index) => {
                       return (
                         <Client
-                          key={index}
-                          name={client.name}
+                          key={client.uuid}
+                          firstName={client.firstName}
+                          lastName={client.lastName}
                           phoneNumber={client.phoneNumber}
-                          outstandingTasks={client.outstandingTasks}
-                          completedTasks={client.completedTasks}
+                          outstandingTasks={0}
+                          completedTasks={6}
                         />
                       )
                     })}

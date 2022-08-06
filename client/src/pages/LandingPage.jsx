@@ -10,7 +10,7 @@ import { SigninModal } from '../components/SigninModal'
 import { useNavigate } from 'react-router-dom'
 import { authContext } from '../context/AuthContext'
 
-export const LandingPage = () => {
+export const LandingPage = ({ redirectPath }) => {
   const [openSignupModal, setOpenSignupModal] = useState(false)
   const [openSigninModal, setOpenSigninModal] = useState(false)
   const { auth } = useContext(authContext)
@@ -18,9 +18,10 @@ export const LandingPage = () => {
 
   useEffect(() => {
     if (auth) {
-      navigate('/client')
+      const path = redirectPath.split('/').splice(3).join('/')
+      navigate(path)
     }
-  }, [auth, navigate])
+  }, [auth, navigate, redirectPath])
 
   return (
     <div className="max-w-6xl mx-auto">

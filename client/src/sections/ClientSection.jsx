@@ -1,59 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Modal } from 'flowbite-react'
 import { ClientSectionBody } from '../components/ClientSectionBody'
 import { ClientSectionHeader } from '../components/ClientSectionHeader'
 import { NewClientModal } from '../components/NewClientModal'
-
-const sampleClients = [
-  {
-    name: 'Geneva Zola',
-    phoneNumber: '(657) 985-3372',
-    outstandingTasks: 6,
-    completedTasks: 6,
-  },
-  {
-    name: 'Thornton Isbel',
-    phoneNumber: '(925) 442-1656',
-    outstandingTasks: 6,
-    completedTasks: 6,
-  },
-  {
-    name: 'Maverick Fredric',
-    phoneNumber: '(941) 401-3670',
-    outstandingTasks: 2,
-    completedTasks: 6,
-  },
-  {
-    name: 'Thornton Moira',
-    phoneNumber: '(833) 780-1933',
-    outstandingTasks: 4,
-    completedTasks: 4,
-  },
-  {
-    name: 'Harland Melva',
-    phoneNumber: '(795) 867-8929',
-    outstandingTasks: 3,
-    completedTasks: 6,
-  },
-  {
-    name: 'Lucky Genesis',
-    phoneNumber: '(702) 221-2760',
-    outstandingTasks: 3,
-    completedTasks: 6,
-  },
-]
+import { clientContext } from '../context/ClientContext'
+import { EditClientModal } from '../components/EditClientModal'
 
 export const ClientSection = () => {
   const [openNewClientModal, setOpenNewClientModal] = useState()
+  const [openEditClientModal, setOpenEditClientModal] = useState()
   const [searchClientText, setSearchClientText] = useState('')
   const [filteredClients, setFilteredClients] = useState(null)
+  const { clients } = useContext(clientContext)
 
   useEffect(() => {
-    let clientsArr = sampleClients.filter((client) =>
-      client.name.toLowerCase().includes(searchClientText.toLowerCase())
-    )
+    let clientsArr = clients.filter((client) => {
+      const name = `${client.firstName} ${client.lastName}`
+      return name.toLowerCase().includes(searchClientText.toLowerCase())
+    })
     setFilteredClients(clientsArr)
-  }, [searchClientText])
+  }, [searchClientText, clients])
 
   return (
     <div className="w-full">
@@ -62,7 +28,7 @@ export const ClientSection = () => {
         setSearchClientText={setSearchClientText}
       />
       <ClientSectionBody
-        sampleClients={sampleClients}
+        clients={clients}
         filteredClients={filteredClients}
         searchClientText={searchClientText}
       />
@@ -79,6 +45,19 @@ export const ClientSection = () => {
           />
         </Modal.Body>
       </Modal>
+
+      {/* <Modal
+        show={openEditClientModal}
+        onClose={() => setOpenEditClientModal(false)}
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <EditClientModal
+          // setOpenEditClientModal={setOpenEditClientModal}
+          // openEditClientModal={openEditClientModal}
+          />
+        </Modal.Body>
+      </Modal> */}
     </div>
   )
 }

@@ -1,5 +1,5 @@
 const db = require('../models')
-const { User, Admin, Client } = db
+const { User, Admin, Client, Assigned_Task } = db
 const Op = db.Sequelize.Op
 const { hash, compare } = require('bcrypt')
 
@@ -86,19 +86,67 @@ exports.createClient = async (req, res) => {
 }
 
 exports.findAllClents = async (req, res) => {
+  const email = req.session.user.email
+  // const email = 'ben@demo.com'
+
   try {
-    const clientData = await Client.findAll({
+    const admin = await User.findAll({
+      raw: true,
       where: {
-        admin_id: 1,
+        email: email,
       },
-      include: ['user', 'assigned_task', 'admin'],
+    })
+    const admin_id = admin[0].admin_id
+
+    const clientData = await Client.findAll({
+      raw: true,
+      include: [
+        {
+          model: Admin,
+          as: 'admin',
+          where: {
+            id: admin_id,
+          },
+          attributes: [],
+        },
+      ],
+      attributes: ['id', 'phone_number', 'summary_of_needs'],
+    })
+
+    const clientInfo = await User.findAll({
+      raw: true,
+      where: {
+        client_id: clientData.map((client) => {
+          return client.id
+        }),
+      },
+      attributes: ['first_name', 'last_name', 'email', 'uuid'],
+    })
+
+    const clients = clientData.map((client, index) => {
+      return {
+        uuid: clientInfo[index].uuid,
+        firstName: clientInfo[index].first_name,
+        lastName: clientInfo[index].last_name,
+        email: clientInfo[index].email,
+        phoneNumber: client.phone_number,
+        summaryOfNeeds: client.summary_of_needs,
+      }
+    })
+
+    const taskData = await Assigned_Task.findAll({
+      raw: true,
+      where: {
+        client_id: clientData[0].id,
+      },
     })
 
     res.status(200).send({
       success: true,
       message: 'Found all clients',
       messge2: null,
-      clientData,
+      taskData,
+      clients,
     })
   } catch (err) {
     res.status(500).send({

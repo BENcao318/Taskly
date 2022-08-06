@@ -13,7 +13,10 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/"
+          element={<LandingPage redirectPath={window.location.href} />}
+        />
         <Route element={<PrivateRoute />}>
           <Route path="/client" element={<ClientPage />}>
             <Route path="" element={<ClientSection />} />

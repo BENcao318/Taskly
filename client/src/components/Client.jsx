@@ -8,7 +8,8 @@ import { ReactComponent as TrashCanLogo } from '../assets/trashcanLogo.svg'
 import { ReactComponent as UserLogo } from '../assets/userLogo.svg'
 
 export const Client = ({
-  name,
+  firstName,
+  lastName,
   phoneNumber,
   outstandingTasks,
   completedTasks,
@@ -37,7 +38,7 @@ export const Client = ({
         scope="row"
         className="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white"
       >
-        {name}
+        {firstName + ' ' + lastName}
       </th>
       <td className="px-6 py-4 font-semibold text-center">{phoneNumber}</td>
       <td className="px-6 py-4 text-center">
