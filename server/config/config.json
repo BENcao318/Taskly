@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "labber",
+    "username": "vagrant",
     "password": "labber",
     "database": "taskly",
     "host": "127.0.0.1",

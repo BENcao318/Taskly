@@ -94,7 +94,7 @@ export const Client = ({
               </li>
               <li>
                 <div className="flex items-center gap-2 px-4 py-2 text-red-600 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">
-                  <TrashCanLogo className="w-5 " />
+                  <TrashCanLogo className="w-5 "/>
                   Delete Client
                 </div>
               </li>
