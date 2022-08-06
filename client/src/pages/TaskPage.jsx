@@ -1,18 +1,16 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 import { NavBar } from '../components/Navbar'
 import { Sidebar } from '../components/Sidebar'
-import { TaskSection } from '../sections/TaskSection'
 
 export const TaskPage = () => {
-  //todo
-  // Add the user info into localstoreage
   return (
     <div>
       <div>
         <NavBar />
         <div className="flex ">
           <Sidebar />
-          <TaskSection />
+          <Outlet />
         </div>
       </div>
     </div>

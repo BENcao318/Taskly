@@ -8,24 +8,19 @@ import { BsFillCheckCircleFill, BsGithub } from 'react-icons/bs'
 import { SignupModal } from '../components/SignupModal'
 import { SigninModal } from '../components/SigninModal'
 import { useNavigate } from 'react-router-dom'
-import serverAPI from '../hooks/useAxios'
 import { authContext } from '../context/AuthContext'
 
 export const LandingPage = () => {
   const [openSignupModal, setOpenSignupModal] = useState(false)
   const [openSigninModal, setOpenSigninModal] = useState(false)
-  const { setAuth } = useContext(authContext)
+  const { auth } = useContext(authContext)
   const navigate = useNavigate()
 
   useEffect(() => {
-    serverAPI.get('/me').then((response) => {
-      if (response.data.success) {
-        setAuth(response.data.user)
-        // localStorage.setItem('tasklyUser', response.data.user)
-        navigate('/client')
-      }
-    })
-  }, [navigate, setAuth])
+    if (auth) {
+      navigate('/client')
+    }
+  }, [auth, navigate])
 
   return (
     <div className="max-w-6xl mx-auto">

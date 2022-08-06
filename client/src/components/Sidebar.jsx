@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import { ReactComponent as HomeLogo } from "../assets/homeLogo.svg";
-import { ReactComponent as ClientLogo } from "../assets/clientLogo.svg";
-import { ReactComponent as TaskLogo } from "../assets/taskLogo.svg";
-import { ReactComponent as HelpLogo } from "../assets/helpLogo.svg";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react'
+import { ReactComponent as HomeLogo } from '../assets/homeLogo.svg'
+import { ReactComponent as ClientLogo } from '../assets/clientLogo.svg'
+import { ReactComponent as TaskLogo } from '../assets/taskLogo.svg'
+import { ReactComponent as HelpLogo } from '../assets/helpLogo.svg'
+import { useNavigate } from 'react-router-dom'
 
 export const Sidebar = () => {
-  const navigate = useNavigate();
- 
-  const [showSidebar, setShowSidebar] = useState(false);
+  const navigate = useNavigate()
+
+  const [showSidebar, setShowSidebar] = useState(false)
   return (
     <>
       <button
-         className="md:hidden items-center cursor-pointer fixed left-32 top-3.5 z-50" 
+        className="lg:hidden items-center cursor-pointer fixed left-32 top-3.5 z-50"
         onClick={() => setShowSidebar(!showSidebar)}
       >
         <svg
           aria-hidden="true"
-          className=" w-6 h-6 mr-2 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+          className="w-6 h-6 mr-2 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +31,7 @@ export const Sidebar = () => {
       </button>
       <aside
         className={`translate-x-0 w-64 h-screen border-r ease-in-out duration-300 ${
-          showSidebar ? "" : "hidden md:block"
+          showSidebar ? '' : 'hidden lg:block'
         }`}
         aria-label="Sidebar"
       >
@@ -47,7 +47,7 @@ export const Sidebar = () => {
             <li>
               <div
                 className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
-                onClick={() => navigate("/client")}
+                onClick={() => navigate('/client')}
               >
                 <ClientLogo />
                 <span className="flex-1 ml-3 whitespace-nowrap">Clients</span>
@@ -56,7 +56,7 @@ export const Sidebar = () => {
             <li>
               <div
                 className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
-                onClick={() => navigate("/task")}
+                onClick={() => navigate('/task')}
               >
                 <TaskLogo />
                 <span className="flex-1 ml-3 whitespace-nowrap">Tasks </span>
@@ -77,5 +77,5 @@ export const Sidebar = () => {
         </div>
       </aside>
     </>
-  );
-};
+  )
+}
