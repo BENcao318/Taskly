@@ -19,6 +19,7 @@ export const Client = ({
   completedTasks,
   uuid,
   setOpenEditClientModal,
+  setOpenDeleteClientModal,
 }) => {
   const [toggleActionMenu, setToggleActionMenu] = useState(false)
   const buttonRef = useRef(null)
@@ -128,7 +129,16 @@ export const Client = ({
                 </div>
               </li>
               <li>
-                <div className="flex items-center gap-2 px-4 py-2 text-red-600 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">
+                <div
+                  className="flex items-center gap-2 px-4 py-2 text-red-600 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                  onClick={() => {
+                    setOpenDeleteClientModal((prev) => ({
+                      ...prev,
+                      isOpen: true,
+                      uuid: uuid,
+                    }))
+                  }}
+                >
                   <TrashCanLogo className="w-5 " />
                   Delete Client
                 </div>

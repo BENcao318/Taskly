@@ -8,7 +8,7 @@ export const ClientSectionBody = ({
   filteredClients,
   searchClientText,
   setOpenEditClientModal,
-  setClientInfo,
+  setOpenDeleteClientModal,
 }) => {
   const [showContent, setShowContent] = useState(false)
   const { clients } = useContext(clientContext)
@@ -108,6 +108,7 @@ export const ClientSectionBody = ({
                           completedTasks={6}
                           uuid={client.uuid}
                           setOpenEditClientModal={setOpenEditClientModal}
+                          setOpenDeleteClientModal={setOpenDeleteClientModal}
                         />
                       )
                     })
@@ -122,6 +123,7 @@ export const ClientSectionBody = ({
                           completedTasks={6}
                           uuid={client.uuid}
                           setOpenEditClientModal={setOpenEditClientModal}
+                          setOpenDeleteClientModal={setOpenDeleteClientModal}
                         />
                       )
                     })}

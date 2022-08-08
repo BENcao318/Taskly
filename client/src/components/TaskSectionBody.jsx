@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Task } from './Task'
 import { ReactComponent as AlertLogo } from '../assets/alertLogo.svg'
 import { Transition } from '@headlessui/react'
+import { useContext } from 'react'
+import { taskContext } from '../context/TaskContext'
 
 const sampleTasks = [
   {
@@ -30,8 +32,9 @@ const sampleTasks = [
   },
 ]
 
-export const TaskSectionBody = () => {
+export const TaskSectionBody = ({ setOpenDeleteTaskModal }) => {
   const [showContent, setShowContent] = useState(false)
+  const { tasks } = useContext(taskContext)
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -54,7 +57,7 @@ export const TaskSectionBody = () => {
         leaveTo="opacity-0 scale-95 -translate-x-full"
       >
         <div className="relative overflow-x-auto sm:rounded-t-lg">
-          {sampleTasks.length === 0 ? (
+          {tasks.length === 0 ? (
             <>
               <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-sky-200 dark:bg-gray-700 dark:text-gray-400">
@@ -108,12 +111,13 @@ export const TaskSectionBody = () => {
                 </tr>
               </thead>
               <tbody>
-                {sampleTasks.map((task, index) => {
+                {tasks.map((task) => {
                   return (
                     <Task
-                      key={index}
-                      name={task.name}
-                      numberOfQuestions={task.number}
+                      key={task.uuid}
+                      task={task}
+                      numberOfQuestions={6}
+                      setOpenDeleteTaskModal={setOpenDeleteTaskModal}
                     />
                   )
                 })}

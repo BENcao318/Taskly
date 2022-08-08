@@ -6,7 +6,7 @@ import { ReactComponent as PenLogo } from '../assets/penLogo.svg'
 import { ReactComponent as TrashCanLogo } from '../assets/trashcanLogo.svg'
 import { Transition } from '@headlessui/react'
 
-export const Task = ({ name, numberOfQuestions }) => {
+export const Task = ({ task, numberOfQuestions, setOpenDeleteTaskModal }) => {
   const [toggleActionMenu, setToggleActionMenu] = useState(false)
   const buttonRef = useRef(null)
 
@@ -30,7 +30,7 @@ export const Task = ({ name, numberOfQuestions }) => {
         scope="row"
         className="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white"
       >
-        {name}
+        {task.form_json_data.title}
       </th>
       <td className="px-6 py-4 text-center ">
         <div className="flex justify-center">
@@ -82,7 +82,16 @@ export const Task = ({ name, numberOfQuestions }) => {
                 </div>
               </li>
               <li>
-                <div className="flex items-center gap-2 px-4 py-2 text-red-600 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">
+                <div
+                  className="flex items-center gap-2 px-4 py-2 text-red-600 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                  onClick={() => {
+                    setOpenDeleteTaskModal((prev) => ({
+                      ...prev,
+                      isOpen: true,
+                      uuid: task.uuid,
+                    }))
+                  }}
+                >
                   <TrashCanLogo className="w-5 " />
                   Delete Task
                 </div>

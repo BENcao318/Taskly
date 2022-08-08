@@ -5,10 +5,15 @@ import { ClientSectionHeader } from '../components/ClientSectionHeader'
 import { NewClientModal } from '../components/NewClientModal'
 import { clientContext } from '../context/ClientContext'
 import { EditClientModal } from '../components/EditClientModal'
+import { DeleteClientModal } from '../components/DeleteClientModal'
 
 export const ClientSection = () => {
   const [openNewClientModal, setOpenNewClientModal] = useState()
   const [openEditClientModal, setOpenEditClientModal] = useState()
+  const [openDeleteClientModal, setOpenDeleteClientModal] = useState({
+    isOpen: false,
+    uuid: '',
+  })
   const [searchClientText, setSearchClientText] = useState('')
   const [filteredClients, setFilteredClients] = useState(null)
 
@@ -32,6 +37,7 @@ export const ClientSection = () => {
         filteredClients={filteredClients}
         searchClientText={searchClientText}
         setOpenEditClientModal={setOpenEditClientModal}
+        setOpenDeleteClientModal={setOpenDeleteClientModal}
       />
 
       <Modal
@@ -56,6 +62,25 @@ export const ClientSection = () => {
           <EditClientModal
             setOpenEditClientModal={setOpenEditClientModal}
             openEditClientModal={openEditClientModal}
+          />
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        show={openDeleteClientModal.isOpen}
+        onClose={() =>
+          setOpenDeleteClientModal((prev) => ({
+            ...prev,
+            isOpen: false,
+            uuid: '',
+          }))
+        }
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <DeleteClientModal
+            setOpenDeleteClientModal={setOpenDeleteClientModal}
+            openDeleteClientModal={openDeleteClientModal}
           />
         </Modal.Body>
       </Modal>
