@@ -5,12 +5,15 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import AuthProvider from './context/AuthContext'
 import ClientProvider from './context/ClientContext'
+import TaskProvider from './context/TaskContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <AuthProvider>
     <ClientProvider>
-      <App />
+      <TaskProvider>
+        <App />
+      </TaskProvider>
     </ClientProvider>
   </AuthProvider>
 )

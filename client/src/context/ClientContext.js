@@ -1,19 +1,21 @@
-import React, { createContext, useEffect, useState } from 'react'
-import serverAPI from '../hooks/useAxios'
+import React, { createContext, useState } from 'react'
 
 export const clientContext = createContext()
 
 const ClientProvider = ({ children }) => {
   const [clients, setClients] = useState([])
-
-  useEffect(() => {
-    serverAPI.get('/users/clients').then((response) => {
-      setClients(response.data.clients)
-    })
-  }, [setClients])
+  const [editClientInfo, setEditClientInfo] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    summaryOfNeeds: '',
+  })
 
   return (
-    <clientContext.Provider value={{ clients, setClients }}>
+    <clientContext.Provider
+      value={{ clients, setClients, editClientInfo, setEditClientInfo }}
+    >
       {children}
     </clientContext.Provider>
   )

@@ -8,11 +8,15 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
+      uuid: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+      },
       admin_id: {
         type: DataTypes.INTEGER,
       },
       form_json_data: {
-        type: DataTypes.JSONB,
+        type: DataTypes.JSON,
       },
       createdAt: {
         allowNull: false,

@@ -23,4 +23,6 @@ router.get('/admin/:companyName', users.findAdmin)
 
 router.get('/clients', users.findAllClents)
 
+router.get('/client-info', users.findClientInfo)
+
 module.exports = router

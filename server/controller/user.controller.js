@@ -1,5 +1,5 @@
 const db = require('../models')
-const { User, Admin, Client, Assigned_Task } = db
+const { User, Admin, Client, Assigned_Task, Task } = db
 const Op = db.Sequelize.Op
 const { hash, compare } = require('bcrypt')
 
@@ -85,6 +85,70 @@ exports.createClient = async (req, res) => {
   }
 }
 
+exports.findClientInfo = async (req, res) => {
+  const uuid = req.query.client_uuid
+
+  try {
+    const clientData = await User.findAll({
+      raw: true,
+      where: {
+        uuid: uuid,
+      },
+      include: [
+        {
+          model: Client,
+          as: 'client',
+          attributes: ['phone_number', 'summary_of_needs'],
+        },
+      ],
+      attributes: ['email', 'first_name', 'last_name', 'client_id'],
+    })
+
+    const assignedTaskData = await Assigned_Task.findAll({
+      raw: true,
+      where: {
+        client_id: clientData[0].client_id,
+      },
+      include: [
+        {
+          model: Task,
+          as: 'task',
+          attributes: ['form_json_data', 'uuid'],
+        },
+      ],
+      attributes: ['completed'],
+    })
+
+    const assignedTasks = assignedTaskData.map((task) => {
+      return {
+        form_json_data: task['task.form_json_data'],
+        uuid: task['task.uuid'],
+      }
+    })
+
+    const clientInfo = {
+      firstName: clientData[0].first_name,
+      lastName: clientData[0].last_name,
+      email: clientData[0].email,
+      phoneNumber: clientData[0]['client.phone_number'],
+      summaryOfNeeds: clientData[0]['client.summary_of_needs'],
+    }
+
+    res.status(200).send({
+      success: true,
+      message: 'Successfully found the request client info',
+      messge2: null,
+      clientInfo,
+      assignedTasks,
+    })
+  } catch (err) {
+    res.status(500).send({
+      message:
+        err.message || 'Some error occurred while finding all the clients',
+    })
+  }
+}
+
 exports.findAllClents = async (req, res) => {
   const email = req.session.user.email
   // const email = 'ben@demo.com'
@@ -150,7 +214,8 @@ exports.findAllClents = async (req, res) => {
     })
   } catch (err) {
     res.status(500).send({
-      message: err.message || 'Some error occurred while creating the Task',
+      message:
+        err.message || 'Some error occurred while finding all the clients',
     })
   }
 }

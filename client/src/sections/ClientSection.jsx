@@ -11,6 +11,7 @@ export const ClientSection = () => {
   const [openEditClientModal, setOpenEditClientModal] = useState()
   const [searchClientText, setSearchClientText] = useState('')
   const [filteredClients, setFilteredClients] = useState(null)
+
   const { clients } = useContext(clientContext)
 
   useEffect(() => {
@@ -28,9 +29,9 @@ export const ClientSection = () => {
         setSearchClientText={setSearchClientText}
       />
       <ClientSectionBody
-        clients={clients}
         filteredClients={filteredClients}
         searchClientText={searchClientText}
+        setOpenEditClientModal={setOpenEditClientModal}
       />
 
       <Modal
@@ -46,18 +47,18 @@ export const ClientSection = () => {
         </Modal.Body>
       </Modal>
 
-      {/* <Modal
+      <Modal
         show={openEditClientModal}
         onClose={() => setOpenEditClientModal(false)}
       >
         <Modal.Header />
         <Modal.Body>
           <EditClientModal
-          // setOpenEditClientModal={setOpenEditClientModal}
-          // openEditClientModal={openEditClientModal}
+            setOpenEditClientModal={setOpenEditClientModal}
+            openEditClientModal={openEditClientModal}
           />
         </Modal.Body>
-      </Modal> */}
+      </Modal>
     </div>
   )
 }

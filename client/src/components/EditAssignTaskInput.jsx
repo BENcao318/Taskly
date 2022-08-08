@@ -5,11 +5,20 @@ import { ReactComponent as CloseLogo } from '../assets/closeLogo.svg'
 import { useContext } from 'react'
 import { taskContext } from '../context/TaskContext'
 
-export const AssignTaskInput = ({ setAssignedTasks }) => {
+export const EditAssignTaskInput = () => {
   const [taskSelectionDropdown, setTaskSelectionDropdown] = useState(false)
   const [searchTaskText, setSearchTaskText] = useState('')
   const [filteredTasks, setFilteredTasks] = useState([])
-  const { tasks } = useContext(taskContext)
+  const { tasks, setEditAssignedTasks } = useContext(taskContext)
+
+  const comparePreviousStateUUID = (prev, uuid) => {
+    if (prev.length !== 0) {
+      return prev.some((task) => {
+        return task.uuid === uuid
+      })
+    }
+    return false
+  }
 
   useEffect(() => {
     let tasksArr = tasks.filter((task) =>
@@ -85,10 +94,13 @@ export const AssignTaskInput = ({ setAssignedTasks }) => {
                           <div
                             className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                             onClick={() => {
-                              setAssignedTasks((prev) => {
+                              console.log('testtest')
+                              setEditAssignedTasks((prev) => {
                                 setSearchTaskText('')
-                                if (!prev.includes(task.form_json_data.title)) {
-                                  return [...prev, task.form_json_data.title]
+                                if (
+                                  !comparePreviousStateUUID(prev, task.uuid)
+                                ) {
+                                  return [...prev, task]
                                 } else {
                                   return prev
                                 }
@@ -107,9 +119,11 @@ export const AssignTaskInput = ({ setAssignedTasks }) => {
                           <div
                             className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                             onClick={() => {
-                              setAssignedTasks((prev) => {
-                                if (!prev.includes(task.form_json_data.title)) {
-                                  return [...prev, task.form_json_data.title]
+                              setEditAssignedTasks((prev) => {
+                                if (
+                                  !comparePreviousStateUUID(prev, task.uuid)
+                                ) {
+                                  return [...prev, task]
                                 } else {
                                   return prev
                                 }

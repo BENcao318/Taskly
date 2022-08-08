@@ -71,16 +71,27 @@ exports.createAssignedTask = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
+    if (req.session.user && req.session.user.email !== req.query.user) {
+      return
+    }
+    const userInfo = await User.findAll({
+      raw: true,
+      where: {
+        email: req.query.user,
+      },
+      attributes: ['admin_id'],
+    })
+
     const taskData = await Task.findAll({
       where: {
-        admin_id: 1,
+        admin_id: userInfo[0].admin_id,
       },
-      include: ['admin'],
+      attributes: ['uuid', 'form_json_data'],
     })
 
     res.status(200).send({
       success: true,
-      message: 'Task create success',
+      message: 'Successfully find the tasks on user',
       messge2: null,
       taskData,
     })

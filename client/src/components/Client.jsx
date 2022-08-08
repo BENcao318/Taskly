@@ -1,11 +1,15 @@
 import { Transition } from '@headlessui/react'
 import React, { useEffect, useRef, useState } from 'react'
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { ReactComponent as DownChevron } from '../assets/downChevron.svg'
 import { ReactComponent as PenLogo } from '../assets/penLogo.svg'
 import { ReactComponent as TrashCanLogo } from '../assets/trashcanLogo.svg'
 import { ReactComponent as UserLogo } from '../assets/userLogo.svg'
+import serverAPI from '../hooks/useAxios'
+import { clientContext } from '../context/ClientContext'
+import { taskContext } from '../context/TaskContext'
 
 export const Client = ({
   firstName,
@@ -13,13 +17,35 @@ export const Client = ({
   phoneNumber,
   outstandingTasks,
   completedTasks,
+  uuid,
+  setOpenEditClientModal,
 }) => {
   const [toggleActionMenu, setToggleActionMenu] = useState(false)
   const buttonRef = useRef(null)
   const navigate = useNavigate()
+  const { setEditClientInfo } = useContext(clientContext)
+  const { setEditAssignedTasks } = useContext(taskContext)
 
   const toggleDropdown = () => {
     setToggleActionMenu((prev) => !prev)
+  }
+
+  const handleClickEditClientButton = () => {
+    serverAPI
+      .get(`/users/client-info?client_uuid=${uuid}`)
+      .then((response) => {
+        if (response.data.success) {
+          setEditClientInfo((prev) => ({
+            ...prev,
+            ...response.data.clientInfo,
+          }))
+          setEditAssignedTasks((prev) => [...response.data.assignedTasks])
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    setOpenEditClientModal(true)
   }
 
   useEffect(() => {
@@ -84,7 +110,10 @@ export const Client = ({
               aria-labelledby="dropdownDefault"
             >
               <li>
-                <div className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">
+                <div
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                  onClick={() => navigate('/client/xyz')}
+                >
                   <UserLogo className="w-5 fill-slate-600" />
                   View Client
                 </div>
@@ -92,7 +121,7 @@ export const Client = ({
               <li>
                 <div
                   className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                  onClick={() => navigate('/client/xyz')}
+                  onClick={handleClickEditClientButton}
                 >
                   <PenLogo className="w-5 fill-slate-600" />
                   Edit Client

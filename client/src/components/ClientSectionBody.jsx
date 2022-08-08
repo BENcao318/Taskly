@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Client } from './Client'
 import { ReactComponent as AlertLogo } from '../assets/alertLogo.svg'
 import { Transition } from '@headlessui/react'
+import { clientContext } from '../context/ClientContext'
 
 export const ClientSectionBody = ({
-  clients,
   filteredClients,
   searchClientText,
+  setOpenEditClientModal,
+  setClientInfo,
 }) => {
   const [showContent, setShowContent] = useState(false)
+  const { clients } = useContext(clientContext)
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -103,6 +106,8 @@ export const ClientSectionBody = ({
                           phoneNumber={client.phoneNumber}
                           outstandingTasks={0}
                           completedTasks={6}
+                          uuid={client.uuid}
+                          setOpenEditClientModal={setOpenEditClientModal}
                         />
                       )
                     })
@@ -115,6 +120,8 @@ export const ClientSectionBody = ({
                           phoneNumber={client.phoneNumber}
                           outstandingTasks={0}
                           completedTasks={6}
+                          uuid={client.uuid}
+                          setOpenEditClientModal={setOpenEditClientModal}
                         />
                       )
                     })}
