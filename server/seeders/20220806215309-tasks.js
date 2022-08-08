@@ -16,6 +16,7 @@ module.exports = {
       [
         {
           admin_id: 1,
+          uuid: "cdb558e5-17f2-4742-acc4-c1be59911502",
           form_json_data: {
             title: "Study Abroad Assesment",
             logoPosition: "right",
@@ -87,6 +88,7 @@ module.exports = {
         },
         {
           admin_id: 1,
+          uuid: "f94c8f28-b954-49a6-923c-bc6a33255626",
           form_json_data: {
             title: "Education Background",
             logoPosition: "right",
@@ -147,6 +149,7 @@ module.exports = {
         },
         {
           admin_id: 1,
+          uuid: "4e5452e0-64d0-4fb0-8752-06afca05fe14",
           form_json_data: {
             title: "Transcript",
             logoPosition: "right",
@@ -177,6 +180,7 @@ module.exports = {
         },
         {
           admin_id: 1,
+          uuid: "985fd477-e0b9-40ce-a8cd-90287e5dddfb",
           form_json_data: {
             title: "Proof of Finances",
             logoPosition: "right",
@@ -214,6 +218,7 @@ module.exports = {
         },
         {
           admin_id: 1,
+          uuid: "1d7ae2c8-b070-417d-8d55-ad3ee7060109",
           form_json_data: {
             title: "Customer Feedback",
             logoPosition: "right",
