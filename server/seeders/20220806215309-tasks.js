@@ -16,7 +16,7 @@ module.exports = {
       [
         {
           admin_id: 1,
-          form_json_data: {
+          form_json_data: JSON.stringify({
             title: "Study Abroad Assesment",
             logoPosition: "right",
             elements: [
@@ -81,13 +81,13 @@ module.exports = {
                   "Additional comments related to your study plans/ goals.",
               },
             ],
-          },
+          }),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           admin_id: 1,
-          form_json_data: {
+          form_json_data: JSON.stringify({
             title: "Education Background",
             logoPosition: "right",
             elements: [
@@ -141,13 +141,13 @@ module.exports = {
                   "Is there any additional information we should know about your study goals? ",
               },
             ],
-          },
+          }),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           admin_id: 1,
-          form_json_data: {
+          form_json_data: JSON.stringify({
             title: "Transcript",
             logoPosition: "right",
             elements: [
@@ -171,13 +171,13 @@ module.exports = {
                 isRequired: true,
               },
             ],
-          },
+          }),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           admin_id: 1,
-          form_json_data: {
+          form_json_data: JSON.stringify({
             title: "Proof of Finances",
             logoPosition: "right",
             elements: [
@@ -208,13 +208,13 @@ module.exports = {
                 isRequired: true,
               },
             ],
-          },
+          }),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           admin_id: 1,
-          form_json_data: {
+          form_json_data: JSON.stringify({
             title: "Customer Feedback",
             logoPosition: "right",
             elements: [
@@ -247,7 +247,7 @@ module.exports = {
                   "Any additional comments related to your experience or how we could improve our service(s) in the future.",
               },
             ],
-          },
+          }),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
