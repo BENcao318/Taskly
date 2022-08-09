@@ -5,33 +5,6 @@ import { Transition } from '@headlessui/react'
 import { useContext } from 'react'
 import { taskContext } from '../context/TaskContext'
 
-const sampleTasks = [
-  {
-    name: 'Initial Onboarding',
-    number: 6,
-  },
-  {
-    name: 'Financial Summary',
-    number: 2,
-  },
-  {
-    name: 'Proof of Income',
-    number: 3,
-  },
-  {
-    name: 'Leter of Intent',
-    number: 1,
-  },
-  {
-    name: 'Finiancial Background',
-    number: 2,
-  },
-  {
-    name: 'Job Offer',
-    number: 6,
-  },
-]
-
 export const TaskSectionBody = ({ setOpenDeleteTaskModal }) => {
   const [showContent, setShowContent] = useState(false)
   const { tasks } = useContext(taskContext)
@@ -114,7 +87,7 @@ export const TaskSectionBody = ({ setOpenDeleteTaskModal }) => {
                 {tasks.map((task) => {
                   return (
                     <Task
-                      key={task.uuid}
+                      key={task.id}
                       task={task}
                       numberOfQuestions={6}
                       setOpenDeleteTaskModal={setOpenDeleteTaskModal}

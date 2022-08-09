@@ -7,9 +7,10 @@ import { DeleteTaskModal } from '../components/DeleteTaskModal'
 export const TaskSection = () => {
   const [openDeleteTaskModal, setOpenDeleteTaskModal] = useState({
     isOpen: false,
-    uuid: '',
+    id: '',
   })
-
+  //todo
+  //Create search function for the tasks.
   return (
     <div className="w-full">
       <TaskSectionHeader />
@@ -20,7 +21,7 @@ export const TaskSection = () => {
           setOpenDeleteTaskModal((prev) => ({
             ...prev,
             isOpen: false,
-            uuid: '',
+            id: '',
           }))
         }
       >

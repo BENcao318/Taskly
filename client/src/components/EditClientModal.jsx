@@ -1,10 +1,9 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { clientContext } from '../context/ClientContext'
 import { EditAssignedTaskTags } from './EditAssignedTaskTags'
 import { EditAssignTaskInput } from './EditAssignTaskInput'
 
-export const EditClientModal = () => {
-  const [assignedTasks, setAssignedTasks] = useState([])
+export const EditClientModal = ({ setOpenEditClientModal }) => {
   const { editClientInfo, setEditClientInfo } = useContext(clientContext)
 
   const changeClientInfoForm = (e) => {

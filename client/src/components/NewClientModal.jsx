@@ -1,10 +1,52 @@
-import React from 'react'
-import { useState } from 'react'
-import { AssignedTaskTags } from './AssignedTaskTags'
-import { AssignTaskInput } from './AssignTaskInput'
+import React, { useContext } from 'react'
+import { clientContext } from '../context/ClientContext'
+import { taskContext } from '../context/TaskContext'
+import { authContext } from '../context/AuthContext'
+import { EditAssignedTaskTags } from './EditAssignedTaskTags'
+import { EditAssignTaskInput } from './EditAssignTaskInput'
+import serverAPI from '../hooks/useAxios'
 
-export const NewClientModal = () => {
-  const [assignedTasks, setAssignedTasks] = useState([])
+export const NewClientModal = ({ setOpenNewClientModal }) => {
+  const { editClientInfo, setEditClientInfo } = useContext(clientContext)
+  const { editAssignedTasks, setEditAssignedTasks } = useContext(taskContext)
+  const { auth } = useContext(authContext)
+
+  const changeClientInfoForm = (e) => {
+    const propertyName = e.target.id
+    setEditClientInfo((prev) => ({
+      ...prev,
+      [propertyName]: e.target.value,
+    }))
+  }
+
+  const handleCreate = (e) => {
+    e.preventDefault()
+    serverAPI
+      .post('/users/new-client', {
+        clientInfo: editClientInfo,
+        assignedTasks: editAssignedTasks,
+        adminEmail: auth.email,
+      })
+      .then((response) => {
+        if (response.data.success) {
+          console.log(response.data)
+
+          setOpenNewClientModal(false)
+          setEditClientInfo((prev) => ({
+            ...prev,
+            firstName: '',
+            lastName: '',
+            email: '',
+            phoneNumber: '',
+            summaryOfNeeds: '',
+          }))
+          setEditAssignedTasks((prev) => [])
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
   return (
     <form className="w-full ">
@@ -13,35 +55,39 @@ export const NewClientModal = () => {
       </div>
       <div className="mb-6">
         <label
-          htmlFor="fname"
+          htmlFor="firstName"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
         >
           First name
         </label>
         <input
-          id="fname"
+          id="firstName"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="First name"
+          onChange={changeClientInfoForm}
+          value={editClientInfo.firstName}
           required
         />
       </div>
       <div className="mb-6">
         <label
-          htmlFor="lname"
+          htmlFor="lastName"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
         >
           Last name
         </label>
         <input
-          id="lname"
+          id="lastName"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Last name"
+          onChange={changeClientInfoForm}
+          value={editClientInfo.lastName}
           required
         />
       </div>
       <div className="mb-6">
         <label
-          htmlFor="email-address-icon"
+          htmlFor="email"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
         >
           Email
@@ -61,15 +107,17 @@ export const NewClientModal = () => {
           </div>
           <input
             type="text"
-            id="email-address-icon"
+            id="email"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="name@example.com"
+            onChange={changeClientInfoForm}
+            value={editClientInfo.email}
           />
         </div>
       </div>
       <div className="mb-6">
         <label
-          htmlFor="phone-number-icon"
+          htmlFor="phoneNumber"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
         >
           Phone number
@@ -88,34 +136,36 @@ export const NewClientModal = () => {
           </div>
           <input
             type="text"
-            id="phone-number-icon"
+            id="phoneNumber"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="xxx-xxx-xxxx"
+            onChange={changeClientInfoForm}
+            value={editClientInfo.phoneNumber}
           />
         </div>
       </div>
       <div className="mb-6">
         <label
-          htmlFor="message"
+          htmlFor="summaryOfNeeds"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
         >
           Summary of needs
         </label>
         <textarea
-          id="message"
+          id="summaryOfNeeds"
           rows="4"
           className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Write text here..."
+          onChange={changeClientInfoForm}
+          value={editClientInfo.summaryOfNeeds}
         ></textarea>
       </div>
-      <AssignTaskInput setAssignedTasks={setAssignedTasks} />
-      <AssignedTaskTags
-        assignedTasks={assignedTasks}
-        setAssignedTasks={setAssignedTasks}
-      />
+      <EditAssignTaskInput />
+      <EditAssignedTaskTags />
       <button
         type="submit"
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        onClick={handleCreate}
       >
         Create
       </button>

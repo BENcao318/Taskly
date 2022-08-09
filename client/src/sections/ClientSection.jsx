@@ -6,6 +6,7 @@ import { NewClientModal } from '../components/NewClientModal'
 import { clientContext } from '../context/ClientContext'
 import { EditClientModal } from '../components/EditClientModal'
 import { DeleteClientModal } from '../components/DeleteClientModal'
+import { taskContext } from '../context/TaskContext'
 
 export const ClientSection = () => {
   const [openNewClientModal, setOpenNewClientModal] = useState()
@@ -17,7 +18,34 @@ export const ClientSection = () => {
   const [searchClientText, setSearchClientText] = useState('')
   const [filteredClients, setFilteredClients] = useState(null)
 
-  const { clients } = useContext(clientContext)
+  const { clients, setEditClientInfo } = useContext(clientContext)
+  const { setEditAssignedTasks } = useContext(taskContext)
+
+  const handleCloseEditClientModal = () => {
+    setOpenEditClientModal(false)
+    setEditClientInfo((prev) => ({
+      ...prev,
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
+      summaryOfNeeds: '',
+    }))
+    setEditAssignedTasks((prev) => [])
+  }
+
+  const handleCloseNewClientModal = () => {
+    setOpenNewClientModal(false)
+    setEditClientInfo((prev) => ({
+      ...prev,
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
+      summaryOfNeeds: '',
+    }))
+    setEditAssignedTasks((prev) => [])
+  }
 
   useEffect(() => {
     let clientsArr = clients.filter((client) => {
@@ -40,41 +68,23 @@ export const ClientSection = () => {
         setOpenDeleteClientModal={setOpenDeleteClientModal}
       />
 
-      <Modal
-        show={openNewClientModal}
-        onClose={() => setOpenNewClientModal(false)}
-      >
+      <Modal show={openNewClientModal} onClose={handleCloseNewClientModal}>
         <Modal.Header />
         <Modal.Body>
-          <NewClientModal
-            setOpenNewClientModal={setOpenNewClientModal}
-            openNewClientModal={openNewClientModal}
-          />
+          <NewClientModal setOpenNewClientModal={setOpenNewClientModal} />
         </Modal.Body>
       </Modal>
 
-      <Modal
-        show={openEditClientModal}
-        onClose={() => setOpenEditClientModal(false)}
-      >
+      <Modal show={openEditClientModal} onClose={handleCloseEditClientModal}>
         <Modal.Header />
         <Modal.Body>
-          <EditClientModal
-            setOpenEditClientModal={setOpenEditClientModal}
-            openEditClientModal={openEditClientModal}
-          />
+          <EditClientModal setOpenEditClientModal={setOpenEditClientModal} />
         </Modal.Body>
       </Modal>
 
       <Modal
         show={openDeleteClientModal.isOpen}
-        onClose={() =>
-          setOpenDeleteClientModal((prev) => ({
-            ...prev,
-            isOpen: false,
-            uuid: '',
-          }))
-        }
+        onClose={() => setOpenDeleteClientModal(false)}
       >
         <Modal.Header />
         <Modal.Body>

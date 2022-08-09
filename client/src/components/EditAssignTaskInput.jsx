@@ -11,10 +11,10 @@ export const EditAssignTaskInput = () => {
   const [filteredTasks, setFilteredTasks] = useState([])
   const { tasks, setEditAssignedTasks } = useContext(taskContext)
 
-  const comparePreviousStateUUID = (prev, uuid) => {
+  const comparePreviousStateUUID = (prev, id) => {
     if (prev.length !== 0) {
       return prev.some((task) => {
-        return task.uuid === uuid
+        return task.id === id
       })
     }
     return false
@@ -90,16 +90,14 @@ export const EditAssignTaskInput = () => {
                 {searchTaskText
                   ? filteredTasks.map((task) => {
                       return (
-                        <li key={task.uuid}>
+                        <li key={task.id}>
                           <div
                             className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                             onClick={() => {
                               console.log('testtest')
                               setEditAssignedTasks((prev) => {
                                 setSearchTaskText('')
-                                if (
-                                  !comparePreviousStateUUID(prev, task.uuid)
-                                ) {
+                                if (!comparePreviousStateUUID(prev, task.id)) {
                                   return [...prev, task]
                                 } else {
                                   return prev
@@ -115,14 +113,12 @@ export const EditAssignTaskInput = () => {
                     })
                   : tasks.map((task) => {
                       return (
-                        <li key={task.uuid}>
+                        <li key={task.id}>
                           <div
                             className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                             onClick={() => {
                               setEditAssignedTasks((prev) => {
-                                if (
-                                  !comparePreviousStateUUID(prev, task.uuid)
-                                ) {
+                                if (!comparePreviousStateUUID(prev, task.id)) {
                                   return [...prev, task]
                                 } else {
                                   return prev

@@ -86,7 +86,7 @@ exports.findAll = async (req, res) => {
       where: {
         admin_id: userInfo[0].admin_id,
       },
-      attributes: ['uuid', 'form_json_data'],
+      attributes: ['id', 'form_json_data'],
     })
 
     res.status(200).send({

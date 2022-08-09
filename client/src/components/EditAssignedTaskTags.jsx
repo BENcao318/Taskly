@@ -11,7 +11,7 @@ export const EditAssignedTaskTags = () => {
       {editAssignedTasks.map((task) => {
         return (
           <div
-            key={task.uuid}
+            key={task.id}
             className="flex items-center justify-center gap-2 px-2 py-2 rounded-lg ring-2 ring-blue-600 hover:bg-slate-200 hover:ring-blue-400"
           >
             <div className="font-semibold text-md">

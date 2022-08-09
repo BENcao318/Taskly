@@ -63,20 +63,55 @@ exports.createAdmin = async (req, res) => {
 }
 
 exports.createClient = async (req, res) => {
-  const { admin_id, phone_number, summary_of_needs } = req.body
+  const { clientInfo, assignedTasks, adminEmail } = req.body
 
   try {
-    const clientData = await Client.create({
-      admin_id,
-      phone_number,
-      summary_of_needs,
+    //check if the client email already exist in the database
+    const clientEmail = await User.findAll({
+      where: {
+        email: clientInfo.email.toLowerCase(),
+      },
     })
+
+    if (clientEmail.length !== 0) {
+      return res.status(403).send({ message: 'Email already exist.' })
+    }
+
+    const adminData = await User.findAll({
+      raw: true,
+      where: {
+        email: adminEmail,
+      },
+      attributes: ['admin_id'],
+    })
+
+    const clientData = await Client.create({
+      admin_id: adminData[0].admin_id,
+      phone_number: clientInfo.phoneNumber,
+      summary_of_needs: clientInfo.summaryOfNeeds,
+    })
+
+    const userData = await User.create({
+      first_name: clientInfo.firstName,
+      last_name: clientInfo.lastName,
+      email: clientInfo.email.toLowerCase(),
+      password: '123', //use this for sending secure code to the user
+      admin_id: null,
+      client_id: clientData.id,
+    })
+
+    const bulkTasks = assignedTasks.map((task) => ({
+      client_id: clientData.id,
+      task_id: task.id,
+      completed: false,
+    }))
+
+    const createdAssignedTasks = await Assigned_Task.bulkCreate(bulkTasks)
 
     res.status(200).send({
       success: true,
       message: 'Client created successfully',
       messge2: null,
-      clientData,
     })
   } catch (err) {
     res.status(500).send({
@@ -113,7 +148,7 @@ exports.findClientInfo = async (req, res) => {
         {
           model: Task,
           as: 'task',
-          attributes: ['form_json_data', 'uuid'],
+          attributes: ['form_json_data', 'id'],
         },
       ],
       attributes: ['completed'],
@@ -122,7 +157,7 @@ exports.findClientInfo = async (req, res) => {
     const assignedTasks = assignedTaskData.map((task) => {
       return {
         form_json_data: task['task.form_json_data'],
-        uuid: task['task.uuid'],
+        id: task['task.id'],
       }
     })
 
@@ -149,18 +184,18 @@ exports.findClientInfo = async (req, res) => {
   }
 }
 
-exports.findAllClents = async (req, res) => {
-  const email = req.session.user.email
-  // const email = 'ben@demo.com'
+exports.findAllClients = async (req, res) => {
+  // const email = req.session.user.email
+  const email = 'ben@demo.com'
 
   try {
-    const admin = await User.findAll({
+    const adminData = await User.findAll({
       raw: true,
       where: {
         email: email,
       },
     })
-    const admin_id = admin[0].admin_id
+    const admin_id = adminData[0].admin_id
 
     const clientData = await Client.findAll({
       raw: true,
@@ -197,7 +232,6 @@ exports.findAllClents = async (req, res) => {
         summaryOfNeeds: client.summary_of_needs,
       }
     })
-
     const taskData = await Assigned_Task.findAll({
       raw: true,
       where: {

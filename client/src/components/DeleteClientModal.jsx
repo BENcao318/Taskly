@@ -13,7 +13,11 @@ export const DeleteClientModal = ({
     <div>
       <div className="relative w-full h-full max-w-md p-4 mx-auto my-auto md:h-auto">
         <div className="p-6 text-center">
-          <ExclamationMark />
+          <div className="flex items-center justify-center w-full">
+            <div className="w-8 h-8">
+              <ExclamationMark />
+            </div>
+          </div>
           <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
             Are you sure you want to delete this client?
           </h3>
