@@ -12,10 +12,18 @@ const ClientProvider = ({ children }) => {
     summaryOfNeeds: '',
     uuid: '',
   })
+  const [clientUUID, setClientUUID] = useState('')
 
   return (
     <clientContext.Provider
-      value={{ clients, setClients, editClientInfo, setEditClientInfo }}
+      value={{
+        clients,
+        setClients,
+        editClientInfo,
+        setEditClientInfo,
+        clientUUID,
+        setClientUUID,
+      }}
     >
       {children}
     </clientContext.Provider>

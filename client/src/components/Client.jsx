@@ -24,11 +24,16 @@ export const Client = ({
   const [toggleActionMenu, setToggleActionMenu] = useState(false)
   const buttonRef = useRef(null)
   const navigate = useNavigate()
-  const { setEditClientInfo } = useContext(clientContext)
+  const { setEditClientInfo, setClientUUID } = useContext(clientContext)
   const { setEditAssignedTasks } = useContext(taskContext)
 
   const toggleDropdown = () => {
     setToggleActionMenu((prev) => !prev)
+  }
+
+  const handleClickViewClientButton = () => {
+    setClientUUID((prev) => uuid)
+    navigate('/client/xyz')
   }
 
   const handleClickEditClientButton = () => {
@@ -114,7 +119,7 @@ export const Client = ({
               <li>
                 <div
                   className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                  onClick={() => navigate('/client/xyz')}
+                  onClick={handleClickViewClientButton}
                 >
                   <UserLogo className="w-5 fill-slate-600" />
                   View Client
