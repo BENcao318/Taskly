@@ -104,23 +104,23 @@ export const ClientSectionBody = ({
                           firstName={client.firstName}
                           lastName={client.lastName}
                           phoneNumber={client.phoneNumber}
-                          outstandingTasks={0}
-                          completedTasks={6}
+                          numOfOutstandingTasks={client.numOfOutstandingTasks}
+                          numOfCompletedTasks={client.numOfCompletedTasks}
                           uuid={client.uuid}
                           setOpenEditClientModal={setOpenEditClientModal}
                           setOpenDeleteClientModal={setOpenDeleteClientModal}
                         />
                       )
                     })
-                  : clients.map((client, index) => {
+                  : clients.map((client) => {
                       return (
                         <Client
                           key={client.uuid}
                           firstName={client.firstName}
                           lastName={client.lastName}
                           phoneNumber={client.phoneNumber}
-                          outstandingTasks={0}
-                          completedTasks={6}
+                          numOfOutstandingTasks={client.numOfOutstandingTasks}
+                          numOfCompletedTasks={client.numOfCompletedTasks}
                           uuid={client.uuid}
                           setOpenEditClientModal={setOpenEditClientModal}
                           setOpenDeleteClientModal={setOpenDeleteClientModal}

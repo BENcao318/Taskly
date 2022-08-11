@@ -5,5 +5,11 @@ import { authContext } from '../context/AuthContext'
 export const PrivateRoute = ({ redirectPath = '/' }) => {
   const { auth } = useContext(authContext)
 
-  return auth ? <Outlet /> : <Navigate to={redirectPath} />
+  return auth.isLoggedIn ? (
+    <Outlet />
+  ) : auth.isLoading ? (
+    'Loading...'
+  ) : (
+    <Navigate to={redirectPath} />
+  )
 }

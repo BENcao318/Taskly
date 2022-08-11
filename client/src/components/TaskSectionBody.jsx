@@ -89,7 +89,6 @@ export const TaskSectionBody = ({ setOpenDeleteTaskModal }) => {
                     <Task
                       key={task.id}
                       task={task}
-                      numberOfQuestions={6}
                       setOpenDeleteTaskModal={setOpenDeleteTaskModal}
                     />
                   )

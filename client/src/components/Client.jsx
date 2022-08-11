@@ -15,8 +15,8 @@ export const Client = ({
   firstName,
   lastName,
   phoneNumber,
-  outstandingTasks,
-  completedTasks,
+  numOfOutstandingTasks,
+  numOfCompletedTasks,
   uuid,
   setOpenEditClientModal,
   setOpenDeleteClientModal,
@@ -77,14 +77,14 @@ export const Client = ({
       <td className="px-6 py-4 text-center">
         <div className="flex justify-center">
           <div className="flex items-center justify-center w-6 h-6 font-semibold text-white rounded-full bg-amber-600">
-            {outstandingTasks}
+            {numOfOutstandingTasks}
           </div>
         </div>
       </td>
       <td className="px-6 py-4 text-center">
         <div className="flex justify-center">
           <div className="flex items-center justify-center w-6 h-6 font-semibold text-white rounded-full bg-lime-600">
-            {completedTasks}
+            {numOfCompletedTasks}
           </div>
         </div>
       </td>

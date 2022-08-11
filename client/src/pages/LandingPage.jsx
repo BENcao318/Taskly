@@ -17,7 +17,7 @@ export const LandingPage = ({ redirectPath }) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (auth) {
+    if (auth.isLoggedIn) {
       const path = redirectPath.split('/').splice(3).join('/')
       navigate(path)
     }

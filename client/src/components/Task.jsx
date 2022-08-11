@@ -6,9 +6,10 @@ import { ReactComponent as PenLogo } from '../assets/penLogo.svg'
 import { ReactComponent as TrashCanLogo } from '../assets/trashcanLogo.svg'
 import { Transition } from '@headlessui/react'
 
-export const Task = ({ task, numberOfQuestions, setOpenDeleteTaskModal }) => {
+export const Task = ({ task, setOpenDeleteTaskModal }) => {
   const [toggleActionMenu, setToggleActionMenu] = useState(false)
   const buttonRef = useRef(null)
+  const numberOfQuestions = task.form_json_data.elements.length
 
   const toggleDropdown = () => {
     setToggleActionMenu((prev) => !prev)
