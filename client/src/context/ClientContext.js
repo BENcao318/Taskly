@@ -10,6 +10,7 @@ const ClientProvider = ({ children }) => {
     email: '',
     phoneNumber: '',
     summaryOfNeeds: '',
+    uuid: '',
   })
 
   return (

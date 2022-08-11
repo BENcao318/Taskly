@@ -63,20 +63,140 @@ exports.createAdmin = async (req, res) => {
 }
 
 exports.createClient = async (req, res) => {
-  const { admin_id, phone_number, summary_of_needs } = req.body
+  const { clientInfo, assignedTasks, adminEmail } = req.body
 
   try {
-    const clientData = await Client.create({
-      admin_id,
-      phone_number,
-      summary_of_needs,
+    //check if the client email already exist in the database
+    const clientEmail = await User.findAll({
+      where: {
+        email: clientInfo.email.toLowerCase(),
+      },
     })
+
+    if (clientEmail.length !== 0) {
+      return res.status(403).send({ message: 'Email already exist.' })
+    }
+
+    const adminData = await User.findAll({
+      raw: true,
+      where: {
+        email: adminEmail,
+      },
+      attributes: ['admin_id'],
+    })
+
+    const clientData = await Client.create({
+      admin_id: adminData[0].admin_id,
+      phone_number: clientInfo.phoneNumber,
+      summary_of_needs: clientInfo.summaryOfNeeds,
+    })
+
+    const userData = await User.create({
+      first_name: clientInfo.firstName,
+      last_name: clientInfo.lastName,
+      email: clientInfo.email.toLowerCase(),
+      password: '123', //use this for sending secure code to the user
+      admin_id: null,
+      client_id: clientData.id,
+    })
+
+    if (assignedTasks.length !== 0) {
+      const bulkTasks = assignedTasks.map((task) => ({
+        client_id: clientData.id,
+        task_id: task.id,
+        completed: false,
+      }))
+
+      const createdAssignedTasks = await Assigned_Task.bulkCreate(bulkTasks)
+    }
 
     res.status(200).send({
       success: true,
       message: 'Client created successfully',
       messge2: null,
-      clientData,
+    })
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || 'Some error occurred while creating the Task',
+    })
+  }
+}
+
+exports.updateClient = async (req, res) => {
+  const { updatedClientInfo, updatedAssignedTasks } = req.body
+
+  try {
+    const clientData = await User.findAll({
+      raw: true,
+      where: {
+        uuid: updatedClientInfo.uuid,
+      },
+      attributes: ['client_id'],
+    })
+
+    const updateClient = await Client.update(
+      {
+        phone_number: updatedClientInfo.phoneNumber,
+        summary_of_needs: updatedClientInfo.summaryOfNeeds,
+      },
+      {
+        where: { id: clientData[0].client_id },
+      }
+    )
+
+    const updateUser = await User.update(
+      {
+        first_name: updatedClientInfo.firstName,
+        last_name: updatedClientInfo.lastName,
+        phone_number: updatedClientInfo.phoneNumber,
+        email: updatedClientInfo.email.toLowerCase(), //todo check the email availability first.
+      },
+      {
+        where: { uuid: updatedClientInfo.uuid },
+      }
+    )
+
+    const currentClientAssignedTasks = await Assigned_Task.findAll({
+      raw: true,
+      where: {
+        client_id: clientData[0].client_id,
+      },
+      attributes: ['task_id'],
+    })
+
+    const updatedTaskIdArr = updatedAssignedTasks.map((task) => task.id)
+    const currentTaskIdArr = currentClientAssignedTasks.map(
+      (task) => task.task_id
+    )
+    const assignedTasksIdToDeleteArr = currentTaskIdArr.filter(
+      (task) => !updatedTaskIdArr.includes(task)
+    )
+    const assignedTasksIdToAddArr = updatedTaskIdArr.filter(
+      (task) => !currentTaskIdArr.includes(task)
+    )
+
+    if (assignedTasksIdToDeleteArr.length !== 0) {
+      const deleteAssignedTasks = await Assigned_Task.destroy({
+        where: {
+          id: assignedTasksIdToDeleteArr,
+        },
+      })
+    }
+
+    if (assignedTasksIdToAddArr.length !== 0) {
+      const bulkTasks = assignedTasksIdToAddArr.map((id) => ({
+        client_id: clientData[0].client_id,
+        task_id: id,
+        completed: false,
+      }))
+
+      const createdAssignedTasks = await Assigned_Task.bulkCreate(bulkTasks)
+    }
+
+    res.status(200).send({
+      success: true,
+      message: 'Client updated successfully',
+      messge2: null,
     })
   } catch (err) {
     res.status(500).send({
@@ -113,7 +233,7 @@ exports.findClientInfo = async (req, res) => {
         {
           model: Task,
           as: 'task',
-          attributes: ['form_json_data', 'uuid'],
+          attributes: ['form_json_data', 'id'],
         },
       ],
       attributes: ['completed'],
@@ -122,7 +242,7 @@ exports.findClientInfo = async (req, res) => {
     const assignedTasks = assignedTaskData.map((task) => {
       return {
         form_json_data: task['task.form_json_data'],
-        uuid: task['task.uuid'],
+        id: task['task.id'],
       }
     })
 
@@ -149,18 +269,18 @@ exports.findClientInfo = async (req, res) => {
   }
 }
 
-exports.findAllClents = async (req, res) => {
+exports.findAllClients = async (req, res) => {
   const email = req.session.user.email
   // const email = 'ben@demo.com'
 
   try {
-    const admin = await User.findAll({
+    const adminData = await User.findAll({
       raw: true,
       where: {
         email: email,
       },
     })
-    const admin_id = admin[0].admin_id
+    const admin_id = adminData[0].admin_id
 
     const clientData = await Client.findAll({
       raw: true,
@@ -174,6 +294,7 @@ exports.findAllClents = async (req, res) => {
           attributes: [],
         },
       ],
+      order: [['id', 'ASC']],
       attributes: ['id', 'phone_number', 'summary_of_needs'],
     })
 
@@ -184,9 +305,9 @@ exports.findAllClents = async (req, res) => {
           return client.id
         }),
       },
-      attributes: ['first_name', 'last_name', 'email', 'uuid'],
+      order: [['client_id', 'ASC']],
+      attributes: ['client_id', 'first_name', 'last_name', 'email', 'uuid'],
     })
-
     const clients = clientData.map((client, index) => {
       return {
         uuid: clientInfo[index].uuid,
@@ -197,7 +318,6 @@ exports.findAllClents = async (req, res) => {
         summaryOfNeeds: client.summary_of_needs,
       }
     })
-
     const taskData = await Assigned_Task.findAll({
       raw: true,
       where: {

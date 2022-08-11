@@ -88,7 +88,7 @@ export const Task = ({ task, numberOfQuestions, setOpenDeleteTaskModal }) => {
                     setOpenDeleteTaskModal((prev) => ({
                       ...prev,
                       isOpen: true,
-                      uuid: task.uuid,
+                      id: task.id,
                     }))
                   }}
                 >

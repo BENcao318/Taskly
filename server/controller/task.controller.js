@@ -86,7 +86,7 @@ exports.findAll = async (req, res) => {
       where: {
         admin_id: userInfo[0].admin_id,
       },
-      attributes: ['uuid', 'form_json_data'],
+      attributes: ['id', 'form_json_data'],
     })
 
     res.status(200).send({
@@ -106,7 +106,7 @@ exports.findAllAssignedTasks = async (req, res) => {
   try {
     const taskData = await Assigned_Task.findAll({
       where: {
-        client_id: 1,
+        client_id: 1, //todo
       },
       include: ['task'],
     })

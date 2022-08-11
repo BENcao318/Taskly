@@ -39,6 +39,7 @@ export const Client = ({
           setEditClientInfo((prev) => ({
             ...prev,
             ...response.data.clientInfo,
+            uuid: uuid,
           }))
           setEditAssignedTasks((prev) => [...response.data.assignedTasks])
         }

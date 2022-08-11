@@ -25,10 +25,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Task.init(
     {
-      uuid: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-      },
       admin_id: DataTypes.INTEGER,
       form_json_data: DataTypes.JSON,
     },
