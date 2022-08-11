@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { Task } from './Task'
-import { ReactComponent as AlertLogo } from '../assets/alertLogo.svg'
-import { Transition } from '@headlessui/react'
-import { useContext } from 'react'
-import { taskContext } from '../context/TaskContext'
+import React, { useEffect, useState } from "react";
+import { Task } from "./Task";
+import { ReactComponent as AlertLogo } from "../assets/alertLogo.svg";
+import { Transition } from "@headlessui/react";
+import { useContext } from "react";
+import { taskContext } from "../context/TaskContext";
+import { useNavigate } from "react-router-dom";
 
 export const TaskSectionBody = ({ setOpenDeleteTaskModal }) => {
-  const [showContent, setShowContent] = useState(false)
-  const { tasks } = useContext(taskContext)
+  const [showContent, setShowContent] = useState(false);
+  const { tasks } = useContext(taskContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setShowContent(true)
-    }, 100)
+      setShowContent(true);
+    }, 100);
 
-    return () => clearTimeout(timeout)
-  }, [])
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <div>
@@ -56,10 +58,13 @@ export const TaskSectionBody = ({ setOpenDeleteTaskModal }) => {
                 <AlertLogo />
                 <div>
                   <span className="font-medium">
-                    You have not added any tasks.{' '}
+                    You have not added any tasks.{" "}
                   </span>
                   {/* todo */}
-                  <span className="font-bold underline cursor-pointer">
+                  <span
+                    className="font-bold underline cursor-pointer"
+                    onClick={() => navigate("/task/new")}
+                  >
                     Click here
                   </span>
                   <span className="font-medium"> to create your first.</span>
@@ -91,7 +96,7 @@ export const TaskSectionBody = ({ setOpenDeleteTaskModal }) => {
                       task={task}
                       setOpenDeleteTaskModal={setOpenDeleteTaskModal}
                     />
-                  )
+                  );
                 })}
               </tbody>
             </table>
@@ -99,5 +104,5 @@ export const TaskSectionBody = ({ setOpenDeleteTaskModal }) => {
         </div>
       </Transition>
     </div>
-  )
-}
+  );
+};
