@@ -1,7 +1,9 @@
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
+import { useNavigate } from "react-router-dom";
 import * as Survey from "survey-core";
 import "survey-core/defaultV2.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
+import serverAPI from "../hooks/useAxios";
 import "../surveyJs.css";
 
 const creatorOptions = {
@@ -59,31 +61,25 @@ Survey.Serializer.findProperty("survey", "logo").visible = false;
 // };
 
 export function SurveyCreatorWidget() {
+  const navigate = useNavigate();
   const creator = new SurveyCreator(creatorOptions);
   // creator.text = window.localStorage.getItem("survey-json") || JSON.stringify();
   creator.saveSurveyFunc = (saveNo, callback) => {
-    window.localStorage.setItem("survey-json", creator.text);
-    callback(saveNo, true);
     alert(creator.text);
-    // saveSurveyJson(
-    //     "https://your-web-service.com/",
-    //     creator.JSON,
-    //     saveNo,
-    //     callback
-    // );
+    serverAPI
+      .post("/tasks/new", {
+        // req.session.user.adminID
+        admin_id: 1,
+        form_json_data: JSON.parse(creator.text),
+      })
+      .then((response) => {
+        if (response && response.data.success) {
+          navigate("/task");
+        }
+      })
+      .catch((err) => {
+        console.log("Error!");
+      });
   };
   return <SurveyCreatorComponent creator={creator} />;
 }
-
-// function saveSurveyJson(url, json, saveNo, callback) {
-//   const request = new XMLHttpRequest();
-//   request.open('POST', url);
-//   request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-//   request.addEventListener('load', () => {
-//       callback(saveNo, true);
-//   });
-//   request.addEventListener('error', () => {
-//       callback(saveNo, false);
-//   });
-//   request.send(JSON.stringify(json));
-// }
