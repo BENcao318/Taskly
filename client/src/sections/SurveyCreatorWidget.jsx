@@ -36,9 +36,9 @@ const creatorOptions = {
   ],
 };
 
-// Survey.Serializer.findProperty("survey", "title").visible = false;
 Survey.Serializer.findProperty("survey", "description").visible = false;
 Survey.Serializer.findProperty("survey", "logo").visible = false;
+Survey.Serializer.findProperty("survey", "title").isRequired = true;
 
 // const defaultJson = {
 //   pages: [
@@ -65,21 +65,23 @@ export function SurveyCreatorWidget() {
   const creator = new SurveyCreator(creatorOptions);
   // creator.text = window.localStorage.getItem("survey-json") || JSON.stringify();
   creator.saveSurveyFunc = (saveNo, callback) => {
-    alert(creator.text);
-    serverAPI
-      .post("/tasks/new", {
-        // req.session.user.adminID
-        admin_id: 1,
-        form_json_data: JSON.parse(creator.text),
-      })
-      .then((response) => {
-        if (response && response.data.success) {
-          navigate("/task");
-        }
-      })
-      .catch((err) => {
-        console.log("Error!");
-      });
+    let surveyJSON = JSON.parse(creator.text);
+    if (surveyJSON.title) {
+      serverAPI
+        .post("/tasks/new", {
+          // req.session.user.adminID
+          admin_id: 1,
+          form_json_data: JSON.parse(creator.text),
+        })
+        .then((response) => {
+          if (response && response.data.success) {
+            navigate("/task");
+          }
+        })
+        .catch((err) => {
+          console.log("Error!");
+        });
+    }
   };
   return <SurveyCreatorComponent creator={creator} />;
 }
