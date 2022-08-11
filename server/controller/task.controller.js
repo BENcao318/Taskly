@@ -103,19 +103,31 @@ exports.findAll = async (req, res) => {
 }
 
 exports.findAllAssignedTasks = async (req, res) => {
+  const { client_uuid } = req.query
+
   try {
-    const taskData = await Assigned_Task.findAll({
+    const userData = await User.findAll({
+      raw: true,
       where: {
-        client_id: 1, //todo
+        uuid: client_uuid,
+      },
+    })
+
+    const assignedTasks = await Assigned_Task.findAll({
+      raw: true,
+      where: {
+        client_id: userData[0].client_id,
       },
       include: ['task'],
+      order: [['client_id', 'ASC']],
+      attributes: ['client_id', 'task_id', 'completed'],
     })
 
     res.status(200).send({
       success: true,
       message: 'Find assigned tasks ',
       messge2: null,
-      taskData,
+      assignedTasks,
     })
   } catch (err) {
     res.status(500).send({
