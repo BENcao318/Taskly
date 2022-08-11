@@ -26,7 +26,7 @@ export const ClientPage = () => {
       })
 
     serverAPI
-      .get(`/tasks?user=${auth.email}`)
+      .get(`/tasks?user=${auth.user.email}`)
       .then((response) => {
         if (response.data.success) {
           setTasks(response.data.taskData)

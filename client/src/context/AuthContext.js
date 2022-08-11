@@ -4,12 +4,21 @@ import serverAPI from '../hooks/useAxios'
 export const authContext = createContext()
 
 const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState(null)
+  const [auth, setAuth] = useState({
+    isLoading: true,
+    isLoggedIn: false,
+    user: {},
+  })
 
   useEffect(() => {
     serverAPI.get('/me').then((response) => {
       if (response.data.success) {
-        setAuth(response.data.user)
+        setAuth((prev) => ({
+          ...prev,
+          isLoading: false,
+          isLoggedIn: true,
+          user: response.data.user,
+        }))
       }
     })
   }, [setAuth])

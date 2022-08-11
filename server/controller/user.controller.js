@@ -270,8 +270,8 @@ exports.findClientInfo = async (req, res) => {
 }
 
 exports.findAllClients = async (req, res) => {
-  const email = req.session.user.email
-  // const email = 'ben@demo.com'
+  // const email = req.session.user.email
+  const email = 'ben@demo.com'
 
   try {
     const adminData = await User.findAll({
@@ -308,7 +308,31 @@ exports.findAllClients = async (req, res) => {
       order: [['client_id', 'ASC']],
       attributes: ['client_id', 'first_name', 'last_name', 'email', 'uuid'],
     })
+    const assignedTasks = await Assigned_Task.findAll({
+      raw: true,
+      where: {
+        client_id: clientData.map((client) => {
+          return client.id
+        }),
+      },
+      order: [['client_id', 'ASC']],
+      attributes: ['client_id', 'task_id', 'completed'],
+    })
+
     const clients = clientData.map((client, index) => {
+      let numOfCompletedTasks = 0
+      let numOfOutstandingTasks = 0
+
+      assignedTasks.forEach((assignedTask) => {
+        if (client.id === assignedTask.client_id) {
+          if (assignedTask.completed) {
+            numOfCompletedTasks++
+          } else {
+            numOfOutstandingTasks++
+          }
+        }
+      })
+
       return {
         uuid: clientInfo[index].uuid,
         firstName: clientInfo[index].first_name,
@@ -316,20 +340,15 @@ exports.findAllClients = async (req, res) => {
         email: clientInfo[index].email,
         phoneNumber: client.phone_number,
         summaryOfNeeds: client.summary_of_needs,
+        numOfCompletedTasks,
+        numOfOutstandingTasks,
       }
-    })
-    const taskData = await Assigned_Task.findAll({
-      raw: true,
-      where: {
-        client_id: clientData[0].id,
-      },
     })
 
     res.status(200).send({
       success: true,
       message: 'Found all clients',
       messge2: null,
-      taskData,
       clients,
     })
   } catch (err) {

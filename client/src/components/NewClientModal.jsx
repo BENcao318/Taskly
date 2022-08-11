@@ -26,7 +26,7 @@ export const NewClientModal = ({ setOpenNewClientModal }) => {
       .post('/users/new-client', {
         clientInfo: editClientInfo,
         assignedTasks: editAssignedTasks,
-        adminEmail: auth.email,
+        adminEmail: auth.user.email,
       })
       .then((response) => {
         if (response.data.success) {
