@@ -67,7 +67,7 @@ module.exports = {
           uuid: 'acfe6e3d-14e3-448a-9507-d52deb34ddab',
           first_name: 'Geneva',
           last_name: 'Zola',
-          email: 'Geneva@demo.com',
+          email: 'geneva@demo.com',
           password:
             '$2b$10$p/qMLXlMz9/ZvE9/78x4Qe58JifScOdgOsRjaxWeeV.bnWidAkgXy', //password66
           admin_id: null,
@@ -79,7 +79,7 @@ module.exports = {
           uuid: 'e66bd74b-84ae-42ce-84c1-edff069adc9e',
           first_name: 'Thornton',
           last_name: 'Isbel',
-          email: 'Thornton@demo.com',
+          email: 'thornton@demo.com',
           password:
             '$2b$10$p/qMLXlMz9/ZvE9/78x4Qe58JifScOdgOsRjaxWeeV.bnWidAkgXy',
           admin_id: null,
@@ -91,7 +91,7 @@ module.exports = {
           uuid: '377d29ef-6202-4d96-b97e-64936f2d974c',
           first_name: 'Maverick',
           last_name: 'Fredric',
-          email: 'Maverick@demo.com',
+          email: 'maverick@demo.com',
           password:
             '$2b$10$p/qMLXlMz9/ZvE9/78x4Qe58JifScOdgOsRjaxWeeV.bnWidAkgXy',
           admin_id: null,
@@ -103,7 +103,7 @@ module.exports = {
           uuid: '61eb79c5-46cc-45f5-b5e1-537000676440',
           first_name: 'Thornton',
           last_name: 'Moira',
-          email: 'Thornton@demo.com',
+          email: 'thornton@demo.com',
           password:
             '$2b$10$p/qMLXlMz9/ZvE9/78x4Qe58JifScOdgOsRjaxWeeV.bnWidAkgXy',
           admin_id: null,
@@ -115,7 +115,7 @@ module.exports = {
           uuid: 'e7765ba1-dbdf-4a50-9c7a-35f5fb5eb2c9',
           first_name: 'Harland',
           last_name: 'Melva',
-          email: 'Harland@demo.com',
+          email: 'harland@demo.com',
           password:
             '$2b$10$p/qMLXlMz9/ZvE9/78x4Qe58JifScOdgOsRjaxWeeV.bnWidAkgXy',
           admin_id: null,
@@ -127,7 +127,7 @@ module.exports = {
           uuid: 'ccb7fa8d-24ff-40fa-83e8-923098542f72',
           first_name: 'Lucky',
           last_name: 'Genesis',
-          email: 'Lucky@demo.com',
+          email: 'lucky@demo.com',
           password:
             '$2b$10$p/qMLXlMz9/ZvE9/78x4Qe58JifScOdgOsRjaxWeeV.bnWidAkgXy',
           admin_id: null,

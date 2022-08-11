@@ -106,7 +106,7 @@ exports.findAllAssignedTasks = async (req, res) => {
   try {
     const taskData = await Assigned_Task.findAll({
       where: {
-        client_id: 1,
+        client_id: 1, //todo
       },
       include: ['task'],
     })

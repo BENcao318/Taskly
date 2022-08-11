@@ -17,7 +17,7 @@ export const SignupModal = ({
 
   const signUp = (user) => {
     serverAPI
-      .post('/users/newAdmin', user)
+      .post('/users/new-admin', user)
       .then((response) => {
         if (response && response.data.success) {
           // localStorage.setItem('tasklyUser', JSON.stringify(response.data.user))

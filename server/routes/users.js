@@ -13,9 +13,11 @@ router.get('/new', (req, res) => {
 router.get('/signout', users.signOut)
 // router.get('/:email', () => console.log('test'))
 
-router.post('/newAdmin', users.createAdmin)
+router.post('/new-admin', users.createAdmin)
 
 router.post('/new-client', users.createClient)
+
+router.post('/update-client', users.updateClient)
 
 router.post('/signin', users.signIn)
 

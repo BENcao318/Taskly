@@ -1,10 +1,14 @@
 import React, { useContext } from 'react'
 import { clientContext } from '../context/ClientContext'
+import { taskContext } from '../context/TaskContext'
+import serverAPI from '../hooks/useAxios'
 import { EditAssignedTaskTags } from './EditAssignedTaskTags'
 import { EditAssignTaskInput } from './EditAssignTaskInput'
 
 export const EditClientModal = ({ setOpenEditClientModal }) => {
-  const { editClientInfo, setEditClientInfo } = useContext(clientContext)
+  const { editClientInfo, setEditClientInfo, setClients } =
+    useContext(clientContext)
+  const { editAssignedTasks, setEditAssignedTasks } = useContext(taskContext)
 
   const changeClientInfoForm = (e) => {
     const propertyName = e.target.id
@@ -16,7 +20,40 @@ export const EditClientModal = ({ setOpenEditClientModal }) => {
 
   const handleUpdate = (e) => {
     e.preventDefault()
-    console.log('udpate')
+    serverAPI
+      .post('/users/update-client', {
+        updatedClientInfo: editClientInfo,
+        updatedAssignedTasks: editAssignedTasks,
+      })
+      .then((response) => {
+        if (response.data.success) {
+          setOpenEditClientModal(false)
+          setEditClientInfo((prev) => ({
+            ...prev,
+            firstName: '',
+            lastName: '',
+            email: '',
+            phoneNumber: '',
+            summaryOfNeeds: '',
+            uuid: '',
+          }))
+          setEditAssignedTasks((prev) => [])
+
+          serverAPI
+            .get('/users/clients')
+            .then((response) => {
+              if (response.data.success) {
+                setClients(response.data.clients)
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   return (

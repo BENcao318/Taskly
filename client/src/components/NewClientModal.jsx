@@ -7,7 +7,8 @@ import { EditAssignTaskInput } from './EditAssignTaskInput'
 import serverAPI from '../hooks/useAxios'
 
 export const NewClientModal = ({ setOpenNewClientModal }) => {
-  const { editClientInfo, setEditClientInfo } = useContext(clientContext)
+  const { editClientInfo, setEditClientInfo, setClients } =
+    useContext(clientContext)
   const { editAssignedTasks, setEditAssignedTasks } = useContext(taskContext)
   const { auth } = useContext(authContext)
 
@@ -29,8 +30,6 @@ export const NewClientModal = ({ setOpenNewClientModal }) => {
       })
       .then((response) => {
         if (response.data.success) {
-          console.log(response.data)
-
           setOpenNewClientModal(false)
           setEditClientInfo((prev) => ({
             ...prev,
@@ -41,6 +40,17 @@ export const NewClientModal = ({ setOpenNewClientModal }) => {
             summaryOfNeeds: '',
           }))
           setEditAssignedTasks((prev) => [])
+
+          serverAPI
+            .get('/users/clients')
+            .then((response) => {
+              if (response.data.success) {
+                setClients(response.data.clients)
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            })
         }
       })
       .catch((err) => {
