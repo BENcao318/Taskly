@@ -9,6 +9,7 @@ export const ClientSectionBody = ({
   searchClientText,
   setOpenEditClientModal,
   setOpenDeleteClientModal,
+  setOpenNewClientModal,
 }) => {
   const [showContent, setShowContent] = useState(false)
   const { clients } = useContext(clientContext)
@@ -67,7 +68,12 @@ export const ClientSectionBody = ({
                     You have not added any clients.{' '}
                   </span>
                   {/* todo */}
-                  <span className="font-bold underline cursor-pointer">
+                  <span
+                    className="font-bold underline cursor-pointer"
+                    onClick={() => {
+                      setOpenNewClientModal(true)
+                    }}
+                  >
                     Click here
                   </span>
                   <span className="font-medium"> to create your first.</span>

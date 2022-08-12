@@ -4,6 +4,8 @@ import { Outlet } from 'react-router-dom'
 import { NavBar } from '../components/Navbar'
 import { Sidebar } from '../components/Sidebar'
 import serverAPI from '../hooks/useAxios'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { clientContext } from '../context/ClientContext'
 import { taskContext } from '../context/TaskContext'
 import { authContext } from '../context/AuthContext'
@@ -44,6 +46,12 @@ export const ClientPage = () => {
         <div className="flex ">
           <Sidebar />
           <Outlet />
+          <ToastContainer
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+          />
         </div>
       </div>
     </div>

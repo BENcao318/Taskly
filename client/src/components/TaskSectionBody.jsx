@@ -1,23 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { Task } from "./Task";
-import { ReactComponent as AlertLogo } from "../assets/alertLogo.svg";
-import { Transition } from "@headlessui/react";
-import { useContext } from "react";
-import { taskContext } from "../context/TaskContext";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { Task } from './Task'
+import { ReactComponent as AlertLogo } from '../assets/alertLogo.svg'
+import { Transition } from '@headlessui/react'
+import { useContext } from 'react'
+import { taskContext } from '../context/TaskContext'
+import { useNavigate } from 'react-router-dom'
 
-export const TaskSectionBody = ({ setOpenDeleteTaskModal }) => {
-  const [showContent, setShowContent] = useState(false);
-  const { tasks } = useContext(taskContext);
-  const navigate = useNavigate();
+export const TaskSectionBody = ({
+  setOpenDeleteTaskModal,
+  searchTaskText,
+  filteredTasks,
+}) => {
+  const [showContent, setShowContent] = useState(false)
+  const { tasks } = useContext(taskContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setShowContent(true);
-    }, 100);
+      setShowContent(true)
+    }, 100)
 
-    return () => clearTimeout(timeout);
-  }, []);
+    return () => clearTimeout(timeout)
+  }, [])
 
   return (
     <div>
@@ -58,12 +62,12 @@ export const TaskSectionBody = ({ setOpenDeleteTaskModal }) => {
                 <AlertLogo />
                 <div>
                   <span className="font-medium">
-                    You have not added any tasks.{" "}
+                    You have not added any tasks.{' '}
                   </span>
                   {/* todo */}
                   <span
                     className="font-bold underline cursor-pointer"
-                    onClick={() => navigate("/task/new")}
+                    onClick={() => navigate('/task/new')}
                   >
                     Click here
                   </span>
@@ -89,20 +93,30 @@ export const TaskSectionBody = ({ setOpenDeleteTaskModal }) => {
                 </tr>
               </thead>
               <tbody>
-                {tasks.map((task) => {
-                  return (
-                    <Task
-                      key={task.id}
-                      task={task}
-                      setOpenDeleteTaskModal={setOpenDeleteTaskModal}
-                    />
-                  );
-                })}
+                {searchTaskText
+                  ? filteredTasks.map((task) => {
+                      return (
+                        <Task
+                          key={task.id}
+                          task={task}
+                          setOpenDeleteTaskModal={setOpenDeleteTaskModal}
+                        />
+                      )
+                    })
+                  : tasks.map((task) => {
+                      return (
+                        <Task
+                          key={task.id}
+                          task={task}
+                          setOpenDeleteTaskModal={setOpenDeleteTaskModal}
+                        />
+                      )
+                    })}
               </tbody>
             </table>
           )}
         </div>
       </Transition>
     </div>
-  );
-};
+  )
+}

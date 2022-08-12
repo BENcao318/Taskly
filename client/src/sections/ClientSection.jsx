@@ -66,6 +66,7 @@ export const ClientSection = () => {
         searchClientText={searchClientText}
         setOpenEditClientModal={setOpenEditClientModal}
         setOpenDeleteClientModal={setOpenDeleteClientModal}
+        setOpenNewClientModal={setOpenNewClientModal}
       />
 
       <Modal show={openNewClientModal} onClose={handleCloseNewClientModal}>

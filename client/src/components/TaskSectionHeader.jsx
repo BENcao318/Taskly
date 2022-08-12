@@ -1,13 +1,13 @@
-import React from "react";
-import { ReactComponent as SearchLogo } from "../assets/searchLogo.svg";
-import { useNavigate } from "react-router-dom";
+import React from 'react'
+import { ReactComponent as SearchLogo } from '../assets/searchLogo.svg'
+import { useNavigate } from 'react-router-dom'
 
-export const TaskSectionHeader = () => {
-  let navigate = useNavigate();
+export const TaskSectionHeader = ({ setSearchTaskText }) => {
+  let navigate = useNavigate()
   const routeChange = () => {
-    let path = `/task/new`;
-    navigate(path);
-  };
+    let path = `/task/new`
+    navigate(path)
+  }
 
   return (
     <div className="flex flex-col gap-4 py-6 mx-6">
@@ -22,6 +22,9 @@ export const TaskSectionHeader = () => {
             id="search"
             className="block w-full px-6 py-3 pl-10 text-sm text-gray-900 bg-gray-100 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search for tasks"
+            onChange={(e) => {
+              setSearchTaskText(e.target.value)
+            }}
           ></input>
         </div>
 
@@ -34,5 +37,5 @@ export const TaskSectionHeader = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
