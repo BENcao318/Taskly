@@ -1,67 +1,13 @@
 import { useCallback } from "react";
-
+import { Card } from "flowbite-react";
+import { ReactComponent as Incomplete } from "../assets/incomplete.svg";
 import "survey-core/modern.min.css";
 import { StylesManager, Model } from "survey-core";
 import { Survey } from "survey-react-ui";
 import "../surveyJs.css";
 
-const surveyJson = {
-  title: "Education Background",
-  logoPosition: "right",
-  elements: [
-    {
-      type: "text",
-      name: "question2",
-      title: "What is your GPA based on your most recent transcript.",
-      isRequired: true,
-    },
-    {
-      type: "checkbox",
-      name: "question3",
-      title: "Please select the areas of study that interest you.",
-      isRequired: true,
-      choices: [
-        {
-          value: "item1",
-          text: "Science (General)",
-        },
-        {
-          value: "item2",
-          text: "Math",
-        },
-        {
-          value: "item3",
-          text: "Geography",
-        },
-        {
-          value: "item4",
-          text: "Politics",
-        },
-        {
-          value: "item5",
-          text: "Computer Science",
-        },
-        {
-          value: "item6",
-          text: "Chemistry",
-        },
-        {
-          value: "item7",
-          text: "Arts (General)",
-        },
-      ],
-      hasOther: true,
-    },
-    {
-      type: "text",
-      name: "question1",
-      title:
-        "Is there any additional information we should know about your study goals? ",
-    },
-  ],
-};
-
-export function LoadSurvey() {
+export function LoadSurvey(props) {
+  const { surveyJson } = props;
   const survey = new Model(surveyJson);
   survey.focusFirstQuestionAutomatic = false;
   survey.showTitle = false;
@@ -86,5 +32,17 @@ export function LoadSurvey() {
     // console.log(JSON.stringify(questionResult));
   });
 
-  return <Survey model={survey} />;
+  return (
+    <div className="mb-2">
+      <Card>
+        <div className="flex justify-start items-center">
+          <Incomplete className="h-6 mr-3 sm:h-9" alt="Complete Icon" />
+          <span className="text-lg font-medium text-gray-900 my-0">
+            Example of outstanding task
+          </span>
+        </div>
+        <Survey model={survey} />
+      </Card>
+    </div>
+  );
 }

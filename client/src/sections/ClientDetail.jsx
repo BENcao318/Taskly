@@ -49,7 +49,7 @@ export const ClientDetail = () => {
             email={client.email}
             phoneNumber={client.phoneNumber}
           />
-          <AssignedTasks clientUUID={params.uuid} />
+          <AssignedTasks assignedTasks={assignedTasks} />
           <TaskOverview assignedTasks={assignedTasks} />
         </div>
       </div>
