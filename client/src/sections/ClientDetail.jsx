@@ -24,14 +24,19 @@ export const ClientDetail = () => {
   }, []);
 
   return (
-    <div className="flex w-full h-screen">
-      <ClientInfo
-        summary={client.summaryOfNeeds}
-        email={client.email}
-        phoneNumber={client.phoneNumber}
-      />
-      <AssignedTasks clientUUID={clientUUID} />
-      <TaskOverview clientUUID={clientUUID} />
+    <div className="flex-col w-full h-screen">
+      <p className="ml-4 mt-4 text-2xl font-semibold text-gray-900">
+        {client.firstName} {client.lastName}
+      </p>
+      <div className="flex w-full h-screen">
+        <ClientInfo
+          summary={client.summaryOfNeeds}
+          email={client.email}
+          phoneNumber={client.phoneNumber}
+        />
+        <AssignedTasks clientUUID={clientUUID} />
+        <TaskOverview clientUUID={clientUUID} />
+      </div>
     </div>
   );
 };
