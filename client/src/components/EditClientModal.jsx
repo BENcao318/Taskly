@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { toast } from 'react-toastify'
 import { clientContext } from '../context/ClientContext'
 import { taskContext } from '../context/TaskContext'
 import serverAPI from '../hooks/useAxios'
@@ -44,6 +45,11 @@ export const EditClientModal = ({ setOpenEditClientModal }) => {
             .then((response) => {
               if (response.data.success) {
                 setClients(response.data.clients)
+                toast.success('Client updated! 👌', {
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                })
               }
             })
             .catch((err) => {

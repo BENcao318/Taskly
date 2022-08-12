@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import serverAPI from '../hooks/useAxios'
 import { authContext } from '../context/AuthContext'
+import { toast } from 'react-toastify'
 
 export const SigninModal = ({
   openSigninModal,
@@ -25,8 +26,12 @@ export const SigninModal = ({
           isLoggedIn: true,
           user: response.data.user,
         }))
-        // localStorage.setItem('tasklyUser', JSON.stringify(response.data.user))
         navigate('/client')
+        toast.success(`Signed in. Welcome! 😊`, {
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        })
       }
     })
   }

@@ -5,6 +5,7 @@ import { authContext } from '../context/AuthContext'
 import { EditAssignedTaskTags } from './EditAssignedTaskTags'
 import { EditAssignTaskInput } from './EditAssignTaskInput'
 import serverAPI from '../hooks/useAxios'
+import { toast } from 'react-toastify'
 
 export const NewClientModal = ({ setOpenNewClientModal }) => {
   const { editClientInfo, setEditClientInfo, setClients } =
@@ -46,6 +47,11 @@ export const NewClientModal = ({ setOpenNewClientModal }) => {
             .then((response) => {
               if (response.data.success) {
                 setClients(response.data.clients)
+                toast.success('Successfully add a new client 🚀', {
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                })
               }
             })
             .catch((err) => {
