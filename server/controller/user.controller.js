@@ -361,7 +361,7 @@ exports.findAllClients = async (req, res) => {
 
 exports.signIn = async (req, res) => {
   const { email, password } = req.body
-
+  console.log(req.session.user)
   try {
     const user = await User.findAll({
       where: {

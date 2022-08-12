@@ -20,7 +20,11 @@ export const SigninModal = ({
       if (!response.data.success) {
         setSignInError(true)
       } else {
-        setAuth(response.data.user)
+        setAuth((prev) => ({
+          ...prev,
+          isLoggedIn: true,
+          user: response.data.user,
+        }))
         // localStorage.setItem('tasklyUser', JSON.stringify(response.data.user))
         navigate('/client')
       }
