@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
 import { useNavigate } from "react-router-dom";
 import * as Survey from "survey-core";
@@ -83,5 +84,14 @@ export function SurveyCreatorWidget() {
         });
     }
   };
-  return <SurveyCreatorComponent creator={creator} />;
+  return (
+    <Fragment>
+      <div className="flex-col w-full h-screen">
+        <p className="mt-6 mx-6 text-2xl font-semibold text-gray-900">
+          Add task
+        </p>
+        <SurveyCreatorComponent creator={creator} />
+      </div>
+    </Fragment>
+  );
 }

@@ -6,25 +6,57 @@ import { Survey } from "survey-react-ui";
 import "../surveyJs.css";
 
 const surveyJson = {
-  title: "Test Survey",
+  title: "Education Background",
   logoPosition: "right",
   elements: [
     {
       type: "text",
-      name: "question1",
-      title: "This is a mandatory input field",
-      isRequired: true,
-    },
-    {
-      type: "rating",
       name: "question2",
-      title: "This is an optional rating",
+      title: "What is your GPA based on your most recent transcript.",
+      isRequired: true,
     },
     {
-      type: "signaturepad",
+      type: "checkbox",
       name: "question3",
-      title: "This is a mandatory signature",
+      title: "Please select the areas of study that interest you.",
       isRequired: true,
+      choices: [
+        {
+          value: "item1",
+          text: "Science (General)",
+        },
+        {
+          value: "item2",
+          text: "Math",
+        },
+        {
+          value: "item3",
+          text: "Geography",
+        },
+        {
+          value: "item4",
+          text: "Politics",
+        },
+        {
+          value: "item5",
+          text: "Computer Science",
+        },
+        {
+          value: "item6",
+          text: "Chemistry",
+        },
+        {
+          value: "item7",
+          text: "Arts (General)",
+        },
+      ],
+      hasOther: true,
+    },
+    {
+      type: "text",
+      name: "question1",
+      title:
+        "Is there any additional information we should know about your study goals? ",
     },
   ],
 };
@@ -35,10 +67,24 @@ export function LoadSurvey() {
   survey.showTitle = false;
   const alertResults = useCallback((sender) => {
     const results = JSON.stringify(sender.data);
-    alert(results);
+    console.log(results);
   }, []);
 
-  survey.onComplete.add(alertResults);
+  survey.onComplete.add(function (result, options) {
+    var data = [];
+    for (var key in result.data) {
+      var question = result.getQuestionByValueName(key);
+      if (!question) continue;
+      var questionResult = {
+        name: key,
+        value: result.data[key],
+        title: question.title,
+        displayValue: question.displayValue,
+      };
+      data.push(questionResult);
+    }
+    // console.log(JSON.stringify(questionResult));
+  });
 
   return <Survey model={survey} />;
 }

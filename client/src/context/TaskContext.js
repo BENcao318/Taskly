@@ -9,7 +9,14 @@ const TaskProvider = ({ children }) => {
 
   return (
     <taskContext.Provider
-      value={{ tasks, setTasks, editAssignedTasks, setEditAssignedTasks }}
+      value={{
+        tasks,
+        setTasks,
+        editAssignedTasks,
+        setEditAssignedTasks,
+        assignedTasks,
+        setAssignedTasks,
+      }}
     >
       {children}
     </taskContext.Provider>

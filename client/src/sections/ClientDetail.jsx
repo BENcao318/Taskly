@@ -10,9 +10,8 @@ import serverAPI from "../hooks/useAxios";
 
 export const ClientDetail = () => {
   const { client, setClient } = useContext(clientContext);
-  const { assignedTasks, setAssignedTasks } = useContext(clientContext);
+  const { assignedTasks, setAssignedTasks } = useContext(taskContext);
   const params = useParams();
-  console.log(JSON.stringify(params.uuid));
 
   useEffect(() => {
     serverAPI
@@ -25,22 +24,35 @@ export const ClientDetail = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    serverAPI
+      .get(`/tasks/assigned?client_uuid=${params.uuid}`)
+      .then((response) => {
+        if (response.data.success) {
+          setAssignedTasks(response.data.assignedTasks);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
-  return (
-    <div className="flex-col w-full h-screen">
-      <p className="ml-4 mt-6 text-2xl font-semibold text-gray-900">
-        {client.firstName} {client.lastName}
-      </p>
-      <div className="flex w-full h-screen">
-        <ClientInfo
-          summary={client.summaryOfNeeds}
-          email={client.email}
-          phoneNumber={client.phoneNumber}
-        />
-        <AssignedTasks clientUUID={params.uuid} />
-        <TaskOverview clientUUID={params.uuid} />
+  if (client && assignedTasks) {
+    return (
+      <div className="flex-col w-full h-screen">
+        <p className="ml-4 mt-6 text-2xl font-semibold text-gray-900">
+          {client.firstName} {client.lastName}
+        </p>
+        <div className="flex w-full h-screen">
+          <ClientInfo
+            summary={client.summaryOfNeeds}
+            email={client.email}
+            phoneNumber={client.phoneNumber}
+          />
+          <AssignedTasks clientUUID={params.uuid} />
+          <TaskOverview assignedTasks={assignedTasks} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
