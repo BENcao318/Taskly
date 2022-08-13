@@ -10,6 +10,12 @@ const AuthProvider = ({ children }) => {
     user: {},
   })
 
+  const [clientAuth, setClientAuth] = useState({
+    clientUUID: '',
+    isLoggedIn: false,
+    client: {},
+  })
+
   useEffect(() => {
     serverAPI.get('/me').then((response) => {
       if (response.data.success) {
@@ -24,7 +30,7 @@ const AuthProvider = ({ children }) => {
   }, [setAuth])
 
   return (
-    <authContext.Provider value={{ auth, setAuth }}>
+    <authContext.Provider value={{ auth, setAuth, clientAuth, setClientAuth }}>
       {children}
     </authContext.Provider>
   )

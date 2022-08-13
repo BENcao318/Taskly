@@ -2,6 +2,7 @@ const db = require('../models')
 const { User, Admin, Client, Assigned_Task, Task } = db
 const Op = db.Sequelize.Op
 const { hash, compare } = require('bcrypt')
+const helpers = require('../helpers/utils')
 
 exports.createAdmin = async (req, res) => {
   if (!req.body) {
@@ -91,11 +92,14 @@ exports.createClient = async (req, res) => {
       summary_of_needs: clientInfo.summaryOfNeeds,
     })
 
+    const securityCode = helpers.generateRandomSecurityCode()
+    const encryptedSecurityCode = helpers.encryption(securityCode)
+
     const userData = await User.create({
       first_name: clientInfo.firstName,
       last_name: clientInfo.lastName,
       email: clientInfo.email.toLowerCase(),
-      password: '123', //use this for sending secure code to the user
+      password: encryptedSecurityCode, //use this for sending secure code to the user
       admin_id: null,
       client_id: clientData.id,
     })
@@ -374,7 +378,7 @@ exports.signIn = async (req, res) => {
       include: ['admin'],
     })
 
-    if (user.length !== 0) {
+    if (user) {
       const passwordMatched = await compare(password, user.dataValues.password)
 
       if (passwordMatched) {
@@ -409,6 +413,50 @@ exports.signIn = async (req, res) => {
   } catch (err) {
     res.status(500).send({
       message: `Error retrieving User with email=${email}, ${err}`,
+    })
+  }
+}
+
+exports.clientSignIn = async (req, res) => {
+  const { securityCode, client_uuid } = req.body
+
+  try {
+    const client = await User.findOne({
+      where: {
+        uuid: client_uuid,
+      },
+    })
+
+    if (client) {
+      const passwordMatched = await compare(
+        securityCode,
+        client.dataValues.password
+      )
+
+      if (passwordMatched) {
+        // req.session.client = client
+        res.status(200).send({
+          success: true,
+          message: 'Client signin success',
+          messge2: null,
+        })
+      } else {
+        res.status(200).send({
+          success: false,
+          message: 'Login Failed',
+          message2: 'Security Code does not match, please try again.',
+        })
+      }
+    } else {
+      res.send({
+        success: false,
+        message: 'Login Failed',
+        message2: 'No such user',
+      })
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: `Error retrieving user`,
     })
   }
 }
@@ -481,6 +529,47 @@ exports.deleteClient = async (req, res) => {
   } catch (err) {
     res.status(500).send({
       message: `Error retrieving User with company name=${company_name}, ${err}`,
+    })
+  }
+}
+
+exports.sendTasksToClient = async (req, res) => {
+  if (!req.session.user) {
+    return res.status(500).send({
+      success: false,
+      message: 'User is not authenticated to send tasks to client',
+      messge2: null,
+    })
+  }
+
+  const { client_email } = req.body
+  try {
+    const clientData = await User.findOne({
+      where: {
+        email: client_email,
+      },
+    })
+
+    if (clientData) {
+      const clientUUID = clientData.uuid
+      const securityCode = clientData.password
+      const decryptedSecurityCode = helpers.decryption(securityCode)
+      const clientPage = `localhost:3000/client/view?client_uuid=${clientUUID}`
+
+      res.status(200).send({
+        success: true,
+        message: 'Successfully send the tasks to client',
+        messge2: null,
+        clientPage,
+      })
+    } else {
+      res.status(404).send({
+        message: `Cannot find client with the email address.`,
+      })
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: `Error retrieving User with client email, ${err}`,
     })
   }
 }

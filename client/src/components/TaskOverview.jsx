@@ -1,10 +1,21 @@
-import React from "react";
-import { Button, Dropdown } from "flowbite-react";
-import { ReactComponent as PaperAirplane } from "../assets/PaperAirplane.svg";
-import { TaskList } from "../components/TaskList";
+import React from 'react'
+import { Button, Dropdown } from 'flowbite-react'
+import { ReactComponent as PaperAirplane } from '../assets/PaperAirplane.svg'
+import { TaskList } from '../components/TaskList'
+import serverAPI from '../hooks/useAxios'
 
 export function TaskOverview(props) {
-  const { assignedTasks } = props;
+  const { assignedTasks, client } = props
+  const sendTasksToClient = () => {
+    serverAPI
+      .post('/users/client/send-tasks', { client_email: client.email })
+      .then((response) => {
+        if (response.data.success) {
+          console.log('task send successfully')
+          console.log(response.data)
+        }
+      })
+  }
 
   return (
     <div className="w-1/4 h-full p-4 border-l border-neutral-200">
@@ -14,19 +25,19 @@ export function TaskOverview(props) {
           <TaskList
             key={task.task_id}
             complete={task.completed}
-            taskTitle={task["task.form_json_data"]["title"]}
+            taskTitle={task['task.form_json_data']['title']}
           />
-        );
+        )
       })}
       <hr className="my-2" />
       <div className="flex flex-col items-center">
-        <Button>
-          <PaperAirplane className="mr-2 h-5 w-5" />
+        <Button onClick={sendTasksToClient}>
+          <PaperAirplane className="w-5 h-5 mr-2" />
           Send Tasks to Client
         </Button>
         <hr className="my-1 border-none" />
         <Dropdown label="Actions" color="light" size="md"></Dropdown>
       </div>
     </div>
-  );
+  )
 }
