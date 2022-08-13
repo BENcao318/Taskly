@@ -21,6 +21,8 @@ router.post('/update-client', users.updateClient)
 
 router.post('/signin', users.signIn)
 
+router.delete('/client', users.deleteClient)
+
 router.get('/admin/:companyName', users.findAdmin)
 
 router.get('/clients', users.findAllClients)

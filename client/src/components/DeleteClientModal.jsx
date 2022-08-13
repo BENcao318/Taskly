@@ -1,11 +1,20 @@
 import React from 'react'
 import { ReactComponent as ExclamationMark } from '../assets/exclamationMark.svg'
+import serverAPI from '../hooks/useAxios'
 
 export const DeleteClientModal = ({
   openDeleteClientModal,
   setOpenDeleteClientModal,
 }) => {
   const handleDelete = () => {
+    serverAPI
+      .delete('/users/client', {
+        data: { client_uuid: openDeleteClientModal.uuid },
+      })
+      .then((response) => {
+        console.log(response.data)
+      })
+
     console.log(`delete ${openDeleteClientModal.uuid}`)
   }
 

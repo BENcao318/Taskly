@@ -178,7 +178,10 @@ exports.updateClient = async (req, res) => {
     if (assignedTasksIdToDeleteArr.length !== 0) {
       const deleteAssignedTasks = await Assigned_Task.destroy({
         where: {
-          id: assignedTasksIdToDeleteArr,
+          [Op.and]: [
+            { client_id: clientData[0].client_id },
+            { task_id: assignedTasksIdToDeleteArr },
+          ],
         },
       })
     }
@@ -361,7 +364,7 @@ exports.findAllClients = async (req, res) => {
 
 exports.signIn = async (req, res) => {
   const { email, password } = req.body
-  console.log(req.session.user)
+
   try {
     const user = await User.findAll({
       where: {
@@ -446,8 +449,10 @@ exports.findAdmin = async (req, res) => {
   }
 }
 
-exports.update = (req, res) => {}
-
-exports.delete = (req, res) => {}
-
-exports.deleteAll = (req, res) => {}
+exports.deleteClient = (req, res) => {
+  res.status(200).send({
+    success: true,
+    message: 'Successfully delete the client',
+    messge2: null,
+  })
+}
