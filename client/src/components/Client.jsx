@@ -1,15 +1,15 @@
-import { Transition } from '@headlessui/react'
-import React, { useEffect, useRef, useState } from 'react'
-import { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Transition } from "@headlessui/react";
+import React, { useEffect, useRef, useState } from "react";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { ReactComponent as DownChevron } from '../assets/downChevron.svg'
-import { ReactComponent as PenLogo } from '../assets/penLogo.svg'
-import { ReactComponent as TrashCanLogo } from '../assets/trashcanLogo.svg'
-import { ReactComponent as UserLogo } from '../assets/userLogo.svg'
-import serverAPI from '../hooks/useAxios'
-import { clientContext } from '../context/ClientContext'
-import { taskContext } from '../context/TaskContext'
+import { ReactComponent as DownChevron } from "../assets/downChevron.svg";
+import { ReactComponent as PenLogo } from "../assets/penLogo.svg";
+import { ReactComponent as TrashCanLogo } from "../assets/trashcanLogo.svg";
+import { ReactComponent as UserLogo } from "../assets/userLogo.svg";
+import serverAPI from "../hooks/useAxios";
+import { clientContext } from "../context/ClientContext";
+import { taskContext } from "../context/TaskContext";
 
 export const Client = ({
   firstName,
@@ -21,20 +21,19 @@ export const Client = ({
   setOpenEditClientModal,
   setOpenDeleteClientModal,
 }) => {
-  const [toggleActionMenu, setToggleActionMenu] = useState(false)
-  const buttonRef = useRef(null)
-  const navigate = useNavigate()
-  const { setEditClientInfo, setClientUUID } = useContext(clientContext)
-  const { setEditAssignedTasks } = useContext(taskContext)
+  const [toggleActionMenu, setToggleActionMenu] = useState(false);
+  const buttonRef = useRef(null);
+  const navigate = useNavigate();
+  const { setEditClientInfo, setClientUUID } = useContext(clientContext);
+  const { setEditAssignedTasks } = useContext(taskContext);
 
   const toggleDropdown = () => {
-    setToggleActionMenu((prev) => !prev)
-  }
+    setToggleActionMenu((prev) => !prev);
+  };
 
   const handleClickViewClientButton = () => {
-    setClientUUID((prev) => uuid)
-    navigate('/client/xyz')
-  }
+    navigate(`/client/${uuid}`);
+  };
 
   const handleClickEditClientButton = () => {
     serverAPI
@@ -45,25 +44,25 @@ export const Client = ({
             ...prev,
             ...response.data.clientInfo,
             uuid: uuid,
-          }))
-          setEditAssignedTasks((prev) => [...response.data.assignedTasks])
+          }));
+          setEditAssignedTasks((prev) => [...response.data.assignedTasks]);
         }
       })
       .catch((err) => {
-        console.log(err)
-      })
-    setOpenEditClientModal(true)
-  }
+        console.log(err);
+      });
+    setOpenEditClientModal(true);
+  };
 
   useEffect(() => {
-    window.addEventListener('click', (e) => {
+    window.addEventListener("click", (e) => {
       if (buttonRef.current && buttonRef.current.contains(e.target)) {
-        toggleDropdown()
+        toggleDropdown();
       } else {
-        setToggleActionMenu(false)
+        setToggleActionMenu(false);
       }
-    })
-  }, [buttonRef])
+    });
+  }, [buttonRef]);
 
   return (
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-100 dark:hover:bg-gray-600">
@@ -71,7 +70,7 @@ export const Client = ({
         scope="row"
         className="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white"
       >
-        {firstName + ' ' + lastName}
+        {firstName + " " + lastName}
       </th>
       <td className="px-6 py-4 font-semibold text-center">{phoneNumber}</td>
       <td className="px-6 py-4 text-center">
@@ -99,7 +98,7 @@ export const Client = ({
 
         <div
           className={`${
-            toggleActionMenu ? '' : 'hidden'
+            toggleActionMenu ? "" : "hidden"
           } z-40 min-w-62 bg-white rounded-lg divide-y divide-gray-100 shadow-lg shadow-neutral-400 dark:bg-gray-700 fixed mt-2 right-24`}
         >
           <Transition
@@ -142,7 +141,7 @@ export const Client = ({
                       ...prev,
                       isOpen: true,
                       uuid: uuid,
-                    }))
+                    }));
                   }}
                 >
                   <TrashCanLogo className="w-5 " />
@@ -154,5 +153,5 @@ export const Client = ({
         </div>
       </td>
     </tr>
-  )
-}
+  );
+};
