@@ -35,7 +35,7 @@ export const ClientDetail = () => {
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
 
   if (client && assignedTasks) {
     return (

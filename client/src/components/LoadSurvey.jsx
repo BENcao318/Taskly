@@ -29,7 +29,7 @@ export function LoadSurvey(props) {
       .catch((err) => {
         console.log("Error!");
       });
-  });
+  }, []);
 
   survey.onComplete.add(saveResults);
 
