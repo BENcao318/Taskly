@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import { authContext } from '../context/AuthContext'
 
-export const PrivateRoute = ({ redirectPath = '/' }) => {
+export const PrivateAdminRoute = ({ redirectPath = '/' }) => {
   const { auth } = useContext(authContext)
 
   return auth.isLoggedIn ? (
