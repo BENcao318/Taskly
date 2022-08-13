@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 export function LoadSurvey(props) {
   const navigate = useNavigate();
-  const { surveyJson, client } = props;
+  const { surveyJson, task_id } = props;
   const survey = new Model(surveyJson);
 
   survey.focusFirstQuestionAutomatic = false;
@@ -20,12 +20,12 @@ export function LoadSurvey(props) {
     const results = JSON.stringify(sender.data);
     serverAPI
       .post("/tasks/completed/new", {
-        assigned_task_id: 1,
+        assigned_task_id: task_id,
         response_json_data: results,
       })
       .then((response) => {
         if (response && response.data.success) {
-          navigate("/client/");
+          window.location.reload();
         }
       })
       .catch((err) => {

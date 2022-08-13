@@ -13,6 +13,7 @@ export function AssignedTasks(props) {
           return (
             <LoadSurvey
               surveyJson={task["task.form_json_data"]}
+              task_id={task.task_id}
               key={task.task_id}
               client={client}
             />
