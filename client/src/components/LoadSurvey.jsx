@@ -6,10 +6,8 @@ import { Model } from "survey-core";
 import { Survey } from "survey-react-ui";
 import "../surveyJs.css";
 import serverAPI from "../hooks/useAxios";
-import { useNavigate } from "react-router-dom";
 
 export function LoadSurvey(props) {
-  const navigate = useNavigate();
   const { surveyJson, task_id } = props;
   const survey = new Model(surveyJson);
 

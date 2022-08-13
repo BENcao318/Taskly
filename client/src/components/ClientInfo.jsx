@@ -1,7 +1,7 @@
 import React from "react";
 
 export function ClientInfo(props) {
-  const { summary, phoneNumber, email, firstName, lastName } = props;
+  const { summary, phoneNumber, email } = props;
 
   return (
     <div className="w-1/4 h-full border-r border-neutral-200 p-4">
