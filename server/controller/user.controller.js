@@ -77,7 +77,7 @@ exports.createClient = async (req, res) => {
       return res.status(403).send({ message: 'Email already exist.' })
     }
 
-    const adminData = await User.findAll({
+    const adminData = await User.findOne({
       raw: true,
       where: {
         email: adminEmail,
@@ -86,7 +86,7 @@ exports.createClient = async (req, res) => {
     })
 
     const clientData = await Client.create({
-      admin_id: adminData[0].admin_id,
+      admin_id: adminData.admin_id,
       phone_number: clientInfo.phoneNumber,
       summary_of_needs: clientInfo.summaryOfNeeds,
     })
@@ -114,6 +114,7 @@ exports.createClient = async (req, res) => {
       success: true,
       message: 'Client created successfully',
       messge2: null,
+      assignedTasks,
     })
   } catch (err) {
     res.status(500).send({
@@ -212,7 +213,7 @@ exports.findClientInfo = async (req, res) => {
   const uuid = req.query.client_uuid
 
   try {
-    const clientData = await User.findAll({
+    const clientData = await User.findOne({
       raw: true,
       where: {
         uuid: uuid,
@@ -230,7 +231,7 @@ exports.findClientInfo = async (req, res) => {
     const assignedTaskData = await Assigned_Task.findAll({
       raw: true,
       where: {
-        client_id: clientData[0].client_id,
+        client_id: clientData.client_id,
       },
       include: [
         {
@@ -250,11 +251,11 @@ exports.findClientInfo = async (req, res) => {
     })
 
     const clientInfo = {
-      firstName: clientData[0].first_name,
-      lastName: clientData[0].last_name,
-      email: clientData[0].email,
-      phoneNumber: clientData[0]['client.phone_number'],
-      summaryOfNeeds: clientData[0]['client.summary_of_needs'],
+      firstName: clientData.first_name,
+      lastName: clientData.last_name,
+      email: clientData.email,
+      phoneNumber: clientData['client.phone_number'],
+      summaryOfNeeds: clientData['client.summary_of_needs'],
     }
 
     res.status(200).send({
@@ -273,8 +274,8 @@ exports.findClientInfo = async (req, res) => {
 }
 
 exports.findAllClients = async (req, res) => {
-  // const email = req.session.user.email
-  const email = 'ben@demo.com'
+  const email = req.session.user.email
+  // const email = 'ben@demo.com'
 
   try {
     const adminData = await User.findAll({
@@ -366,7 +367,7 @@ exports.signIn = async (req, res) => {
   const { email, password } = req.body
 
   try {
-    const user = await User.findAll({
+    const user = await User.findOne({
       where: {
         email,
       },
@@ -374,17 +375,14 @@ exports.signIn = async (req, res) => {
     })
 
     if (user.length !== 0) {
-      const passwordMatched = await compare(
-        password,
-        user[0].dataValues.password
-      )
+      const passwordMatched = await compare(password, user.dataValues.password)
 
       if (passwordMatched) {
         const userData = {
-          email: user[0].dataValues.email,
-          first_name: user[0].dataValues.first_name,
-          last_name: user[0].dataValues.last_name,
-          company_name: user[0].dataValues.admin.dataValues.company_name,
+          email: user.dataValues.email,
+          first_name: user.dataValues.first_name,
+          last_name: user.dataValues.last_name,
+          company_name: user.dataValues.admin.dataValues.company_name,
         }
 
         req.session.user = userData
@@ -449,10 +447,40 @@ exports.findAdmin = async (req, res) => {
   }
 }
 
-exports.deleteClient = (req, res) => {
-  res.status(200).send({
-    success: true,
-    message: 'Successfully delete the client',
-    messge2: null,
-  })
+exports.deleteClient = async (req, res) => {
+  const client_uuid = req.body.client_uuid
+
+  if (!req.session.user) {
+    return res.status(500).send({
+      success: false,
+      message: 'User is not authenticated to delete',
+      messge2: null,
+    })
+  }
+
+  try {
+    const clientData = await User.findOne({
+      raw: true,
+      where: {
+        uuid: client_uuid,
+      },
+    })
+
+    const client = await Client.findOne({
+      where: {
+        id: clientData.client_id,
+      },
+    })
+    await client.destroy()
+
+    res.status(200).send({
+      success: true,
+      message: 'Successfully delete the client',
+      messge2: null,
+    })
+  } catch (err) {
+    res.status(500).send({
+      message: `Error retrieving User with company name=${company_name}, ${err}`,
+    })
+  }
 }

@@ -9,9 +9,24 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ User, Task, Client }) {
       // define association here
-      this.hasOne(User, { foreignKey: 'admin_id', as: 'user' })
-      this.hasMany(Task, { foreignKey: 'admin_id', as: 'task' })
-      this.hasMany(Client, { foreignKey: 'admin_id', as: 'client' })
+      this.hasOne(User, {
+        foreignKey: 'admin_id',
+        as: 'user',
+        onDelete: 'cascade',
+        hooks: true,
+      })
+      this.hasMany(Task, {
+        foreignKey: 'admin_id',
+        as: 'task',
+        onDelete: 'cascade',
+        hooks: true,
+      })
+      this.hasMany(Client, {
+        foreignKey: 'admin_id',
+        as: 'client',
+        onDelete: 'cascade',
+        hooks: true,
+      })
     }
     // static associate({ Task }) {
     //   // define association here
