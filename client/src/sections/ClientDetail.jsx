@@ -49,7 +49,7 @@ export const ClientDetail = () => {
             email={client.email}
             phoneNumber={client.phoneNumber}
           />
-          <AssignedTasks assignedTasks={assignedTasks} />
+          <AssignedTasks client={client} assignedTasks={assignedTasks} />
           <TaskOverview assignedTasks={assignedTasks} />
         </div>
       </div>
