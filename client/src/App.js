@@ -4,6 +4,7 @@ import { LandingPage } from "./pages/LandingPage";
 import { ClientPage } from "./pages/ClientPage";
 import { ClientProfilePage } from "./pages/ClientProfilePage";
 import { PreviewTaskPage } from "./pages/PreviewTaskPage";
+import { EditTaskPage } from "./pages/EditTaskPage";
 import { TaskPage } from "./pages/TaskPage";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { TaskSection } from "./sections/TaskSection";
@@ -27,6 +28,7 @@ const App = () => {
             path="/task/preview/:task_id"
             element={<PreviewTaskPage />}
           ></Route>
+          <Route path="/task/edit/:task_id" element={<EditTaskPage />}></Route>
           <Route path="/task" element={<TaskPage />}>
             <Route path="" element={<TaskSection />} />
             <Route path="new" element={<SurveyCreatorWidget />} />
