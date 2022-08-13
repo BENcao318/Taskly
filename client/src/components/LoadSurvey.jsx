@@ -1,44 +1,51 @@
 import { useCallback } from "react";
-
+import { Card } from "flowbite-react";
+import { ReactComponent as Incomplete } from "../assets/incomplete.svg";
 import "survey-core/modern.min.css";
-import { StylesManager, Model } from "survey-core";
+import { Model } from "survey-core";
 import { Survey } from "survey-react-ui";
 import "../surveyJs.css";
+import serverAPI from "../hooks/useAxios";
+import { useNavigate } from "react-router-dom";
 
-const surveyJson = {
-  title: "Test Survey",
-  logoPosition: "right",
-  elements: [
-    {
-      type: "text",
-      name: "question1",
-      title: "This is a mandatory input field",
-      isRequired: true,
-    },
-    {
-      type: "rating",
-      name: "question2",
-      title: "This is an optional rating",
-    },
-    {
-      type: "signaturepad",
-      name: "question3",
-      title: "This is a mandatory signature",
-      isRequired: true,
-    },
-  ],
-};
-
-export function LoadSurvey() {
+export function LoadSurvey(props) {
+  const navigate = useNavigate();
+  const { surveyJson, task_id } = props;
   const survey = new Model(surveyJson);
+
   survey.focusFirstQuestionAutomatic = false;
   survey.showTitle = false;
-  const alertResults = useCallback((sender) => {
+
+  const saveResults = useCallback((sender) => {
     const results = JSON.stringify(sender.data);
-    alert(results);
+    serverAPI
+      .post("/tasks/completed/new", {
+        assigned_task_id: task_id,
+        response_json_data: results,
+      })
+      .then((response) => {
+        if (response && response.data.success) {
+          window.location.reload();
+        }
+      })
+      .catch((err) => {
+        console.log("Error!");
+      });
   }, []);
 
-  survey.onComplete.add(alertResults);
+  survey.onComplete.add(saveResults);
 
-  return <Survey model={survey} />;
+  return (
+    <div className="mb-2">
+      <Card>
+        <div className="flex justify-start items-center">
+          <Incomplete className="h-6 mr-3 sm:h-9" alt="Complete Icon" />
+          <span className="text-lg font-medium text-gray-900 my-0">
+            {surveyJson.title}
+          </span>
+        </div>
+        <Survey model={survey} />
+      </Card>
+    </div>
+  );
 }

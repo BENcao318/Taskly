@@ -4,13 +4,20 @@ import { ReactComponent as PaperAirplane } from "../assets/PaperAirplane.svg";
 import { TaskList } from "../components/TaskList";
 
 export function TaskOverview(props) {
-  const { taskTitle, form } = props;
+  const { assignedTasks } = props;
 
   return (
     <div className="w-1/4 h-full p-4 border-l border-neutral-200">
       <p className="my-2 text-xl font-bold text-gray-900">Overview of Tasks</p>
-      <TaskList outstanding={true} />
-      <TaskList complete={true} />
+      {assignedTasks.map((task) => {
+        return (
+          <TaskList
+            key={task.task_id}
+            complete={task.completed}
+            taskTitle={task["task.form_json_data"]["title"]}
+          />
+        );
+      })}
       <hr className="my-2" />
       <div className="flex flex-col items-center">
         <Button>
