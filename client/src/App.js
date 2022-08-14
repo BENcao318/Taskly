@@ -19,16 +19,16 @@ const App = () => {
           path="/"
           element={<LandingPage redirectPath={window.location.href} />}
         />
+        <Route
+          path="/task/preview/:task_id"
+          element={<PreviewTaskPage />}
+        ></Route>
+        <Route path="/task/edit/:task_id" element={<EditTaskPage />}></Route>
+        <Route path="client/:uuid" element={<ClientProfilePage />} />
         <Route element={<PrivateRoute />}>
           <Route path="/client" element={<ClientPage />}>
             <Route path="" element={<ClientSection />} />
           </Route>
-          <Route path="client/:uuid" element={<ClientProfilePage />} />
-          <Route
-            path="/task/preview/:task_id"
-            element={<PreviewTaskPage />}
-          ></Route>
-          <Route path="/task/edit/:task_id" element={<EditTaskPage />}></Route>
           <Route path="/task" element={<TaskPage />}>
             <Route path="" element={<TaskSection />} />
             <Route path="new" element={<SurveyCreatorWidget />} />
