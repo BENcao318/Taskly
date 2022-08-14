@@ -8,7 +8,7 @@ import "../surveyJs.css";
 import serverAPI from "../hooks/useAxios";
 
 export function LoadSurvey(props) {
-  const { surveyJson, task_id } = props;
+  const { surveyJson, assignedTaskId } = props;
   const survey = new Model(surveyJson);
 
   survey.focusFirstQuestionAutomatic = false;
@@ -18,9 +18,21 @@ export function LoadSurvey(props) {
     const results = JSON.stringify(sender.data);
     serverAPI
       .post("/tasks/completed/new", {
-        assigned_task_id: task_id,
+        assigned_task_id: assignedTaskId,
         response_json_data: results,
+        copy_of_survey_json: surveyJson,
       })
+      .then((response) => {
+        if (response && response.data.success) {
+          console.log("Completed task data added to the db!");
+        }
+      })
+      .catch((err) => {
+        console.log("Error!");
+      });
+
+    serverAPI
+      .post(`tasks/completed/update?assigned_task_id=${assignedTaskId}`)
       .then((response) => {
         if (response && response.data.success) {
           window.location.reload();
