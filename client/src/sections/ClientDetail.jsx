@@ -7,6 +7,7 @@ import { useContext } from 'react'
 import { clientContext } from '../context/ClientContext'
 import { taskContext } from '../context/TaskContext'
 import serverAPI from '../hooks/useAxios'
+import { ToastContainer } from 'react-toastify'
 
 export const ClientDetail = () => {
   const { client, setClient } = useContext(clientContext)
@@ -51,6 +52,19 @@ export const ClientDetail = () => {
           />
           <AssignedTasks client={client} assignedTasks={assignedTasks} />
           <TaskOverview assignedTasks={assignedTasks} client={client} />
+          <ToastContainer
+            toastClassName={() =>
+              'relative flex px-2 py-4 min-h-16 rounded-md justify-between overflow-hidden cursor-pointer bg-sky-200 text-black font-semibold'
+            }
+            position="top-center"
+            autoClose={6000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+          />
         </div>
       </div>
     )
