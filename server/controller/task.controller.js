@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 const db = require("../models");
 const completed_task = require("../models/completed_task");
 const { User, Admin, Task, Assigned_Task, Completed_Task } = db;
 const Op = db.Sequelize.Op;
+=======
+const db = require('../models')
+const completed_task = require('../models/completed_task')
+const { User, Admin, Task, Assigned_Task, Completed_Task, Client } = db
+const Op = db.Sequelize.Op
+>>>>>>> ben
 
 exports.findTask = async (req, res) => {
   const id = req.query.task_id;
@@ -205,24 +212,183 @@ exports.findAllAssignedTasks = async (req, res) => {
 };
 
 exports.findAllCompletedTasks = async (req, res) => {
+  if (!req.session.user) {
+    return res.status(500).send({
+      success: false,
+      message:
+        'User is not authenticated to find tasks associated to the admin',
+      messge2: null,
+    })
+  }
+
   try {
-    const taskData = await Completed_Task.findAll({
+    const adminData = await User.findOne({
+      raw: true,
       where: {
-        assigned_task_id: 1,
+        email: req.session.user.email,
       },
+<<<<<<< HEAD
       include: ["assigned_task"],
     });
+=======
+    })
+
+    const clients = await Client.findAll({
+      raw: true,
+      where: {
+        admin_id: adminData.admin_id,
+      },
+    })
+
+    const clientIdForTasksArr = clients.map((client) => client.id)
+
+    const taskData = await Assigned_Task.findAll({
+      raw: true,
+      where: {
+        [Op.and]: [{ client_id: clientIdForTasksArr }, { completed: true }],
+      },
+      include: ['task'],
+    })
+    const clientIdArr = taskData.map((task) => task.client_id)
+    const clientData = await User.findAll({
+      raw: true,
+      where: {
+        client_id: clientIdArr,
+      },
+    })
+
+    const completedTasksArr = taskData.map((task) => {
+      const client = clientData.find(
+        (client) => client.client_id === task.client_id
+      )
+
+      const completedTask = {
+        id: task.id,
+        createdAt: Date.parse(task.createdAt),
+        title: task['task.form_json_data'].title,
+        clientFirstName: client.first_name,
+        clientLastName: client.last_name,
+      }
+      return completedTask
+    })
+>>>>>>> ben
 
     res.status(200).send({
       success: true,
       message: "Find completed tasks ",
       messge2: null,
+<<<<<<< HEAD
       taskData,
     });
   } catch (err) {
     res.status(500).send({
       message: err.message || "Some error occurred while creating the Task",
     });
+=======
+      completedTasksArr,
+    })
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || 'Some error occurred while finding the Task',
+    })
+  }
+}
+
+exports.findAllAdminAssignedTasks = async (req, res) => {
+  if (!req.session.user) {
+    return res.status(500).send({
+      success: false,
+      message:
+        'User is not authenticated to find tasks associated to the admin',
+      messge2: null,
+    })
+  }
+
+  try {
+    const adminData = await User.findOne({
+      raw: true,
+      where: {
+        // email: 'ben@demo.com',
+        email: req.session.user.email,
+      },
+    })
+
+    const clients = await Client.findAll({
+      raw: true,
+      where: {
+        admin_id: adminData.admin_id,
+      },
+    })
+
+    const clientIdForTasksArr = clients.map((client) => client.id)
+
+    const taskData = await Assigned_Task.findAll({
+      raw: true,
+      where: {
+        client_id: clientIdForTasksArr,
+      },
+      include: ['task'],
+    })
+    const clientIdArr = taskData.map((task) => task.client_id)
+    const clientData = await User.findAll({
+      raw: true,
+      where: {
+        client_id: clientIdArr,
+      },
+    })
+
+    const completedTasksArr = taskData
+      .map((task) => {
+        if (task.completed) {
+          const client = clientData.find(
+            (client) => client.client_id === task.client_id
+          )
+
+          const completedTask = {
+            id: task.id,
+            createdAt: Date.parse(task.createdAt),
+            title: task['task.form_json_data'].title,
+            clientFirstName: client.first_name,
+            clientLastName: client.last_name,
+          }
+          return completedTask
+        }
+        return
+      })
+      .filter((task) => task)
+
+    const uncompletedTasksArr = taskData
+      .map((task) => {
+        if (!task.completed) {
+          const client = clientData.find(
+            (client) => client.client_id === task.client_id
+          )
+
+          const uncompletedTask = {
+            id: task.id,
+            createdAt: Date.parse(task.createdAt),
+            title: task['task.form_json_data'].title,
+            clientFirstName: client.first_name,
+            clientLastName: client.last_name,
+          }
+          return uncompletedTask
+        }
+        return
+      })
+      .filter((task) => task)
+
+    res.status(200).send({
+      success: true,
+      message: 'Find completed tasks ',
+      messge2: null,
+      completedTasksArr,
+      uncompletedTasksArr,
+    })
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || 'Some error occurred while finding the Task',
+    })
+>>>>>>> ben
   }
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { useContext } from 'react'
 import { clientContext } from '../context/ClientContext'
 import { taskProgressTag } from '../helpers/utils'
@@ -17,7 +17,10 @@ export const LatestClient = () => {
             .slice(0)
             .reverse()
             .map((client) => (
-              <tr className="bg-white border-b hover:bg-gray-50">
+              <tr
+                className="bg-white border-b hover:bg-gray-50"
+                key={client.uuid}
+              >
                 <th
                   scope="row"
                   className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap"

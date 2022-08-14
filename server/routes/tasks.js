@@ -16,8 +16,14 @@ router.post("/assigned/new", tasks.createAssignedTask);
 
 router.post("/completed/new", tasks.createCompletedTask);
 
+<<<<<<< HEAD
 router.post("/completed/update", tasks.markTaskComplete);
 
 router.delete("/", tasks.deleteTask);
 
 module.exports = router;
+=======
+router.get('/admin-assigned', tasks.findAllAdminAssignedTasks)
+
+module.exports = router
+>>>>>>> ben

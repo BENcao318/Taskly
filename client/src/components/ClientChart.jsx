@@ -17,7 +17,6 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 export const ClientChart = () => {
   const { clients } = useContext(clientContext)
 
-  console.log(clients)
   const clientLabels = clients.map(
     (client) => client.firstName + ' ' + client.lastName
   )
