@@ -1,5 +1,5 @@
-'use strict'
-const { Model } = require('sequelize')
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Completed_Task extends Model {
     /**
@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate({ Assigned_Task }) {
       // define association here
       this.belongsTo(Assigned_Task, {
-        foreignKey: 'assigned_task_id',
-        as: 'assigned_task',
-      })
+        foreignKey: "assigned_task_id",
+        as: "assigned_task",
+      });
     }
   }
   Completed_Task.init(
@@ -23,12 +23,15 @@ module.exports = (sequelize, DataTypes) => {
       response_json_data: {
         type: DataTypes.JSONB,
       },
+      copy_of_survey_json: {
+        type: DataTypes.JSONB,
+      },
     },
     {
       sequelize,
-      tableName: 'completed_tasks',
-      modelName: 'Completed_Task',
+      tableName: "completed_tasks",
+      modelName: "Completed_Task",
     }
-  )
-  return Completed_Task
-}
+  );
+  return Completed_Task;
+};

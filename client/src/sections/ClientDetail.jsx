@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { ClientInfo } from '../components/ClientInfo'
-import { AssignedTasks } from '../components/AssignedTasks'
-import { TaskOverview } from '../components/TaskOverview'
-import { useContext } from 'react'
-import { clientContext } from '../context/ClientContext'
-import { taskContext } from '../context/TaskContext'
-import serverAPI from '../hooks/useAxios'
+import React, { useEffect, useContext, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ClientInfo } from "../components/ClientInfo";
+import { AssignedTasks } from "../components/AssignedTasks";
+import { TaskOverview } from "../components/TaskOverview";
+import { clientContext } from "../context/ClientContext";
+import { taskContext } from "../context/TaskContext";
+import serverAPI from "../hooks/useAxios";
 
 export const ClientDetail = () => {
-  const { client, setClient } = useContext(clientContext)
-  const { assignedTasks, setAssignedTasks } = useContext(taskContext)
-  const params = useParams()
+  const { client, setClient } = useContext(clientContext);
+  const [completedTasks, setCompletedTasks] = useState([]);
+  const { assignedTasks, setAssignedTasks } = useContext(taskContext);
+  const { uuid } = useParams();
 
   useEffect(() => {
     serverAPI
-      .get(`/users/client-info?client_uuid=${params.uuid}`)
+      .get(`/users/client-info?client_uuid=${uuid}`)
       .then((response) => {
         if (response.data.success) {
           setClient(response.data.clientInfo)
@@ -26,10 +26,11 @@ export const ClientDetail = () => {
       })
 
     serverAPI
-      .get(`/tasks/assigned?client_uuid=${params.uuid}`)
+      .get(`/tasks/assigned?client_uuid=${uuid}`)
       .then((response) => {
         if (response.data.success) {
-          setAssignedTasks(response.data.assignedTasks)
+          setAssignedTasks(response.data.assignedTasks);
+          setCompletedTasks(response.data.completedTasks);
         }
       })
       .catch((err) => {
@@ -49,8 +50,12 @@ export const ClientDetail = () => {
             email={client.email}
             phoneNumber={client.phoneNumber}
           />
-          <AssignedTasks client={client} assignedTasks={assignedTasks} />
-          <TaskOverview assignedTasks={assignedTasks} client={client} />
+          <AssignedTasks
+            client={client}
+            assignedTasks={assignedTasks}
+            completedTasks={completedTasks}
+          />
+          <TaskOverview assignedTasks={assignedTasks} uuid={uuid} />
         </div>
       </div>
     )
