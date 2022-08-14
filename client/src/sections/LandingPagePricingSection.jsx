@@ -1,8 +1,9 @@
-import { Button } from 'flowbite-react'
 import React from 'react'
-import { HiOutlineArrowRight } from 'react-icons/hi'
+import { HiPresentationChartBar, HiCube } from 'react-icons/hi'
 import { FaClipboard } from 'react-icons/fa'
-import { IoIosHappy } from 'react-icons/io'
+import { IoIosHappy, IoIosPeople } from 'react-icons/io'
+import { AiFillSafetyCertificate } from 'react-icons/ai'
+import { BsFillChatSquareQuoteFill, BsFillChatDotsFill } from 'react-icons/bs'
 
 export const LandingPagePricingSection = ({ setOpenSignupModal }) => {
   return (
@@ -22,7 +23,7 @@ export const LandingPagePricingSection = ({ setOpenSignupModal }) => {
             <h3 className="text-2xl font-bold ">Starter</h3>
 
             <div className="flex items-baseline justify-center my-8">
-              <span className="mr-2 text-5xl font-extrabold">$0</span>
+              <span className="mr-2 text-5xl font-bold">$0</span>
             </div>
 
             <div className="flex justify-center mb-6">
@@ -36,272 +37,156 @@ export const LandingPagePricingSection = ({ setOpenSignupModal }) => {
 
             <ul className="mb-8 space-y-4 text-left">
               <li className="flex items-center space-x-3">
-                <FaClipboard size="1rem" />
+                <FaClipboard size="1.2rem" />
                 <span>Create up to 10 custom tasks</span>
               </li>
               <li className="flex items-center space-x-3">
-                <IoIosHappy size="1rem" />
+                <IoIosHappy size="1.2rem" />
                 <span>Add up to 50 clients at once</span>
               </li>
               <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                <span>
-                  Team size: <span className="font-semibold">1 developer</span>
+                <AiFillSafetyCertificate size="1.2rem" />
+                <span>Comprehensive security</span>
+              </li>
+              <li className="flex items-center space-x-3 text-gray-400">
+                <IoIosPeople size="1.2rem" />
+                <span className="line-through ">Add other admins</span>
+              </li>
+              <li className="flex items-center space-x-3 text-gray-400">
+                <BsFillChatSquareQuoteFill size="1.2rem" />
+                <span className="line-through ">
+                  Send automated reminders to clients
                 </span>
               </li>
-              <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                <span>
-                  Premium support:{' '}
-                  <span className="font-semibold">6 months</span>
+              <li className="flex items-center space-x-3 text-gray-400">
+                <HiPresentationChartBar size="1.2rem" />
+                <span className="line-through ">
+                  Financial reconciliation and reporting
                 </span>
               </li>
-              <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                <span>
-                  Free updates: <span className="font-semibold">6 months</span>
+              <li className="flex items-center space-x-3 text-gray-400">
+                <BsFillChatDotsFill size="1.2rem" />
+                <span className="line-through ">
+                  24×7 phone, chat, and email support
+                </span>
+              </li>
+              <li className="flex items-center space-x-3 text-gray-400">
+                <HiCube size="1.2rem" />
+                <span className="line-through ">
+                  Robust developer platform{' '}
                 </span>
               </li>
             </ul>
           </div>
 
           <div className="flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
-            <h3 className="mb-4 text-2xl font-semibold">Company</h3>
-            <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
-              Relevant for multiple users, extended & premium support.
-            </p>
+            <h3 className="text-2xl font-bold ">Pro</h3>
+
             <div className="flex items-baseline justify-center my-8">
-              <span className="mr-2 text-5xl font-extrabold">$99</span>
-              <span className="text-gray-500 dark:text-gray-400">/month</span>
+              <span className="mr-2 text-5xl font-bold">$20</span>
+            </div>
+
+            <div className="flex justify-center mb-6">
+              <button
+                onClick={() => setOpenSignupModal(true)}
+                className="w-full py-2 font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-800"
+              >
+                Get started
+              </button>
             </div>
 
             <ul className="mb-8 space-y-4 text-left">
               <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                <span>Individual configuration</span>
+                <FaClipboard size="1.2rem" />
+                <span>Create up to 10 custom tasks</span>
               </li>
               <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                <span>No setup, or hidden fees</span>
+                <IoIosHappy size="1.2rem" />
+                <span>Add up to 50 clients at once</span>
               </li>
               <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                <span>
-                  Team size:{' '}
-                  <span className="font-semibold">10 developers</span>
+                <AiFillSafetyCertificate size="1.2rem" />
+                <span>Comprehensive security</span>
+              </li>
+              <li className="flex items-center space-x-3">
+                <IoIosPeople size="1.2rem" />
+                <span>Add up to 2 other admins</span>
+              </li>
+              <li className="flex items-center space-x-3">
+                <BsFillChatSquareQuoteFill size="1.2rem" />
+                <span>Send automated reminders to clients</span>
+              </li>
+              <li className="flex items-center space-x-3 text-gray-400">
+                <HiPresentationChartBar size="1.2rem" />
+                <span className="line-through ">
+                  Financial reconciliation and reporting
                 </span>
               </li>
-              <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                <span>
-                  Premium support:{' '}
-                  <span className="font-semibold">24 months</span>
+              <li className="flex items-center space-x-3 text-gray-400">
+                <BsFillChatDotsFill size="1.2rem" />
+                <span className="line-through ">
+                  24×7 phone, chat, and email support
                 </span>
               </li>
-              <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                <span>
-                  Free updates: <span className="font-semibold">24 months</span>
+              <li className="flex items-center space-x-3 text-gray-400">
+                <HiCube size="1.2rem" />
+                <span className="line-through ">
+                  Robust developer platform{' '}
                 </span>
               </li>
             </ul>
-            <div className="flex justify-center">
-              <Button onClick={() => setOpenSignupModal(true)}>
-                Get started
-                <HiOutlineArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-            </div>
           </div>
 
           <div className="flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
-            <h3 className="mb-4 text-2xl font-semibold">Enterprise</h3>
-            <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
-              Best for large scale uses and extended redistribution rights.
-            </p>
+            <h3 className="text-2xl font-bold ">Platinum</h3>
+
             <div className="flex items-baseline justify-center my-8">
-              <span className="mr-2 text-5xl font-extrabold">$499</span>
-              <span className="text-gray-500 dark:text-gray-400">/month</span>
+              <span className="mr-2 text-5xl font-bold">$169</span>
+            </div>
+
+            <div className="flex justify-center mb-6">
+              <button
+                onClick={() => setOpenSignupModal(true)}
+                className="w-full py-2 font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-800"
+              >
+                Get started
+              </button>
             </div>
 
             <ul className="mb-8 space-y-4 text-left">
               <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                <span>Individual configuration</span>
+                <FaClipboard size="1.2rem" />
+                <span>Create up to 10 custom tasks</span>
               </li>
               <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                <span>No setup, or hidden fees</span>
+                <IoIosHappy size="1.2rem" />
+                <span>Add up to 50 clients at once</span>
               </li>
               <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                <span>
-                  Team size:{' '}
-                  <span className="font-semibold">100+ developers</span>
-                </span>
+                <AiFillSafetyCertificate size="1.2rem" />
+                <span>Comprehensive security</span>
               </li>
               <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                <span>
-                  Premium support:{' '}
-                  <span className="font-semibold">36 months</span>
-                </span>
+                <IoIosPeople size="1.2rem" />
+                <span>Add up to 2 other admins</span>
               </li>
               <li className="flex items-center space-x-3">
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                <span>
-                  Free updates: <span className="font-semibold">36 months</span>
-                </span>
+                <BsFillChatSquareQuoteFill size="1.2rem" />
+                <span>Send automated reminders to clients</span>
+              </li>
+              <li className="flex items-center space-x-3">
+                <HiPresentationChartBar size="1.2rem" />
+                <span>Financial reconciliation and reporting</span>
+              </li>
+              <li className="flex items-center space-x-3">
+                <BsFillChatDotsFill size="1.2rem" />
+                <span>24×7 phone, chat, and email support</span>
+              </li>
+              <li className="flex items-center space-x-3">
+                <HiCube size="1.2rem" />
+                <span>Robust developer platform </span>
               </li>
             </ul>
-            <div className="flex justify-center">
-              <Button onClick={() => setOpenSignupModal(true)}>
-                Get started
-                <HiOutlineArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-            </div>
           </div>
         </div>
       </div>
