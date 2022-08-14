@@ -224,16 +224,17 @@ exports.findAllCompletedTasks = async (req, res) => {
       message: err.message || "Some error occurred while creating the Task",
     });
   }
+};
 
 exports.deleteTask = async (req, res) => {
-  const task_id = req.body.task_id
+  const task_id = req.body.task_id;
 
   if (!req.session.user) {
     return res.status(500).send({
       success: false,
-      message: 'User is not authenticated to delete',
+      message: "User is not authenticated to delete",
       messge2: null,
-    })
+    });
   }
 
   try {
@@ -241,17 +242,17 @@ exports.deleteTask = async (req, res) => {
       where: {
         id: task_id,
       },
-    })
-    await task.destroy()
+    });
+    await task.destroy();
 
     res.status(200).send({
       success: true,
-      message: 'Successfully delete the task',
+      message: "Successfully delete the task",
       messge2: null,
-    })
+    });
   } catch (err) {
     res.status(500).send({
       message: `Error retrieving User with company name=${company_name}, ${err}`,
-    })
+    });
   }
-}
+};

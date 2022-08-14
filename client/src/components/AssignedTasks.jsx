@@ -5,6 +5,8 @@ import { LoadSurvey } from "./LoadSurvey";
 export function AssignedTasks(props) {
   const { assignedTasks, completedTasks } = props;
 
+  console.log(completedTasks);
+
   return (
     <div className="w-2/4 h-full p-4">
       <p className="my-2 text-xl font-bold text-gray-900">Assigned Tasks</p>

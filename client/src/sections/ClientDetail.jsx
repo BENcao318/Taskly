@@ -18,12 +18,12 @@ export const ClientDetail = () => {
       .get(`/users/client-info?client_uuid=${uuid}`)
       .then((response) => {
         if (response.data.success) {
-          setClient(response.data.clientInfo)
+          setClient(response.data.clientInfo);
         }
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
 
     serverAPI
       .get(`/tasks/assigned?client_uuid=${uuid}`)
@@ -34,9 +34,9 @@ export const ClientDetail = () => {
         }
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }, [])
+        console.log(err);
+      });
+  }, []);
 
   if (client && assignedTasks) {
     return (
@@ -58,6 +58,6 @@ export const ClientDetail = () => {
           <TaskOverview assignedTasks={assignedTasks} uuid={uuid} />
         </div>
       </div>
-    )
+    );
   }
-}
+};

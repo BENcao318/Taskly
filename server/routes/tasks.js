@@ -18,14 +18,6 @@ router.post("/completed/new", tasks.createCompletedTask);
 
 router.post("/completed/update", tasks.markTaskComplete);
 
+router.delete("/", tasks.deleteTask);
+
 module.exports = router;
-
-router.delete('/', tasks.deleteTask)
-
-router.get('/', tasks.findAll)
-
-router.get('/assigned', tasks.findAllAssignedTasks)
-
-router.get('/completed', tasks.findAllCompletedTasks)
-
-module.exports = router
