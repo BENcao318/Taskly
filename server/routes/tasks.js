@@ -1,29 +1,21 @@
-const express = require("express");
-const router = express.Router();
-const tasks = require("../controller/task.controller");
+const express = require('express')
+const router = express.Router()
+const tasks = require('../controller/task.controller')
 
-router.get("/", tasks.findAll);
+router.get('/', tasks.findAll)
 
-router.get("/find", tasks.findTask);
+router.post('/assigned/new', tasks.createAssignedTask)
 
-router.get("/assigned", tasks.findAllAssignedTasks);
+router.post('/completed/new', tasks.createCompletedTask)
 
-router.get("/completed", tasks.findAllCompletedTasks);
+router.delete('/', tasks.deleteTask)
 
-router.post("/new", tasks.createTask);
+router.get('/', tasks.findAll)
 
-router.post("/assigned/new", tasks.createAssignedTask);
+router.get('/assigned', tasks.findAllAssignedTasks)
 
-router.post("/completed/new", tasks.createCompletedTask);
+router.get('/completed', tasks.findAllCompletedTasks)
 
-<<<<<<< HEAD
-router.post("/completed/update", tasks.markTaskComplete);
-
-router.delete("/", tasks.deleteTask);
-
-module.exports = router;
-=======
 router.get('/admin-assigned', tasks.findAllAdminAssignedTasks)
 
 module.exports = router
->>>>>>> ben
