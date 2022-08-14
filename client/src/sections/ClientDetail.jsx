@@ -38,7 +38,7 @@ export const ClientDetail = () => {
       .catch((err) => {
         console.log(err)
       })
-  }, [])
+  }, [params.uuid, setAssignedTasks, setClient])
 
   if (client && assignedTasks) {
     return (
