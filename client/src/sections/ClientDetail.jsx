@@ -1,42 +1,44 @@
-import React, { useEffect, useContext, useState } from "react";
-import { useParams } from "react-router-dom";
-import { ClientInfo } from "../components/ClientInfo";
-import { AssignedTasks } from "../components/AssignedTasks";
-import { TaskOverview } from "../components/TaskOverview";
-import { clientContext } from "../context/ClientContext";
-import { taskContext } from "../context/TaskContext";
-import serverAPI from "../hooks/useAxios";
+import React, { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { ClientInfo } from '../components/ClientInfo'
+import { AssignedTasks } from '../components/AssignedTasks'
+import { TaskOverview } from '../components/TaskOverview'
+import { useContext } from 'react'
+import { clientContext } from '../context/ClientContext'
+import { taskContext } from '../context/TaskContext'
+import serverAPI from '../hooks/useAxios'
+import { ToastContainer } from 'react-toastify'
 
 export const ClientDetail = () => {
-  const { client, setClient } = useContext(clientContext);
-  const [completedTasks, setCompletedTasks] = useState([]);
-  const { assignedTasks, setAssignedTasks } = useContext(taskContext);
-  const { uuid } = useParams();
+  const { client, setClient } = useContext(clientContext)
+  const [completedTasks, setCompletedTasks] = useState([])
+  const { assignedTasks, setAssignedTasks } = useContext(taskContext)
+  const { uuid } = useParams()
 
   useEffect(() => {
     serverAPI
       .get(`/users/client-info?client_uuid=${uuid}`)
       .then((response) => {
         if (response.data.success) {
-          setClient(response.data.clientInfo);
+          setClient(response.data.clientInfo)
         }
       })
       .catch((err) => {
-        console.log(err);
-      });
+        console.log(err)
+      })
 
     serverAPI
       .get(`/tasks/assigned?client_uuid=${uuid}`)
       .then((response) => {
         if (response.data.success) {
-          setAssignedTasks(response.data.assignedTasks);
-          setCompletedTasks(response.data.completedTasks);
+          setAssignedTasks(response.data.assignedTasks)
+          setCompletedTasks(response.data.completedTasks)
         }
       })
       .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+        console.log(err)
+      })
+  }, [])
 
   if (client && assignedTasks) {
     return (
@@ -50,14 +52,23 @@ export const ClientDetail = () => {
             email={client.email}
             phoneNumber={client.phoneNumber}
           />
-          <AssignedTasks
-            client={client}
-            assignedTasks={assignedTasks}
-            completedTasks={completedTasks}
+          <AssignedTasks client={client} assignedTasks={assignedTasks} />
+          <TaskOverview assignedTasks={assignedTasks} client={client} />
+          <ToastContainer
+            toastClassName={() =>
+              'relative flex px-2 py-4 min-h-16 rounded-md justify-between overflow-hidden cursor-pointer bg-sky-200 text-black font-semibold'
+            }
+            position="top-center"
+            autoClose={6000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
           />
-          <TaskOverview assignedTasks={assignedTasks} uuid={uuid} />
         </div>
       </div>
-    );
+    )
   }
-};
+}

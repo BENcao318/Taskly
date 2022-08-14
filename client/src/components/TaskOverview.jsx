@@ -3,6 +3,7 @@ import { Button, Dropdown } from 'flowbite-react'
 import { ReactComponent as PaperAirplane } from '../assets/PaperAirplane.svg'
 import { TaskList } from '../components/TaskList'
 import serverAPI from '../hooks/useAxios'
+import { toast } from 'react-toastify'
 
 export function TaskOverview(props) {
   const { assignedTasks, client } = props
@@ -10,10 +11,34 @@ export function TaskOverview(props) {
     serverAPI
       .post('/users/client/send-tasks', { client_email: client.email })
       .then((response) => {
+        console.log(response.data)
         if (response.data.success) {
-          console.log('task send successfully')
-          console.log(response.data)
+          toast.success(`Successfully sent the tasks to the client 😊`, {
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          })
+        } else {
+          toast.error(
+            `Error sending the tasks to the client, please try again 🙌`,
+            {
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            }
+          )
         }
+      })
+      .catch((err) => {
+        toast.error(
+          `Error sending the tasks to the client, please try again 🙌`,
+          {
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          }
+        )
+        console.log(err)
       })
   }
 

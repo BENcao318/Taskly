@@ -2,15 +2,15 @@ import React from 'react'
 
 export const CompletedTask = ({ completedTasks }) => {
   return (
-    <div className="relative overflow-x-auto border-2 border-gray-200 rounded-lg shadow-md h-96">
+    <div className="relative overflow-x-auto border-2 border-gray-200 rounded-lg shadow-md scrollbar-hide h-96">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <caption className="p-4 text-xl font-semibold text-center text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+        <caption className="p-4 font-serif text-xl font-semibold text-center text-gray-900 bg-white dark:text-white dark:bg-gray-800">
           Completed Tasks
-          <p className="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
+          {/* <p className="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
             This is a list of completed tasks in last 7 days
-          </p>
+          </p> */}
         </caption>
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-sky-200 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-6 py-3">
               TASK

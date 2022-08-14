@@ -93,13 +93,13 @@ exports.createClient = async (req, res) => {
     })
 
     const securityCode = helpers.generateRandomSecurityCode()
-    const encryptedSecurityCode = helpers.encryption(securityCode)
+    // const encryptedSecurityCode = helpers.encryption(securityCode)
 
     const userData = await User.create({
       first_name: clientInfo.firstName,
       last_name: clientInfo.lastName,
       email: clientInfo.email.toLowerCase(),
-      password: encryptedSecurityCode, //use this for sending secure code to the user
+      password: securityCode, //use this for sending secure code to the user
       admin_id: null,
       client_id: clientData.id,
     })
@@ -419,22 +419,20 @@ exports.signIn = async (req, res) => {
 
 exports.clientSignIn = async (req, res) => {
   const { securityCode, client_uuid } = req.body
-
   try {
     const client = await User.findOne({
+      raw: true,
       where: {
         uuid: client_uuid,
       },
     })
 
     if (client) {
-      const passwordMatched = await compare(
-        securityCode,
-        client.dataValues.password
-      )
+      // const decryptedSecurityCode = helpers.decryption(client.password)
 
-      if (passwordMatched) {
+      if (securityCode === client.password) {
         // req.session.client = client
+        // console.log('testtest66666666666', client)
         res.status(200).send({
           success: true,
           message: 'Client signin success',
@@ -534,14 +532,13 @@ exports.deleteClient = async (req, res) => {
 }
 
 exports.sendTasksToClient = async (req, res) => {
-  if (!req.session.user) {
-    return res.status(500).send({
-      success: false,
-      message: 'User is not authenticated to send tasks to client',
-      messge2: null,
-    })
-  }
-
+  // if (!req.session.user) {
+  //   return res.status(500).send({
+  //     success: false,
+  //     message: 'User is not authenticated to send tasks to client',
+  //     messge2: null,
+  //   })
+  // }
   const { client_email } = req.body
   try {
     const clientData = await User.findOne({
@@ -553,14 +550,14 @@ exports.sendTasksToClient = async (req, res) => {
     if (clientData) {
       const clientUUID = clientData.uuid
       const securityCode = clientData.password
-      const decryptedSecurityCode = helpers.decryption(securityCode)
-      const clientPage = `localhost:3000/client/view?client_uuid=${clientUUID}`
+      // const decryptedSecurityCode = helpers.decryption(securityCode)
+      // const clientPage = `localhost:3000/client/view?client_uuid=${clientUUID}`
+      const sendEmail = helpers.sendEmail(clientUUID, securityCode)
 
       res.status(200).send({
         success: true,
         message: 'Successfully send the tasks to client',
         messge2: null,
-        clientPage,
       })
     } else {
       res.status(404).send({
@@ -568,6 +565,7 @@ exports.sendTasksToClient = async (req, res) => {
       })
     }
   } catch (err) {
+    console.log('testtestsetest6666666666666666', err)
     res.status(500).send({
       message: `Error retrieving User with client email, ${err}`,
     })

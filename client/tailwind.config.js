@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   content: [
     './src/**/*.{js,jsx,ts,tsx}',
@@ -11,8 +13,12 @@ module.exports = {
       '1/4': '25%',
       40: '10rem',
       60: '15rem',
+      80: '20rem',
+      100: '40rem',
+      120: '60rem',
     },
     maxHeight: {
+      104: '26rem',
       112: '28rem',
       120: '30rem',
     },
@@ -57,5 +63,23 @@ module.exports = {
       xl: '26px',
     },
   },
-  plugins: [require('flowbite/plugin')],
+  plugins: [
+    require('flowbite/plugin'),
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.scrollbar-hide': {
+          /* IE and Edge */
+          '-ms-overflow-style': 'none',
+
+          /* Firefox */
+          'scrollbar-width': 'none',
+
+          /* Safari and Chrome */
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+        },
+      })
+    }),
+  ],
 }
