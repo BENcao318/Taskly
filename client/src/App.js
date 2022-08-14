@@ -13,6 +13,8 @@ import { ClientSection } from './sections/ClientSection'
 import { PrivateClientRoute } from './components/PrivateClientRoute'
 import { ClientAuthPage } from './pages/ClientAuthPage'
 import { ClientViewPage } from './pages/ClientViewPage'
+import { HomePage } from './pages/HomePage'
+import { Dashboard } from './sections/Dashboard'
 
 const App = () => {
   return (
@@ -23,6 +25,9 @@ const App = () => {
           element={<LandingPage redirectPath={window.location.href} />}
         />
         <Route element={<PrivateAdminRoute />}>
+          <Route path="/home" element={<HomePage />}>
+            <Route path="" element={<Dashboard />} />
+          </Route>
           <Route path="/client" element={<ClientPage />}>
             <Route path="" element={<ClientSection />} />
           </Route>

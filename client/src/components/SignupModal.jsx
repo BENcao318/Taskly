@@ -28,7 +28,7 @@ export const SignupModal = ({
             isLoading: false,
             user: response.data.user,
           }))
-          navigate('/client')
+          navigate('/home ')
           toast.success(`Signed in. Welcome! 😊`, {
             closeOnClick: true,
             pauseOnHover: true,

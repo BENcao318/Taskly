@@ -12,6 +12,10 @@ module.exports = {
       40: '10rem',
       60: '15rem',
     },
+    maxHeight: {
+      112: '28rem',
+      120: '30rem',
+    },
     extend: {
       keyframes: {
         wiggle: {

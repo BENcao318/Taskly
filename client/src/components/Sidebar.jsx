@@ -38,7 +38,10 @@ export const Sidebar = () => {
         <div className="px-3 py-4 overflow-y-auto rounded dark:bg-gray-800">
           <ul className="space-y-2">
             <li>
-              <div className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+              <div
+                className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+                onClick={() => navigate('/home')}
+              >
                 <HomeLogo />
                 <span className="ml-3">Home</span>
               </div>
