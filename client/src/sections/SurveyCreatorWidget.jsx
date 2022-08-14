@@ -41,9 +41,30 @@ Survey.Serializer.findProperty("survey", "description").visible = false;
 Survey.Serializer.findProperty("survey", "logo").visible = false;
 Survey.Serializer.findProperty("survey", "title").isRequired = true;
 
+// const defaultJson = {
+//   pages: [
+//     {
+//       name: "Name",
+//       elements: [
+//         {
+//           name: "FirstName",
+//           title: "Enter your first name:",
+//           type: "text",
+//         },
+//         {
+//           name: "LastName",
+//           title: "Enter your last name:",
+//           type: "text",
+//         },
+//       ],
+//     },
+//   ],
+// };
+
 export function SurveyCreatorWidget() {
   const navigate = useNavigate();
   const creator = new SurveyCreator(creatorOptions);
+  // creator.text = window.localStorage.getItem("survey-json") || JSON.stringify();
   creator.saveSurveyFunc = (saveNo, callback) => {
     let surveyJSON = JSON.parse(creator.text);
     if (surveyJSON.title) {

@@ -1,18 +1,9 @@
+import React from "react";
 import { Card } from "flowbite-react";
 import { ReactComponent as Complete } from "../assets/complete.svg";
-import "survey-core/modern.min.css";
-import { Model } from "survey-core";
-import { Survey } from "survey-react-ui";
-import "../surveyJs.css";
 
 export function TaskResponse(props) {
-  const { surveyJson, responseData } = props;
-  const survey = new Model(surveyJson);
-
-  survey.focusFirstQuestionAutomatic = false;
-  survey.showTitle = false;
-  survey.data = JSON.parse(responseData);
-  survey.mode = "display";
+  const { surveyJson } = props;
 
   return (
     <div className="mb-2">
@@ -23,7 +14,7 @@ export function TaskResponse(props) {
             {surveyJson.title}
           </span>
         </div>
-        <Survey model={survey} />
+        <p className="text-base font-normal text-gray-500 text">Coming soon!</p>
       </Card>
     </div>
   );

@@ -1,31 +1,29 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react'
 
-import { ReactComponent as DownChevron } from "../assets/downChevron.svg";
-import { ReactComponent as TaskLogo } from "../assets/taskLogo.svg";
-import { ReactComponent as PenLogo } from "../assets/penLogo.svg";
-import { ReactComponent as TrashCanLogo } from "../assets/trashcanLogo.svg";
-import { Transition } from "@headlessui/react";
-import { useNavigate } from "react-router-dom";
+import { ReactComponent as DownChevron } from '../assets/downChevron.svg'
+import { ReactComponent as TaskLogo } from '../assets/taskLogo.svg'
+import { ReactComponent as PenLogo } from '../assets/penLogo.svg'
+import { ReactComponent as TrashCanLogo } from '../assets/trashcanLogo.svg'
+import { Transition } from '@headlessui/react'
 
 export const Task = ({ task, setOpenDeleteTaskModal }) => {
-  const [toggleActionMenu, setToggleActionMenu] = useState(false);
-  const buttonRef = useRef(null);
-  const numberOfQuestions = task.form_json_data.elements.length;
-  const navigate = useNavigate();
+  const [toggleActionMenu, setToggleActionMenu] = useState(false)
+  const buttonRef = useRef(null)
+  const numberOfQuestions = task.form_json_data.elements.length
 
   const toggleDropdown = () => {
-    setToggleActionMenu((prev) => !prev);
-  };
+    setToggleActionMenu((prev) => !prev)
+  }
 
   useEffect(() => {
-    window.addEventListener("click", (e) => {
+    window.addEventListener('click', (e) => {
       if (buttonRef.current && buttonRef.current.contains(e.target)) {
-        toggleDropdown();
+        toggleDropdown()
       } else {
-        setToggleActionMenu(false);
+        setToggleActionMenu(false)
       }
-    });
-  }, [buttonRef]);
+    })
+  }, [buttonRef])
 
   return (
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-100 dark:hover:bg-gray-600">
@@ -55,7 +53,7 @@ export const Task = ({ task, setOpenDeleteTaskModal }) => {
 
         <div
           className={`${
-            toggleActionMenu ? "" : "hidden"
+            toggleActionMenu ? '' : 'hidden'
           } z-40 min-w-62 bg-white rounded-lg divide-y  divide-gray-100 shadow-lg shadow-neutral-400 dark:bg-gray-700 fixed mt-2 right-24`}
         >
           <Transition
@@ -72,13 +70,13 @@ export const Task = ({ task, setOpenDeleteTaskModal }) => {
               className="py-1 font-semibold text-gray-700 text-md dark:text-gray-200"
               aria-labelledby="dropdownDefault"
             >
-              <li onClick={() => navigate(`/task/preview/${task.id}`)}>
+              <li>
                 <div className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">
                   <TaskLogo className="w-5 fill-slate-600" />
                   Preview Task
                 </div>
               </li>
-              <li onClick={() => navigate(`/task/edit/${task.id}`)}>
+              <li>
                 <div className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">
                   <PenLogo className="w-5 fill-slate-600" />
                   Edit Task
@@ -92,7 +90,7 @@ export const Task = ({ task, setOpenDeleteTaskModal }) => {
                       ...prev,
                       isOpen: true,
                       id: task.id,
-                    }));
+                    }))
                   }}
                 >
                   <TrashCanLogo className="w-5 " />
@@ -104,5 +102,5 @@ export const Task = ({ task, setOpenDeleteTaskModal }) => {
         </div>
       </td>
     </tr>
-  );
-};
+  )
+}

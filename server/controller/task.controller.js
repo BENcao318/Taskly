@@ -3,23 +3,7 @@ const completed_task = require('../models/completed_task')
 const { User, Admin, Task, Assigned_Task, Completed_Task, Client } = db
 const Op = db.Sequelize.Op
 
-exports.findTask = async (req, res) => {
-  const id = req.query.task_id
-
-  const taskData = await Task.findAll({
-    where: {
-      id: id,
-    },
-    attributes: ['form_json_data'],
-  })
-
-  res.status(200).send({
-    success: true,
-    message: 'Successfully find the task with given id',
-    messge2: null,
-    taskData,
-  })
-}
+exports.findTasks = async (req, res) => {}
 
 exports.createTask = async (req, res) => {
   const { admin_id, form_json_data } = req.body
@@ -41,13 +25,12 @@ exports.createTask = async (req, res) => {
 }
 
 exports.createCompletedTask = async (req, res) => {
-  const { assigned_task_id, response_json_data, copy_of_survey_json } = req.body
+  const { assigned_task_id, response_json_data } = req.body
 
   try {
     const taskData = await Completed_Task.create({
       assigned_task_id,
       response_json_data,
-      copy_of_survey_json,
     })
 
     res.status(200).send({
