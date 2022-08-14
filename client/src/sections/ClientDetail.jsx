@@ -11,13 +11,12 @@ import { ToastContainer } from 'react-toastify'
 
 export const ClientDetail = () => {
   const { client, setClient } = useContext(clientContext)
-  const [completedTasks, setCompletedTasks] = useState([])
   const { assignedTasks, setAssignedTasks } = useContext(taskContext)
-  const { uuid } = useParams()
+  const params = useParams()
 
   useEffect(() => {
     serverAPI
-      .get(`/users/client-info?client_uuid=${uuid}`)
+      .get(`/users/client-info?client_uuid=${params.uuid}`)
       .then((response) => {
         if (response.data.success) {
           setClient(response.data.clientInfo)
@@ -28,11 +27,10 @@ export const ClientDetail = () => {
       })
 
     serverAPI
-      .get(`/tasks/assigned?client_uuid=${uuid}`)
+      .get(`/tasks/assigned?client_uuid=${params.uuid}`)
       .then((response) => {
         if (response.data.success) {
           setAssignedTasks(response.data.assignedTasks)
-          setCompletedTasks(response.data.completedTasks)
         }
       })
       .catch((err) => {

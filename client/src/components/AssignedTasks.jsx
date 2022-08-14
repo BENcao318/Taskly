@@ -1,11 +1,9 @@
-import React from "react";
-import { TaskResponse } from "../components/TaskResponse";
-import { LoadSurvey } from "./LoadSurvey";
+import React from 'react'
+import { TaskResponse } from '../components/TaskResponse'
+import { LoadSurvey } from './LoadSurvey'
 
 export function AssignedTasks(props) {
-  const { assignedTasks, completedTasks } = props;
-
-  console.log(completedTasks);
+  const { assignedTasks, client } = props
 
   return (
     <div className="w-2/4 h-full p-4">
@@ -14,22 +12,21 @@ export function AssignedTasks(props) {
         if (!task.completed) {
           return (
             <LoadSurvey
-              surveyJson={task["task.form_json_data"]}
-              assignedTaskId={task.id}
+              surveyJson={task['task.form_json_data']}
+              task_id={task.task_id}
+              key={task.task_id}
+              client={client}
+            />
+          )
+        } else {
+          return (
+            <TaskResponse
+              surveyJson={task['task.form_json_data']}
               key={task.task_id}
             />
-          );
+          )
         }
       })}
-      {completedTasks.map((task) => {
-        return (
-          <TaskResponse
-            surveyJson={task["copy_of_survey_json"]}
-            responseData={task["response_json_data"]}
-            key={task["assigned_task_id"]}
-          />
-        );
-      })}
     </div>
-  );
+  )
 }
