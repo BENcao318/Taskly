@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const UncompletedTask = () => {
+export const UncompletedTask = ({ uncompletedTasks }) => {
   return (
     <div className="relative overflow-x-auto border-2 border-gray-200 rounded-lg shadow-md h-96">
       <table className="w-full text-sm text-left text-gray-500">
@@ -24,27 +24,22 @@ export const UncompletedTask = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="font-medium text-gray-900 bg-white border-b whitespace-nowrap hover:bg-gray-50">
-            <th scope="row" className="px-6 py-4 font-medium">
-              Create Profile
-            </th>
-            <td className="px-6 py-4">Apr 23, 2022</td>
-            <td className="px-6 py-4">Bonnie Green</td>
-          </tr>
-          <tr className="font-medium text-gray-900 bg-white border-b whitespace-nowrap hover:bg-gray-50">
-            <th scope="row" className="px-6 py-4 font-medium">
-              Task 2
-            </th>
-            <td className="px-6 py-4">Apr 23, 2022</td>
-            <td className="px-6 py-4">Bonnie Green</td>
-          </tr>
-          <tr className="font-medium text-gray-900 bg-white border-b whitespace-nowrap hover:bg-gray-50">
-            <th scope="row" className="px-6 py-4 font-medium">
-              Task 3
-            </th>
-            <td className="px-6 py-4">Apr 23, 2022</td>
-            <td className="px-6 py-4">Bonnie Green</td>
-          </tr>
+          {uncompletedTasks.length !== 0 &&
+            uncompletedTasks.map((task) => {
+              const date = new Date(task.createdAt)
+              return (
+                <tr
+                  className="font-medium text-gray-900 bg-white border-b whitespace-nowrap hover:bg-blue-200"
+                  key={task.id}
+                >
+                  <th scope="row" className="px-6 py-4 font-medium">
+                    {task.title}
+                  </th>
+                  <td className="px-6 py-4">{date.toDateString()}</td>
+                  <td className="px-6 py-4">{`${task.clientFirstName} ${task.clientLastName}`}</td>
+                </tr>
+              )
+            })}
         </tbody>
       </table>
     </div>

@@ -13,7 +13,12 @@ export const NavBar = () => {
     serverAPI.get('/users/signout').then((response) => {
       if (response.data.success) {
         // localStorage.removeItem('tasklyUser')
-        setAuth(null)
+        setAuth((prev) => ({
+          ...prev,
+          isLoading: true,
+          isLoggedIn: false,
+          user: {},
+        }))
         // console.log('signout')
         navigate('/')
       }

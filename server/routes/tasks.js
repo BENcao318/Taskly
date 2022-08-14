@@ -16,4 +16,6 @@ router.get('/assigned', tasks.findAllAssignedTasks)
 
 router.get('/completed', tasks.findAllCompletedTasks)
 
+router.get('/admin-assigned', tasks.findAllAdminAssignedTasks)
+
 module.exports = router
