@@ -18,12 +18,12 @@ export const ClientDetail = () => {
       .get(`/users/client-info?client_uuid=${uuid}`)
       .then((response) => {
         if (response.data.success) {
-          setClient(response.data.clientInfo);
+          setClient(response.data.clientInfo)
         }
       })
       .catch((err) => {
-        console.log(err);
-      });
+        console.log(err)
+      })
 
     serverAPI
       .get(`/tasks/assigned?client_uuid=${uuid}`)
@@ -34,14 +34,14 @@ export const ClientDetail = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+        console.log(err)
+      })
+  }, [])
 
   if (client && assignedTasks) {
     return (
       <div className="flex-col w-full h-screen">
-        <p className="ml-4 mt-6 text-2xl font-semibold text-gray-900">
+        <p className="mt-6 ml-4 text-2xl font-semibold text-gray-900">
           {client.firstName} {client.lastName}
         </p>
         <div className="flex w-full h-screen">
@@ -58,6 +58,6 @@ export const ClientDetail = () => {
           <TaskOverview assignedTasks={assignedTasks} uuid={uuid} />
         </div>
       </div>
-    );
+    )
   }
-};
+}

@@ -1,11 +1,45 @@
 import React from 'react'
+import { useContext } from 'react'
+import { toast } from 'react-toastify'
 import { ReactComponent as ExclamationMark } from '../assets/exclamationMark.svg'
+import { authContext } from '../context/AuthContext'
+import { taskContext } from '../context/TaskContext'
+import serverAPI from '../hooks/useAxios'
 
 export const DeleteTaskModal = ({
   openDeleteTaskModal,
   setOpenDeleteTaskModal,
 }) => {
+  const { auth } = useContext(authContext)
+  const { setTasks } = useContext(taskContext)
+
   const handleDelete = () => {
+    serverAPI
+      .delete('/tasks', {
+        data: { task_id: openDeleteTaskModal.id },
+      })
+      .then((response) => {
+        if (response.data.success) {
+          setOpenDeleteTaskModal(false)
+          toast.info('Task deleted! 📢', {
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          })
+
+          serverAPI
+            .get(`/tasks?user=${auth.user.email}`)
+            .then((response) => {
+              if (response.data.success) {
+                setTasks(response.data.taskData)
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        }
+      })
+
     console.log(`delete ${openDeleteTaskModal.id}`)
   }
 

@@ -122,7 +122,7 @@ exports.findAll = async (req, res) => {
     if (req.session.user && req.session.user.email !== req.query.user) {
       return;
     }
-    const userInfo = await User.findAll({
+    const userInfo = await User.findOne({
       raw: true,
       where: {
         email: req.query.user,
@@ -132,7 +132,7 @@ exports.findAll = async (req, res) => {
 
     const taskData = await Task.findAll({
       where: {
-        admin_id: userInfo[0].admin_id,
+        admin_id: userInfo.admin_id,
       },
       attributes: ["id", "form_json_data"],
     });
@@ -190,8 +190,6 @@ exports.findAllAssignedTasks = async (req, res) => {
       ],
     });
 
-    console.log(completedTasks);
-
     res.status(200).send({
       success: true,
       message: "Find assigned tasks ",
@@ -226,4 +224,34 @@ exports.findAllCompletedTasks = async (req, res) => {
       message: err.message || "Some error occurred while creating the Task",
     });
   }
-};
+
+exports.deleteTask = async (req, res) => {
+  const task_id = req.body.task_id
+
+  if (!req.session.user) {
+    return res.status(500).send({
+      success: false,
+      message: 'User is not authenticated to delete',
+      messge2: null,
+    })
+  }
+
+  try {
+    const task = await Task.findOne({
+      where: {
+        id: task_id,
+      },
+    })
+    await task.destroy()
+
+    res.status(200).send({
+      success: true,
+      message: 'Successfully delete the task',
+      messge2: null,
+    })
+  } catch (err) {
+    res.status(500).send({
+      message: `Error retrieving User with company name=${company_name}, ${err}`,
+    })
+  }
+}
