@@ -1,7 +1,7 @@
-'use strict'
+"use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('completed_tasks', {
+    await queryInterface.createTable("completed_tasks", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -14,6 +14,9 @@ module.exports = {
       response_json_data: {
         type: Sequelize.JSONB,
       },
+      copy_of_survey_json: {
+        type: Sequelize.JSONB,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -22,9 +25,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-    })
+    });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('completed_tasks')
+    await queryInterface.dropTable("completed_tasks");
   },
-}
+};

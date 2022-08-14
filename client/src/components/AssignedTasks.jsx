@@ -3,7 +3,7 @@ import { TaskResponse } from "../components/TaskResponse";
 import { LoadSurvey } from "./LoadSurvey";
 
 export function AssignedTasks(props) {
-  const { assignedTasks, client } = props;
+  const { assignedTasks, completedTasks } = props;
 
   return (
     <div className="w-2/4 h-full p-4">
@@ -13,19 +13,20 @@ export function AssignedTasks(props) {
           return (
             <LoadSurvey
               surveyJson={task["task.form_json_data"]}
-              task_id={task.task_id}
-              key={task.task_id}
-              client={client}
-            />
-          );
-        } else {
-          return (
-            <TaskResponse
-              surveyJson={task["task.form_json_data"]}
+              assignedTaskId={task.id}
               key={task.task_id}
             />
           );
         }
+      })}
+      {completedTasks.map((task) => {
+        return (
+          <TaskResponse
+            surveyJson={task["copy_of_survey_json"]}
+            responseData={task["response_json_data"]}
+            key={task["assigned_task_id"]}
+          />
+        );
       })}
     </div>
   );

@@ -1,17 +1,21 @@
-const express = require('express')
-const router = express.Router()
-const tasks = require('../controller/task.controller')
+const express = require("express");
+const router = express.Router();
+const tasks = require("../controller/task.controller");
 
-router.get('/', tasks.findAll)
+router.get("/", tasks.findAll);
 
-router.get('/assigned', tasks.findAllAssignedTasks)
+router.get("/find", tasks.findTask);
 
-router.get('/completed', tasks.findAllCompletedTasks)
+router.get("/assigned", tasks.findAllAssignedTasks);
 
-router.post('/new', tasks.createTask)
+router.get("/completed", tasks.findAllCompletedTasks);
 
-router.post('/assigned/new', tasks.createAssignedTask)
+router.post("/new", tasks.createTask);
 
-router.post('/completed/new', tasks.createCompletedTask)
+router.post("/assigned/new", tasks.createAssignedTask);
 
-module.exports = router
+router.post("/completed/new", tasks.createCompletedTask);
+
+router.post("/completed/update", tasks.markTaskComplete);
+
+module.exports = router;
