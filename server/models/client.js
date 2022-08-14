@@ -9,11 +9,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ User, Admin, Assigned_Task }) {
       // define association here
-      this.hasOne(User, { foreignKey: 'client_id', as: 'user' })
+      this.hasOne(User, {
+        foreignKey: 'client_id',
+        as: 'user',
+        onDelete: 'CASCADE',
+        hooks: true,
+      })
       this.belongsTo(Admin, { foreignKey: 'admin_id', as: 'admin' })
       this.hasMany(Assigned_Task, {
         foreignKey: 'client_id',
         as: 'assigned_task',
+        onDelete: 'CASCADE',
+        hooks: true,
       })
     }
     // static associate({ Admin }) {

@@ -25,6 +25,8 @@ module.exports = (sequelize, DataTypes) => {
       this.hasOne(Completed_Task, {
         foreignKey: 'assigned_task_id',
         as: 'completed_task',
+        onDelete: 'cascade',
+        hooks: true,
       })
     }
     // static associate({ Client }) {

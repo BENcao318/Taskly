@@ -1,21 +1,42 @@
 import React from 'react'
+import { useContext } from 'react'
+import { toast } from 'react-toastify'
 import { ReactComponent as ExclamationMark } from '../assets/exclamationMark.svg'
+import { clientContext } from '../context/ClientContext'
 import serverAPI from '../hooks/useAxios'
 
 export const DeleteClientModal = ({
   openDeleteClientModal,
   setOpenDeleteClientModal,
 }) => {
+  const { setClients } = useContext(clientContext)
+
   const handleDelete = () => {
     serverAPI
       .delete('/users/client', {
         data: { client_uuid: openDeleteClientModal.uuid },
       })
       .then((response) => {
-        console.log(response.data)
-      })
+        if (response.data.success) {
+          setOpenDeleteClientModal(false)
+          toast.info('Client deleted! 📢', {
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          })
 
-    console.log(`delete ${openDeleteClientModal.uuid}`)
+          serverAPI
+            .get('/users/clients')
+            .then((response) => {
+              if (response.data.success) {
+                setClients(response.data.clients)
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        }
+      })
   }
 
   return (
