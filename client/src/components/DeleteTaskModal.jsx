@@ -39,8 +39,6 @@ export const DeleteTaskModal = ({
             })
         }
       })
-
-    console.log(`delete ${openDeleteTaskModal.id}`)
   }
 
   return (

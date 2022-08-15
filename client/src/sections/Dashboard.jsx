@@ -29,7 +29,6 @@ export const Dashboard = () => {
       .get('/tasks/admin-assigned')
       .then((response) => {
         if (response.data.success) {
-          // console.log(response.data)
           setCompletedTasks((prev) => [...response.data.completedTasksArr])
           setUncompletedTasks((prev) => [...response.data.uncompletedTasksArr])
         }

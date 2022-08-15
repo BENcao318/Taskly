@@ -11,7 +11,6 @@ export function TaskOverview(props) {
     serverAPI
       .post('/users/client/send-tasks', { client_email: client.email })
       .then((response) => {
-        console.log(response.data)
         if (response.data.success) {
           toast.success(`Successfully sent the tasks to the client 😊`, {
             closeOnClick: true,

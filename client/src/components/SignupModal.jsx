@@ -21,7 +21,6 @@ export const SignupModal = ({
       .post('/users/new-admin', user)
       .then((response) => {
         if (response && response.data.success) {
-          // localStorage.setItem('tasklyUser', JSON.stringify(response.data.user))
           setAuth((prev) => ({
             ...prev,
             isLoggedIn: true,
@@ -34,8 +33,6 @@ export const SignupModal = ({
             pauseOnHover: true,
             draggable: true,
           })
-          // console.log('signup page', response.data.user)
-          // console.log('Successfully created account')
         }
       })
       .catch((err) => {
