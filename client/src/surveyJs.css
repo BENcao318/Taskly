@@ -2,19 +2,7 @@
   height: 1500px;
 }
 
-#svd-settings {
-  display: none;
-}
-
-.svc-side-bar {
-  display: none;
-}
-
 .svc-creator__banner {
-  display: none;
-}
-
-.svc-tabbed-menu-item {
   display: none;
 }
 
