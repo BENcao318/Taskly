@@ -21,6 +21,37 @@ exports.findTask = async (req, res) => {
   });
 };
 
+exports.updateTask = async (req, res) => {
+  const { task_id, form_json_data } = req.body;
+
+  console.log(task_id);
+  console.log(form_json_data);
+
+  try {
+    const updateTask = await Task.update(
+      {
+        form_json_data: form_json_data,
+      },
+      {
+        where: { id: task_id },
+      }
+    );
+
+    console.log("Task update!");
+
+    res.status(200).send({
+      success: true,
+      message: "Completed Task update success",
+      messge2: null,
+      updateTask,
+    });
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the Task",
+    });
+  }
+};
+
 exports.createTask = async (req, res) => {
   const { form_json_data } = req.body;
 

@@ -4,6 +4,8 @@ const tasks = require("../controller/task.controller");
 
 router.post("/new", tasks.createTask);
 
+router.post("/update", tasks.updateTask);
+
 router.get("/find", tasks.findTask);
 
 router.post("/assigned/new", tasks.createAssignedTask);

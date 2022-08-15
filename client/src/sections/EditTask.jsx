@@ -1,4 +1,8 @@
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import serverAPI from "../hooks/useAxios";
+import { useNavigate } from "react-router-dom";
+
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
 import * as Survey from "survey-core";
 import "survey-core/defaultV2.min.css";
@@ -106,11 +110,44 @@ const defaultJson = {
 };
 
 export function EditTask() {
+  const { task_id } = useParams();
+  const [task, setTask] = useState([]);
+  const navigate = useNavigate();
+
   const creator = new SurveyCreator(creatorOptions);
+
+  useEffect(() => {
+    serverAPI
+      .get(`/tasks/find?task_id=${task_id}`)
+      .then((response) => {
+        if (response.data.success) {
+          setTask(response.data.taskData[0].form_json_data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [setTask]);
+
   creator.text = JSON.stringify(defaultJson);
+
   creator.saveSurveyFunc = (saveNo, callback) => {
     callback(saveNo, true);
+    serverAPI
+      .post("/tasks/update", {
+        task_id: task_id,
+        form_json_data: JSON.parse(creator.text),
+      })
+      .then((response) => {
+        if (response.data.success) {
+          navigate("/task");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
   return (
     <Fragment>
       <div className="flex-col w-full h-screen">
