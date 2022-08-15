@@ -92,8 +92,8 @@ export function TaskOverviewClientVarient(props) {
       <Accordion alwaysOpen={true}>
         <Accordion.Panel>
           <Accordion.Title>
-            Jump to a Task
-            <div className="text-base text-xs text-green-700">
+            Task List
+            <div className="text-base text-xs text-green-700 mt-2">
               {doneTasks}/{doneTasks + notDoneTasks} Complete
             </div>
             <Progress
@@ -101,6 +101,9 @@ export function TaskOverviewClientVarient(props) {
               color="green"
               size="sm"
             />
+            <p className="text-base text-xs text-gray-500 text mt-2">
+              Est. time to complete: {notDoneTasks * 5} minutes
+            </p>
           </Accordion.Title>
           <Accordion.Content>
             {assignedTasks.map((task) => {

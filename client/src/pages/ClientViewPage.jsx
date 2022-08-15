@@ -48,7 +48,7 @@ export const ClientViewPage = () => {
             <div className="flex items-center ml-2">
               <div
                 className="flex items-center cursor-pointer"
-                onClick={() => navigate("/home")}
+                onClick={() => navigate("/")}
               >
                 <PencilLogo />
                 <span className="self-center px-2 text-xl font-semibold whitespace-nowrap dark:text-white">
