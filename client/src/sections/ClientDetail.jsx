@@ -61,6 +61,7 @@ export const ClientDetail = () => {
             assignedTasks={assignedTasks}
             client={client}
             completedTasks={completedTasks}
+            uuid={uuid}
           />
           <ToastContainer
             toastClassName={() =>
