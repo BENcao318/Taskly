@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import { ReactComponent as Complete } from "../assets/complete.svg";
 import { ReactComponent as Incomplete } from "../assets/incomplete.svg";
 
 export function TaskList(props) {
-  const { complete, taskTitle } = props;
+  const { complete, taskTitle, id } = props;
+  const ref = useRef(null);
+
+  const handleClick = () => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   let completionIcon;
   if (complete) {
     completionIcon = (
@@ -18,9 +24,12 @@ export function TaskList(props) {
   return (
     <div className="flex justify-start items-center">
       {completionIcon}
-      <span className="text-base font-normal text-gray-500 text">
+      <a
+        href={`#${id}`}
+        className="text-base font-normal text-gray-500 text hover:underline hover:cursor-pointer"
+      >
         {taskTitle}
-      </span>
+      </a>
     </div>
   );
 }

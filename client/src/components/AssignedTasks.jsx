@@ -16,6 +16,7 @@ export function AssignedTasks(props) {
               task_id={task.task_id}
               key={task.task_id}
               client={client}
+              id={task.id}
             />
           );
         } else {
@@ -23,6 +24,7 @@ export function AssignedTasks(props) {
             <TaskResponse
               surveyJson={task["task.form_json_data"]}
               key={task.task_id}
+              id={task.id}
             />
           );
         }

@@ -3,10 +3,10 @@ import { Card } from "flowbite-react";
 import { ReactComponent as Complete } from "../assets/complete.svg";
 
 export function TaskResponse(props) {
-  const { surveyJson } = props;
+  const { surveyJson, id } = props;
 
   return (
-    <div className="mb-2">
+    <div className="mb-2" id={id}>
       <Card>
         <div className="flex justify-start items-center">
           <Complete className="h-6 mr-3 sm:h-9" alt="Complete Icon" />

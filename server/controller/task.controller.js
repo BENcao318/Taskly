@@ -177,7 +177,26 @@ exports.findAllAssignedTasks = async (req, res) => {
       },
       include: ["task"],
       order: [["client_id", "ASC"]],
-      attributes: ["client_id", "task_id", "completed"],
+      attributes: ["id", "client_id", "task_id", "completed"],
+    });
+
+    let completedTaskId = [];
+    assignedTasks.forEach(function (item) {
+      if (item.completed) {
+        completedTaskId.push(item.id);
+      }
+    });
+
+    const completedTasks = await Completed_Task.findAll({
+      raw: true,
+      where: {
+        assigned_task_id: completedTaskId,
+      },
+      attributes: [
+        "assigned_task_id",
+        "response_json_data",
+        "copy_of_survey_json",
+      ],
     });
 
     res.status(200).send({
@@ -185,6 +204,7 @@ exports.findAllAssignedTasks = async (req, res) => {
       message: "Find assigned tasks ",
       messge2: null,
       assignedTasks,
+      completedTasks,
     });
   } catch (err) {
     res.status(500).send({

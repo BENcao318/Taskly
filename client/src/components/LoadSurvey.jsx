@@ -8,7 +8,7 @@ import "../surveyJs.css";
 import serverAPI from "../hooks/useAxios";
 
 export function LoadSurvey(props) {
-  const { surveyJson, task_id } = props;
+  const { surveyJson, task_id, id } = props;
   const survey = new Model(surveyJson);
 
   survey.focusFirstQuestionAutomatic = false;
@@ -34,7 +34,7 @@ export function LoadSurvey(props) {
   survey.onComplete.add(saveResults);
 
   return (
-    <div className="mb-2">
+    <div className="mb-2" id={id}>
       <Card>
         <div className="flex justify-start items-center">
           <Incomplete className="h-6 mr-3 sm:h-9" alt="Complete Icon" />
