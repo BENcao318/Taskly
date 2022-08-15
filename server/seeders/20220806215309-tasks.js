@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -12,73 +12,73 @@ module.exports = {
      * }], {});
      */
     return queryInterface.bulkInsert(
-      'tasks',
+      "tasks",
       [
         {
           admin_id: 1,
           form_json_data: JSON.stringify({
-            title: 'Study Abroad Assesment',
-            logoPosition: 'right',
+            title: "Study Abroad Assesment",
+            logoPosition: "right",
             elements: [
               {
-                type: 'text',
-                name: 'question2',
-                title: 'How old are you?',
+                type: "text",
+                name: "question2",
+                title: "How old are you?",
                 isRequired: true,
               },
               {
-                type: 'text',
-                name: 'question3',
-                title: 'What is your highest form of education?',
+                type: "text",
+                name: "question3",
+                title: "What is your highest form of education?",
                 isRequired: true,
               },
               {
-                type: 'text',
-                name: 'question4',
-                title: 'What country are you currently located in?',
+                type: "text",
+                name: "question4",
+                title: "What country are you currently located in?",
                 isRequired: true,
               },
               {
-                type: 'text',
-                name: 'question5',
-                title: 'Where would you like to study?',
+                type: "text",
+                name: "question5",
+                title: "Where would you like to study?",
                 isRequired: true,
               },
               {
-                type: 'dropdown',
-                name: 'question1',
-                title: 'What program level are you interested in studying?',
+                type: "dropdown",
+                name: "question1",
+                title: "What program level are you interested in studying?",
                 isRequired: true,
                 choices: [
                   {
-                    value: 'item1',
-                    text: 'Preschool - Grade 12',
+                    value: "item1",
+                    text: "Preschool - Grade 12",
                   },
                   {
-                    value: 'item2',
-                    text: 'University Undergrad',
+                    value: "item2",
+                    text: "University Undergrad",
                   },
                   {
-                    value: 'item3',
-                    text: 'College Undergrad',
+                    value: "item3",
+                    text: "College Undergrad",
                   },
                   {
-                    value: 'item4',
-                    text: 'Masters',
+                    value: "item4",
+                    text: "Masters",
                   },
                 ],
               },
               {
-                type: 'text',
-                name: 'question6',
-                title: 'What is your maximum budget for annual tuition costs?',
+                type: "text",
+                name: "question6",
+                title: "What is your maximum budget for annual tuition costs?",
                 isRequired: true,
               },
               {
-                type: 'text',
-                name: 'question7',
+                type: "text",
+                name: "question7",
                 title:
-                  'Additional comments related to your study plans/ goals.',
+                  "Additional comments related to your study plans/ goals.",
               },
             ],
           }),
@@ -88,294 +88,159 @@ module.exports = {
         {
           admin_id: 1,
           form_json_data: JSON.stringify({
-            title: 'Education Background',
-            logoPosition: 'right',
+            title: "Education Background",
+            logoPosition: "right",
             elements: [
               {
-                type: 'text',
-                name: 'question2',
-                title: 'What is your GPA based on your most recent transcript.',
+                type: "text",
+                name: "question2",
+                title: "What is your GPA based on your most recent transcript.",
                 isRequired: true,
               },
               {
-                type: 'checkbox',
-                name: 'question3',
-                title: 'Please select the areas of study that interest you.',
+                type: "checkbox",
+                name: "question3",
+                title: "Please select the areas of study that interest you.",
                 isRequired: true,
                 choices: [
                   {
-                    value: 'item1',
-                    text: 'Science (General)',
+                    value: "item1",
+                    text: "Science (General)",
                   },
                   {
-                    value: 'item2',
-                    text: 'Math',
+                    value: "item2",
+                    text: "Math",
                   },
                   {
-                    value: 'item3',
-                    text: 'Geography',
+                    value: "item3",
+                    text: "Geography",
                   },
                   {
-                    value: 'item4',
-                    text: 'Politics',
+                    value: "item4",
+                    text: "Politics",
                   },
                   {
-                    value: 'item5',
-                    text: 'Computer Science',
+                    value: "item5",
+                    text: "Computer Science",
                   },
                   {
-                    value: 'item6',
-                    text: 'Chemistry',
+                    value: "item6",
+                    text: "Chemistry",
                   },
                   {
-                    value: 'item7',
-                    text: 'Arts (General)',
-                  },
-                ],
-                hasOther: true,
-              },
-              {
-                type: 'text',
-                name: 'question1',
-                title:
-                  'Is there any additional information we should know about your study goals? ',
-              },
-            ],
-          }),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          admin_id: 1,
-          form_json_data: JSON.stringify({
-            title: 'Transcript',
-            logoPosition: 'right',
-            elements: [
-              {
-                type: 'file',
-                name: 'question1',
-                title:
-                  'Please upload a picture of your most recent transcript.',
-                isRequired: true,
-              },
-              {
-                type: 'text',
-                name: 'question3',
-                title: 'Additional comments related to your transcript.',
-              },
-              {
-                type: 'signaturepad',
-                name: 'question2',
-                title:
-                  'Please certify that the documents you have provided are valid, and not fraudulent.',
-                isRequired: true,
-              },
-            ],
-          }),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          admin_id: 1,
-          form_json_data: JSON.stringify({
-            title: 'Proof of Finances',
-            logoPosition: 'right',
-            elements: [
-              {
-                type: 'text',
-                name: 'question4',
-                title:
-                  'What is you annual household income as of the last 12 months?',
-                isRequired: true,
-              },
-              {
-                type: 'file',
-                name: 'question1',
-                title:
-                  'Please upload a picture of your bank statement that includes your last 12 months of deposits.',
-                isRequired: true,
-              },
-              {
-                type: 'text',
-                name: 'question3',
-                title: 'Additional comments related to your finances.',
-              },
-              {
-                type: 'signaturepad',
-                name: 'question2',
-                title:
-                  'Please certify that the documents you have provided are valid, and not fraudulent.',
-                isRequired: true,
-              },
-            ],
-          }),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          admin_id: 1,
-          form_json_data: JSON.stringify({
-            title: 'Customer Feedback',
-            logoPosition: 'right',
-            elements: [
-              {
-                type: 'text',
-                name: 'question3',
-                title:
-                  'What was the name of the employee who serviced your needs?',
-              },
-              {
-                type: 'text',
-                name: 'question5',
-              },
-              {
-                type: 'rating',
-                name: 'question1',
-                title: 'How would you rate our communication?',
-                isRequired: true,
-              },
-              {
-                type: 'rating',
-                name: 'question2',
-                title: 'How would you rate our response time?',
-                isRequired: true,
-              },
-              {
-                type: 'text',
-                name: 'question4',
-                title:
-                  'Any additional comments related to your experience or how we could improve our service(s) in the future.',
-              },
-            ],
-          }),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          admin_id: 2,
-          form_json_data: JSON.stringify({
-            title: 'Study Abroad Assesment',
-            logoPosition: 'right',
-            elements: [
-              {
-                type: 'text',
-                name: 'question2',
-                title: 'How old are you?',
-                isRequired: true,
-              },
-              {
-                type: 'text',
-                name: 'question3',
-                title: 'What is your highest form of education?',
-                isRequired: true,
-              },
-              {
-                type: 'text',
-                name: 'question4',
-                title: 'What country are you currently located in?',
-                isRequired: true,
-              },
-              {
-                type: 'text',
-                name: 'question5',
-                title: 'Where would you like to study?',
-                isRequired: true,
-              },
-              {
-                type: 'dropdown',
-                name: 'question1',
-                title: 'What program level are you interested in studying?',
-                isRequired: true,
-                choices: [
-                  {
-                    value: 'item1',
-                    text: 'Preschool - Grade 12',
-                  },
-                  {
-                    value: 'item2',
-                    text: 'University Undergrad',
-                  },
-                  {
-                    value: 'item3',
-                    text: 'College Undergrad',
-                  },
-                  {
-                    value: 'item4',
-                    text: 'Masters',
-                  },
-                ],
-              },
-              {
-                type: 'text',
-                name: 'question6',
-                title: 'What is your maximum budget for annual tuition costs?',
-                isRequired: true,
-              },
-              {
-                type: 'text',
-                name: 'question7',
-                title:
-                  'Additional comments related to your study plans/ goals.',
-              },
-            ],
-          }),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          admin_id: 2,
-          form_json_data: JSON.stringify({
-            title: 'Education Background',
-            logoPosition: 'right',
-            elements: [
-              {
-                type: 'text',
-                name: 'question2',
-                title: 'What is your GPA based on your most recent transcript.',
-                isRequired: true,
-              },
-              {
-                type: 'checkbox',
-                name: 'question3',
-                title: 'Please select the areas of study that interest you.',
-                isRequired: true,
-                choices: [
-                  {
-                    value: 'item1',
-                    text: 'Science (General)',
-                  },
-                  {
-                    value: 'item2',
-                    text: 'Math',
-                  },
-                  {
-                    value: 'item3',
-                    text: 'Geography',
-                  },
-                  {
-                    value: 'item4',
-                    text: 'Politics',
-                  },
-                  {
-                    value: 'item5',
-                    text: 'Computer Science',
-                  },
-                  {
-                    value: 'item6',
-                    text: 'Chemistry',
-                  },
-                  {
-                    value: 'item7',
-                    text: 'Arts (General)',
+                    value: "item7",
+                    text: "Arts (General)",
                   },
                 ],
                 hasOther: true,
               },
               {
-                type: 'text',
-                name: 'question1',
+                type: "text",
+                name: "question1",
                 title:
-                  'Is there any additional information we should know about your study goals? ',
+                  "Is there any additional information we should know about your study goals? ",
+              },
+            ],
+          }),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          admin_id: 1,
+          form_json_data: JSON.stringify({
+            title: "Transcript",
+            logoPosition: "right",
+            elements: [
+              {
+                type: "text",
+                name: "question1",
+                title:
+                  "Please add a link to a digitized version of your latest transcript.",
+                isRequired: true,
+              },
+              {
+                type: "text",
+                name: "question3",
+                title: "Additional comments related to your transcript.",
+              },
+            ],
+          }),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          admin_id: 1,
+          form_json_data: JSON.stringify({
+            title: "Proof of Finances",
+            logoPosition: "right",
+            elements: [
+              {
+                type: "text",
+                name: "question1",
+                title: "What is your annual household income?",
+                isRequired: true,
+              },
+              {
+                type: "radiogroup",
+                name: "question4",
+                title: "How many dependents do you have?",
+                isRequired: true,
+                choices: [
+                  { value: "item1", text: "0" },
+                  { value: "item2", text: "1" },
+                  { value: "item3", text: "2-3" },
+                  { value: "item4", text: "3-5" },
+                  { value: "item5", text: ">5" },
+                ],
+              },
+              {
+                type: "text",
+                name: "question2",
+                title:
+                  "Please add a link to a digital version of your latest tax return.",
+                isRequired: true,
+              },
+              {
+                type: "text",
+                name: "question3",
+                title:
+                  "Additional comments related to your financial situation. ",
+              },
+            ],
+          }),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          admin_id: 1,
+          form_json_data: JSON.stringify({
+            title: "Customer Feedback",
+            logoPosition: "right",
+            elements: [
+              {
+                type: "text",
+                name: "question3",
+                title:
+                  "What was the name of the employee who serviced your needs?",
+                isRequired: true,
+              },
+              {
+                type: "rating",
+                name: "question1",
+                title: "How would you rate our communication?",
+                isRequired: true,
+              },
+              {
+                type: "rating",
+                name: "question2",
+                title: "How would you rate our response time?",
+                isRequired: true,
+              },
+              {
+                type: "text",
+                name: "question4",
+                title:
+                  "Any additional comments related to your experience or how we could improve our service(s) in the future.",
               },
             ],
           }),
@@ -385,26 +250,157 @@ module.exports = {
         {
           admin_id: 2,
           form_json_data: JSON.stringify({
-            title: 'Transcript',
-            logoPosition: 'right',
+            title: "Study Abroad Assesment",
+            logoPosition: "right",
             elements: [
               {
-                type: 'file',
-                name: 'question1',
-                title:
-                  'Please upload a picture of your most recent transcript.',
+                type: "text",
+                name: "question2",
+                title: "How old are you?",
                 isRequired: true,
               },
               {
-                type: 'text',
-                name: 'question3',
-                title: 'Additional comments related to your transcript.',
+                type: "text",
+                name: "question3",
+                title: "What is your highest form of education?",
+                isRequired: true,
               },
               {
-                type: 'signaturepad',
-                name: 'question2',
+                type: "text",
+                name: "question4",
+                title: "What country are you currently located in?",
+                isRequired: true,
+              },
+              {
+                type: "text",
+                name: "question5",
+                title: "Where would you like to study?",
+                isRequired: true,
+              },
+              {
+                type: "dropdown",
+                name: "question1",
+                title: "What program level are you interested in studying?",
+                isRequired: true,
+                choices: [
+                  {
+                    value: "item1",
+                    text: "Preschool - Grade 12",
+                  },
+                  {
+                    value: "item2",
+                    text: "University Undergrad",
+                  },
+                  {
+                    value: "item3",
+                    text: "College Undergrad",
+                  },
+                  {
+                    value: "item4",
+                    text: "Masters",
+                  },
+                ],
+              },
+              {
+                type: "text",
+                name: "question6",
+                title: "What is your maximum budget for annual tuition costs?",
+                isRequired: true,
+              },
+              {
+                type: "text",
+                name: "question7",
                 title:
-                  'Please certify that the documents you have provided are valid, and not fraudulent.',
+                  "Additional comments related to your study plans/ goals.",
+              },
+            ],
+          }),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          admin_id: 2,
+          form_json_data: JSON.stringify({
+            title: "Education Background",
+            logoPosition: "right",
+            elements: [
+              {
+                type: "text",
+                name: "question2",
+                title: "What is your GPA based on your most recent transcript.",
+                isRequired: true,
+              },
+              {
+                type: "checkbox",
+                name: "question3",
+                title: "Please select the areas of study that interest you.",
+                isRequired: true,
+                choices: [
+                  {
+                    value: "item1",
+                    text: "Science (General)",
+                  },
+                  {
+                    value: "item2",
+                    text: "Math",
+                  },
+                  {
+                    value: "item3",
+                    text: "Geography",
+                  },
+                  {
+                    value: "item4",
+                    text: "Politics",
+                  },
+                  {
+                    value: "item5",
+                    text: "Computer Science",
+                  },
+                  {
+                    value: "item6",
+                    text: "Chemistry",
+                  },
+                  {
+                    value: "item7",
+                    text: "Arts (General)",
+                  },
+                ],
+                hasOther: true,
+              },
+              {
+                type: "text",
+                name: "question1",
+                title:
+                  "Is there any additional information we should know about your study goals? ",
+              },
+            ],
+          }),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          admin_id: 2,
+          form_json_data: JSON.stringify({
+            title: "Transcript",
+            logoPosition: "right",
+            elements: [
+              {
+                type: "file",
+                name: "question1",
+                title:
+                  "Please upload a picture of your most recent transcript.",
+                isRequired: true,
+              },
+              {
+                type: "text",
+                name: "question3",
+                title: "Additional comments related to your transcript.",
+              },
+              {
+                type: "signaturepad",
+                name: "question2",
+                title:
+                  "Please certify that the documents you have provided are valid, and not fraudulent.",
                 isRequired: true,
               },
             ],
@@ -415,33 +411,33 @@ module.exports = {
         {
           admin_id: 2,
           form_json_data: JSON.stringify({
-            title: 'Proof of Finances',
-            logoPosition: 'right',
+            title: "Proof of Finances",
+            logoPosition: "right",
             elements: [
               {
-                type: 'text',
-                name: 'question4',
+                type: "text",
+                name: "question4",
                 title:
-                  'What is you annual household income as of the last 12 months?',
+                  "What is you annual household income as of the last 12 months?",
                 isRequired: true,
               },
               {
-                type: 'file',
-                name: 'question1',
+                type: "file",
+                name: "question1",
                 title:
-                  'Please upload a picture of your bank statement that includes your last 12 months of deposits.',
+                  "Please upload a picture of your bank statement that includes your last 12 months of deposits.",
                 isRequired: true,
               },
               {
-                type: 'text',
-                name: 'question3',
-                title: 'Additional comments related to your finances.',
+                type: "text",
+                name: "question3",
+                title: "Additional comments related to your finances.",
               },
               {
-                type: 'signaturepad',
-                name: 'question2',
+                type: "signaturepad",
+                name: "question2",
                 title:
-                  'Please certify that the documents you have provided are valid, and not fraudulent.',
+                  "Please certify that the documents you have provided are valid, and not fraudulent.",
                 isRequired: true,
               },
             ],
@@ -452,36 +448,36 @@ module.exports = {
         {
           admin_id: 2,
           form_json_data: JSON.stringify({
-            title: 'Customer Feedback',
-            logoPosition: 'right',
+            title: "Customer Feedback",
+            logoPosition: "right",
             elements: [
               {
-                type: 'text',
-                name: 'question3',
+                type: "text",
+                name: "question3",
                 title:
-                  'What was the name of the employee who serviced your needs?',
+                  "What was the name of the employee who serviced your needs?",
               },
               {
-                type: 'text',
-                name: 'question5',
+                type: "text",
+                name: "question5",
               },
               {
-                type: 'rating',
-                name: 'question1',
-                title: 'How would you rate our communication?',
+                type: "rating",
+                name: "question1",
+                title: "How would you rate our communication?",
                 isRequired: true,
               },
               {
-                type: 'rating',
-                name: 'question2',
-                title: 'How would you rate our response time?',
+                type: "rating",
+                name: "question2",
+                title: "How would you rate our response time?",
                 isRequired: true,
               },
               {
-                type: 'text',
-                name: 'question4',
+                type: "text",
+                name: "question4",
                 title:
-                  'Any additional comments related to your experience or how we could improve our service(s) in the future.',
+                  "Any additional comments related to your experience or how we could improve our service(s) in the future.",
               },
             ],
           }),
@@ -490,7 +486,7 @@ module.exports = {
         },
       ],
       {}
-    )
+    );
   },
 
   async down(queryInterface, Sequelize) {
@@ -501,4 +497,4 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
   },
-}
+};
