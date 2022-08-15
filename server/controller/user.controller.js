@@ -432,7 +432,6 @@ exports.clientSignIn = async (req, res) => {
 
       if (securityCode === client.password) {
         // req.session.client = client
-        // console.log('testtest66666666666', client)
         res.status(200).send({
           success: true,
           message: 'Client signin success',

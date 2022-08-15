@@ -94,7 +94,6 @@ export const EditAssignTaskInput = () => {
                           <div
                             className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                             onClick={() => {
-                              console.log('testtest')
                               setEditAssignedTasks((prev) => {
                                 setSearchTaskText('')
                                 if (!comparePreviousStateUUID(prev, task.id)) {

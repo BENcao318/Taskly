@@ -6,10 +6,20 @@ const Op = db.Sequelize.Op
 exports.findTasks = async (req, res) => {}
 
 exports.createTask = async (req, res) => {
-  const { admin_id, form_json_data } = req.body
+  const { form_json_data } = req.body
 
   try {
-    const taskData = await Task.create({ admin_id, form_json_data })
+    const user = await User.findOne({
+      raw: true,
+      where: {
+        email: req.session.user.email,
+      },
+    })
+
+    const taskData = await Task.create({
+      admin_id: user.admin_id,
+      form_json_data,
+    })
 
     res.status(200).send({
       success: true,

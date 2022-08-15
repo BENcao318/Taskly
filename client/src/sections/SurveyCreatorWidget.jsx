@@ -1,11 +1,13 @@
-import { Fragment } from "react";
-import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
-import { useNavigate } from "react-router-dom";
-import * as Survey from "survey-core";
-import "survey-core/defaultV2.min.css";
-import "survey-creator-core/survey-creator-core.min.css";
-import serverAPI from "../hooks/useAxios";
-import "../surveyJs.css";
+import { Fragment, useContext } from 'react'
+import { SurveyCreatorComponent, SurveyCreator } from 'survey-creator-react'
+import { useNavigate } from 'react-router-dom'
+import * as Survey from 'survey-core'
+import 'survey-core/defaultV2.min.css'
+import 'survey-creator-core/survey-creator-core.min.css'
+import serverAPI from '../hooks/useAxios'
+import '../surveyJs.css'
+import { taskContext } from '../context/TaskContext'
+import { authContext } from '../context/AuthContext'
 
 const creatorOptions = {
   showLogicTab: false,
@@ -16,30 +18,30 @@ const creatorOptions = {
   showInvisibleElementsInPreviewTab: false,
   showSimulatorInPreviewTab: false,
   showPreviewTab: false,
-  pageEditMode: "single",
+  pageEditMode: 'single',
   allowModifyPages: false,
   questionTypes: [
-    "text",
-    "checkbox",
-    "radiogroup",
-    "ranking",
-    "radiogroup",
-    "dropdown",
-    "comment",
-    "rating",
-    "boolean",
-    "html",
-    "file",
-    "matrix",
-    "matrixdropdown",
-    "matrixdynamic",
-    "signaturepad",
+    'text',
+    'checkbox',
+    'radiogroup',
+    'ranking',
+    'radiogroup',
+    'dropdown',
+    'comment',
+    'rating',
+    'boolean',
+    'html',
+    'file',
+    'matrix',
+    'matrixdropdown',
+    'matrixdynamic',
+    'signaturepad',
   ],
-};
+}
 
-Survey.Serializer.findProperty("survey", "description").visible = false;
-Survey.Serializer.findProperty("survey", "logo").visible = false;
-Survey.Serializer.findProperty("survey", "title").isRequired = true;
+Survey.Serializer.findProperty('survey', 'description').visible = false
+Survey.Serializer.findProperty('survey', 'logo').visible = false
+Survey.Serializer.findProperty('survey', 'title').isRequired = true
 
 // const defaultJson = {
 //   pages: [
@@ -62,36 +64,46 @@ Survey.Serializer.findProperty("survey", "title").isRequired = true;
 // };
 
 export function SurveyCreatorWidget() {
-  const navigate = useNavigate();
-  const creator = new SurveyCreator(creatorOptions);
+  const navigate = useNavigate()
+  const creator = new SurveyCreator(creatorOptions)
+  const { setTasks } = useContext(taskContext)
+  const { auth } = useContext(authContext)
   // creator.text = window.localStorage.getItem("survey-json") || JSON.stringify();
   creator.saveSurveyFunc = (saveNo, callback) => {
-    let surveyJSON = JSON.parse(creator.text);
+    let surveyJSON = JSON.parse(creator.text)
     if (surveyJSON.title) {
       serverAPI
-        .post("/tasks/new", {
-          // req.session.user.adminID
-          admin_id: 1,
+        .post('/tasks/new', {
           form_json_data: JSON.parse(creator.text),
         })
         .then((response) => {
           if (response && response.data.success) {
-            navigate("/task");
+            serverAPI
+              .get(`/tasks?user=${auth.user.email}`)
+              .then((response) => {
+                if (response.data.success) {
+                  setTasks(response.data.taskData)
+                }
+              })
+              .catch((err) => {
+                console.log(err)
+              })
+            navigate('/task')
           }
         })
         .catch((err) => {
-          console.log("Error!");
-        });
+          console.log('Error!')
+        })
     }
-  };
+  }
   return (
     <Fragment>
       <div className="flex-col w-full h-screen">
-        <p className="mt-6 mx-6 text-2xl font-semibold text-gray-900">
+        <p className="mx-6 mt-6 text-2xl font-semibold text-gray-900">
           Add task
         </p>
         <SurveyCreatorComponent creator={creator} />
       </div>
     </Fragment>
-  );
+  )
 }
