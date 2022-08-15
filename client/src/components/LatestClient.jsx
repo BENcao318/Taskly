@@ -16,7 +16,7 @@ export const LatestClient = () => {
           {clients
             .slice(0)
             .reverse()
-            .map((client) => (
+            .map((client, index) => (
               <tr
                 className="bg-white border-b hover:bg-gray-50"
                 key={client.uuid}
@@ -27,7 +27,7 @@ export const LatestClient = () => {
                 >
                   <img
                     className="w-10 h-10 rounded-full"
-                    src="https://flowbite.com/docs/images/people/profile-picture-1.jpg"
+                    src={`https://ui-avatars.com/api/?name=${client.firstName}+${client.lastName}&background=random`}
                     alt="profile"
                   />
                   <div className="pl-3">

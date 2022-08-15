@@ -65,7 +65,7 @@ export const NewClientModal = ({ setOpenNewClientModal }) => {
   }
 
   return (
-    <form className="w-full ">
+    <form className="w-full">
       <div className="mb-6">
         <p className="text-2xl dark:text-white">Add new client</p>
       </div>

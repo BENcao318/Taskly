@@ -250,6 +250,7 @@ exports.findAllAdminAssignedTasks = async (req, res) => {
         client_id: clientIdForTasksArr,
       },
       include: ['task'],
+      order: [['updatedAt', 'DESC']],
     })
     const clientIdArr = taskData.map((task) => task.client_id)
     const clientData = await User.findAll({
