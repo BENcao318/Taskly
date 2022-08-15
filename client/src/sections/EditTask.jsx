@@ -30,12 +30,9 @@ const creatorOptions = {
     "comment",
     "rating",
     "boolean",
-    "html",
-    "file",
     "matrix",
     "matrixdropdown",
     "matrixdynamic",
-    "signaturepad",
   ],
 };
 

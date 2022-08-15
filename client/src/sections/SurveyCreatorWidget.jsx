@@ -1,14 +1,14 @@
 import { Fragment, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { taskContext } from "../context/TaskContext";
+import { authContext } from "../context/AuthContext";
+import serverAPI from "../hooks/useAxios";
 
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
 import * as Survey from "survey-core";
 import "survey-core/defaultV2.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
-import serverAPI from "../hooks/useAxios";
 import "../surveyJs.css";
-import { taskContext } from "../context/TaskContext";
-import { authContext } from "../context/AuthContext";
 
 const creatorOptions = {
   showLogicTab: false,
@@ -41,32 +41,11 @@ Survey.Serializer.findProperty("survey", "description").visible = false;
 Survey.Serializer.findProperty("survey", "logo").visible = false;
 Survey.Serializer.findProperty("survey", "title").isRequired = true;
 
-// const defaultJson = {
-//   pages: [
-//     {
-//       name: "Name",
-//       elements: [
-//         {
-//           name: "FirstName",
-//           title: "Enter your first name:",
-//           type: "text",
-//         },
-//         {
-//           name: "LastName",
-//           title: "Enter your last name:",
-//           type: "text",
-//         },
-//       ],
-//     },
-//   ],
-// };
-
 export function SurveyCreatorWidget() {
   const navigate = useNavigate();
   const creator = new SurveyCreator(creatorOptions);
   const { setTasks } = useContext(taskContext);
   const { auth } = useContext(authContext);
-  // creator.text = window.localStorage.getItem("survey-json") || JSON.stringify();
   creator.saveSurveyFunc = (saveNo, callback) => {
     let surveyJSON = JSON.parse(creator.text);
     if (surveyJSON.title) {
