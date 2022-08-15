@@ -12,6 +12,8 @@ router.post("/assigned/new", tasks.createAssignedTask);
 
 router.post("/completed/new", tasks.createCompletedTask);
 
+router.post("/completed/update", tasks.markTaskComplete);
+
 router.delete("/", tasks.deleteTask);
 
 router.get("/", tasks.findAll);

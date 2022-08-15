@@ -82,12 +82,14 @@ exports.createTask = async (req, res) => {
 };
 
 exports.createCompletedTask = async (req, res) => {
-  const { assigned_task_id, response_json_data } = req.body;
+  const { assigned_task_id, response_json_data, copy_of_survey_json } =
+    req.body;
 
   try {
     const taskData = await Completed_Task.create({
       assigned_task_id,
       response_json_data,
+      copy_of_survey_json,
     });
 
     res.status(200).send({
@@ -95,6 +97,36 @@ exports.createCompletedTask = async (req, res) => {
       message: "Completed Task create success",
       messge2: null,
       taskData,
+    });
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the Task",
+    });
+  }
+};
+
+exports.markTaskComplete = async (req, res) => {
+  const assigned_task_id = req.query.assigned_task_id;
+
+  console.log(assigned_task_id);
+
+  try {
+    const updateStatus = await Assigned_Task.update(
+      {
+        completed: true,
+      },
+      {
+        where: { id: assigned_task_id },
+      }
+    );
+
+    console.log("Am I running?");
+
+    res.status(200).send({
+      success: true,
+      message: "Completed Task update success",
+      messge2: null,
+      updateStatus,
     });
   } catch (err) {
     res.status(500).send({

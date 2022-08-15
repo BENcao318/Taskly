@@ -42,7 +42,7 @@ export function TaskOverview(props) {
   };
 
   return (
-    <div className="w-1/4 h-full p-4 border-l border-neutral-200">
+    <div className="fixed bottom-0 left-0 bg-white border border-neutral-200 p-4 rounded-md">
       <p className="my-2 text-xl font-bold text-gray-900">Jump to a Task</p>
       {assignedTasks.map((task) => {
         if (!task.completed) {

@@ -1,7 +1,7 @@
 import { Fragment, useContext } from "react";
-import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
 import { useNavigate } from "react-router-dom";
 
+import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
 import * as Survey from "survey-core";
 import "survey-core/defaultV2.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
@@ -31,12 +31,9 @@ const creatorOptions = {
     "comment",
     "rating",
     "boolean",
-    "html",
-    "file",
     "matrix",
     "matrixdropdown",
     "matrixdynamic",
-    "signaturepad",
   ],
 };
 
