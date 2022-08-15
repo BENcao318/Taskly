@@ -68,8 +68,7 @@ module.exports = {
           first_name: 'Geneva',
           last_name: 'Zola',
           email: 'geneva@demo.com',
-          password:
-            '$2b$10$p/qMLXlMz9/ZvE9/78x4Qe58JifScOdgOsRjaxWeeV.bnWidAkgXy', //password66
+          password: '632012', //password66
           admin_id: null,
           client_id: 1,
           createdAt: new Date(),
