@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ClientInfo } from "../components/ClientInfo";
 import { AssignedTasks } from "../components/AssignedTasks";
 import { TaskOverview } from "../components/TaskOverview";
 import { useContext } from "react";
@@ -43,15 +42,21 @@ export const ClientDetail = () => {
   if (client && assignedTasks) {
     return (
       <div className="flex-col w-full h-screen">
-        <p className="mt-6 ml-4 text-2xl font-semibold text-gray-900">
-          {client.firstName} {client.lastName}
-        </p>
+        <div className="border-b">
+          <p className="mt-6 ml-4 text-2xl font-semibold text-gray-900">
+            {client.firstName} {client.lastName}
+          </p>
+          <p className="ml-4 mb-4 text-base font-normal text-gray-500 text">
+            {client.email} | {client.phoneNumber}
+          </p>
+          <p className="ml-4 text-base font-bold text-gray-900">
+            Summary of Needs
+          </p>
+          <p className="ml-4 mb-4 text-base font-normal text-gray-500 text">
+            {client.summaryOfNeeds}
+          </p>
+        </div>
         <div className="flex flex-col">
-          <ClientInfo
-            summary={client.summaryOfNeeds}
-            email={client.email}
-            phoneNumber={client.phoneNumber}
-          />
           <AssignedTasks
             client={client}
             assignedTasks={assignedTasks}
