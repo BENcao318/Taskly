@@ -4,8 +4,8 @@ import { ReactComponent as Incomplete } from "../assets/incomplete.svg";
 import "survey-core/modern.min.css";
 import { Model } from "survey-core";
 import { Survey } from "survey-react-ui";
-import "../surveyJs.css";
 import serverAPI from "../hooks/useAxios";
+import "../surveyJs.css";
 
 export function LoadSurvey(props) {
   const { surveyJson, id } = props;
@@ -46,7 +46,7 @@ export function LoadSurvey(props) {
   survey.onComplete.add(saveResults);
 
   return (
-    <div className="mb-2" id={id}>
+    <div className="mb-5 mx-10" id={id}>
       <Card>
         <div className="flex justify-start items-center">
           <Incomplete className="h-6 mr-3 sm:h-9" alt="Complete Icon" />

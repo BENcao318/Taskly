@@ -46,7 +46,7 @@ export const ClientDetail = () => {
         <p className="mt-6 ml-4 text-2xl font-semibold text-gray-900">
           {client.firstName} {client.lastName}
         </p>
-        <div className="flex w-full h-screen">
+        <div className="flex flex-col">
           <ClientInfo
             summary={client.summaryOfNeeds}
             email={client.email}
@@ -63,20 +63,20 @@ export const ClientDetail = () => {
             completedTasks={completedTasks}
             uuid={uuid}
           />
-          <ToastContainer
-            toastClassName={() =>
-              "relative flex px-2 py-4 min-h-16 rounded-md justify-between overflow-hidden cursor-pointer bg-sky-200 text-black font-semibold"
-            }
-            position="top-center"
-            autoClose={6000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-          />
         </div>
+        <ToastContainer
+          toastClassName={() =>
+            "relative flex px-2 py-4 min-h-16 rounded-md justify-between overflow-hidden cursor-pointer bg-sky-200 text-black font-semibold"
+          }
+          position="top-center"
+          autoClose={6000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+        />
       </div>
     );
   }

@@ -15,7 +15,7 @@ export function TaskResponse(props) {
   survey.mode = "display";
 
   return (
-    <div className="mb-2" id={id}>
+    <div className="mb-5 mx-10" id={id}>
       <Card>
         <div className="flex justify-start items-center">
           <Complete className="h-6 mr-3 sm:h-9" alt="Complete Icon" />
