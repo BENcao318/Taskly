@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { clientContext } from "../context/ClientContext";
 import { taskContext } from "../context/TaskContext";
 
-export function TaskOverview(props) {
+export function TaskOverviewClientVarient(props) {
   const { assignedTasks, client, uuid } = props;
   const buttonRef = useRef(null);
   const [toggleActionMenu, setToggleActionMenu] = useState(false);
@@ -130,67 +130,6 @@ export function TaskOverview(props) {
                 );
               }
             })}
-            <hr className="my-2" />
-            <div className="flex flex-col items-center">
-              <Button onClick={sendTasksToClient}>
-                <PaperAirplane className="w-5 h-5 mr-2" />
-                Send Tasks to Client
-              </Button>
-              <hr className="my-1 border-none" />
-              <button
-                className="inline-flex items-center px-4 py-2 text-sm font-semibold rounded-lg bg-white-700 hover:bg-slate-300 focus:ring-4 focus:outline-none focus:ring-slate-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ring-2 ring-slate-300"
-                ref={buttonRef}
-              >
-                Actions
-                <DownChevron />
-              </button>
-              <div
-                className={`${
-                  toggleActionMenu ? "" : "hidden"
-                } z-40 min-w-62 bg-white rounded-lg divide-y divide-gray-100 shadow-lg shadow-neutral-400 dark:bg-gray-700 fixed mt-2 right-24`}
-              >
-                <Transition
-                  as="div"
-                  show={toggleActionMenu}
-                  enter="transform transition duration-[300ms]"
-                  enterFrom="opacity-0 scale-50 -translate-y-1/2"
-                  enterTo="opacity-100 scale-100 translate-y-0"
-                  leave="transform duration-200 transition ease-in-out"
-                  leaveFrom="opacity-100 scale-100 translate-x-0"
-                  leaveTo="opacity-0 scale-95 -translate-x-full"
-                >
-                  <ul
-                    className="py-1 font-semibold text-gray-700 text-md dark:text-gray-200"
-                    aria-labelledby="dropdownDefault"
-                  >
-                    <li>
-                      <div
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                        onClick={handleClickEditClientButton}
-                      >
-                        <PenLogo className="w-5 fill-slate-600" />
-                        Edit Client
-                      </div>
-                    </li>
-                    <li>
-                      <div
-                        className="flex items-center gap-2 px-4 py-2 text-red-600 rounded-lg cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                        onClick={() => {
-                          setOpenDeleteClientModal((prev) => ({
-                            ...prev,
-                            isOpen: true,
-                            uuid: uuid,
-                          }));
-                        }}
-                      >
-                        <TrashCanLogo className="w-5 " />
-                        Delete Client
-                      </div>
-                    </li>
-                  </ul>
-                </Transition>
-              </div>
-            </div>
           </Accordion.Content>
         </Accordion.Panel>
       </Accordion>

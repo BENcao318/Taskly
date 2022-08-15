@@ -3,7 +3,54 @@ const completed_task = require('../models/completed_task')
 const { User, Admin, Task, Assigned_Task, Completed_Task, Client } = db
 const Op = db.Sequelize.Op
 
-exports.findTasks = async (req, res) => {}
+exports.findTask = async (req, res) => {
+  const id = req.query.task_id
+
+  const taskData = await Task.findAll({
+    where: {
+      id: id,
+    },
+    attributes: ['form_json_data'],
+  })
+
+  res.status(200).send({
+    success: true,
+    message: 'Successfully find the task with given id',
+    messge2: null,
+    taskData,
+  })
+}
+
+exports.updateTask = async (req, res) => {
+  const { task_id, form_json_data } = req.body
+
+  console.log(task_id)
+  console.log(form_json_data)
+
+  try {
+    const updateTask = await Task.update(
+      {
+        form_json_data: form_json_data,
+      },
+      {
+        where: { id: task_id },
+      }
+    )
+
+    console.log('Task update!')
+
+    res.status(200).send({
+      success: true,
+      message: 'Completed Task update success',
+      messge2: null,
+      updateTask,
+    })
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || 'Some error occurred while creating the Task',
+    })
+  }
+}
 
 exports.createTask = async (req, res) => {
   const { form_json_data } = req.body
@@ -35,12 +82,13 @@ exports.createTask = async (req, res) => {
 }
 
 exports.createCompletedTask = async (req, res) => {
-  const { assigned_task_id, response_json_data } = req.body
+  const { assigned_task_id, response_json_data, copy_of_survey_json } = req.body
 
   try {
     const taskData = await Completed_Task.create({
       assigned_task_id,
       response_json_data,
+      copy_of_survey_json,
     })
 
     res.status(200).send({
@@ -48,6 +96,36 @@ exports.createCompletedTask = async (req, res) => {
       message: 'Completed Task create success',
       messge2: null,
       taskData,
+    })
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || 'Some error occurred while creating the Task',
+    })
+  }
+}
+
+exports.markTaskComplete = async (req, res) => {
+  const assigned_task_id = req.query.assigned_task_id
+
+  console.log(assigned_task_id)
+
+  try {
+    const updateStatus = await Assigned_Task.update(
+      {
+        completed: true,
+      },
+      {
+        where: { id: assigned_task_id },
+      }
+    )
+
+    console.log('Am I running?')
+
+    res.status(200).send({
+      success: true,
+      message: 'Completed Task update success',
+      messge2: null,
+      updateStatus,
     })
   } catch (err) {
     res.status(500).send({
@@ -130,7 +208,26 @@ exports.findAllAssignedTasks = async (req, res) => {
       },
       include: ['task'],
       order: [['client_id', 'ASC']],
-      attributes: ['client_id', 'task_id', 'completed'],
+      attributes: ['id', 'client_id', 'task_id', 'completed'],
+    })
+
+    let completedTaskId = []
+    assignedTasks.forEach(function (item) {
+      if (item.completed) {
+        completedTaskId.push(item.id)
+      }
+    })
+
+    const completedTasks = await Completed_Task.findAll({
+      raw: true,
+      where: {
+        assigned_task_id: completedTaskId,
+      },
+      attributes: [
+        'assigned_task_id',
+        'response_json_data',
+        'copy_of_survey_json',
+      ],
     })
 
     res.status(200).send({
@@ -138,6 +235,7 @@ exports.findAllAssignedTasks = async (req, res) => {
       message: 'Find assigned tasks ',
       messge2: null,
       assignedTasks,
+      completedTasks,
     })
   } catch (err) {
     res.status(500).send({

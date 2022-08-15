@@ -1,21 +1,21 @@
-import React, { useState } from 'react'
-import { Modal } from 'flowbite-react'
-import { ReactComponent as Lock } from '../assets/lock.svg'
-import { useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
-import { authContext } from '../context/AuthContext'
-import serverAPI from '../hooks/useAxios'
+import React, { useState } from "react";
+import { Modal } from "flowbite-react";
+import { ReactComponent as Lock } from "../assets/lock.svg";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { authContext } from "../context/AuthContext";
+import serverAPI from "../hooks/useAxios";
 
 export const TwoFactorAuth = () => {
-  const [securityCode, setSecurityCode] = useState('')
-  const [error, setError] = useState('')
-  const navigate = useNavigate()
-  const { clientAuth, setClientAuth } = useContext(authContext)
+  const [securityCode, setSecurityCode] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { clientAuth, setClientAuth } = useContext(authContext);
 
   const verifySecurityCode = () => {
-    setError('')
+    setError("");
     serverAPI
-      .post('users/client/signin', {
+      .post("users/client/signin", {
         client_uuid: clientAuth.clientUUID,
         securityCode,
       })
@@ -25,18 +25,18 @@ export const TwoFactorAuth = () => {
             ...prev,
             isLoggedIn: true,
             client: {},
-          }))
-          navigate(`/client/view?client_uuid=${clientAuth.clientUUID}`)
+          }));
+          navigate(`/client/view?client_uuid=${clientAuth.clientUUID}`);
         } else {
-          setSecurityCode('')
-          setError(response.data.message2)
+          setSecurityCode("");
+          setError(response.data.message2);
         }
       })
       .catch((err) => {
-        console.log(err.response.data.message)
-        setError(err.response.data.message)
-      })
-  }
+        console.log(err.response.data.message);
+        setError(err.response.data.message);
+      });
+  };
 
   return (
     <React.Fragment>
@@ -49,7 +49,7 @@ export const TwoFactorAuth = () => {
             </h1>
           </div>
           <div className="flex items-center mb-4 space-y-6">
-            <p className="w-3/4 leading-relaxed text-gray-500 text-normal dark:text-gray-400 ">
+            <p className="leading-relaxed text-gray-500 text-normal dark:text-gray-400 ">
               A security code has been sent to your email. Please enter it below
               to access this page.
             </p>
@@ -66,8 +66,8 @@ export const TwoFactorAuth = () => {
                 type="text"
                 value={securityCode}
                 onChange={(e) => {
-                  setError('')
-                  setSecurityCode(e.target.value)
+                  setError("");
+                  setSecurityCode(e.target.value);
                 }}
               />
             </label>
@@ -77,7 +77,7 @@ export const TwoFactorAuth = () => {
               {error}
             </div>
           ) : (
-            ''
+            ""
           )}
           <button
             onClick={verifySecurityCode}
@@ -88,5 +88,5 @@ export const TwoFactorAuth = () => {
         </Modal.Body>
       </Modal>
     </React.Fragment>
-  )
-}
+  );
+};
