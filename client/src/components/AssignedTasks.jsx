@@ -6,7 +6,7 @@ export function AssignedTasks(props) {
   const { assignedTasks, client, completedTasks } = props;
 
   return (
-    <div className="w-full h-full p-10">
+    <div className="w-full h-full px-20 pt-10">
       {assignedTasks.map((task) => {
         if (!task.completed) {
           return (
