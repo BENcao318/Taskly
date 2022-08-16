@@ -20,7 +20,7 @@ export function TaskResponse(props) {
         <div className="flex justify-start items-center">
           <Complete className="h-6 mr-3 sm:h-9" alt="Complete Icon" />
           <span className="text-lg font-medium text-gray-900 my-0">
-            {"Test title"}
+            {copy_of_survey_json.title}
           </span>
         </div>
         <Survey model={survey} />
