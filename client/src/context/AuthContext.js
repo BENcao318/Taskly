@@ -13,7 +13,6 @@ const AuthProvider = ({ children }) => {
   const [clientAuth, setClientAuth] = useState({
     clientUUID: '',
     isLoggedIn: false,
-    client: {},
   })
 
   useEffect(() => {

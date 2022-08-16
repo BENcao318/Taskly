@@ -1,44 +1,44 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { AssignedTasks } from "../components/AssignedTasks";
-import { TaskOverviewClientVarient } from "../components/TaskOverviewClientVarient";
-import { clientContext } from "../context/ClientContext";
-import { taskContext } from "../context/TaskContext";
-import serverAPI from "../hooks/useAxios";
-import { ToastContainer } from "react-toastify";
-import { ReactComponent as PencilLogo } from "../assets/pencil.svg";
+import React, { useEffect, useState, useContext } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { AssignedTasks } from '../components/AssignedTasks'
+import { TaskOverviewClientVarient } from '../components/TaskOverviewClientVarient'
+import { clientContext } from '../context/ClientContext'
+import { taskContext } from '../context/TaskContext'
+import serverAPI from '../hooks/useAxios'
+import { ToastContainer } from 'react-toastify'
+import { ReactComponent as PencilLogo } from '../assets/pencil.svg'
 
 export const ClientViewPage = () => {
-  const { client, setClient } = useContext(clientContext);
-  const [completedTasks, setCompletedTasks] = useState([]);
-  const { assignedTasks, setAssignedTasks } = useContext(taskContext);
-  const { uuid } = useParams();
-  const navigate = useNavigate();
+  const { client, setClient } = useContext(clientContext)
+  const [completedTasks, setCompletedTasks] = useState([])
+  const { assignedTasks, setAssignedTasks } = useContext(taskContext)
+  const { uuid } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     serverAPI
       .get(`/users/client-info?client_uuid=${uuid}`)
       .then((response) => {
         if (response.data.success) {
-          setClient(response.data.clientInfo);
+          setClient(response.data.clientInfo)
         }
       })
       .catch((err) => {
-        console.log(err);
-      });
+        console.log(err)
+      })
 
     serverAPI
       .get(`/tasks/assigned?client_uuid=${uuid}`)
       .then((response) => {
         if (response.data.success) {
-          setAssignedTasks(response.data.assignedTasks);
-          setCompletedTasks(response.data.completedTasks);
+          setAssignedTasks(response.data.assignedTasks)
+          setCompletedTasks(response.data.completedTasks)
         }
       })
       .catch((err) => {
-        console.log(err);
-      });
-  }, [uuid]);
+        console.log(err)
+      })
+  }, [uuid, setClient, setAssignedTasks])
 
   if (client && assignedTasks) {
     return (
@@ -48,7 +48,7 @@ export const ClientViewPage = () => {
             <div className="flex items-center ml-2">
               <div
                 className="flex items-center cursor-pointer"
-                onClick={() => navigate("/")}
+                onClick={() => navigate('/')}
               >
                 <PencilLogo />
                 <span className="self-center px-2 text-xl font-semibold whitespace-nowrap dark:text-white">
@@ -63,13 +63,13 @@ export const ClientViewPage = () => {
             <p className="mt-6 ml-4 text-2xl font-semibold text-gray-900">
               {client.firstName} {client.lastName}
             </p>
-            <p className="ml-4 mb-4 text-base font-normal text-gray-500 text">
+            <p className="mb-4 ml-4 text-base font-normal text-gray-500 text">
               {client.email} | {client.phoneNumber}
             </p>
             <p className="ml-4 text-base font-bold text-gray-900">
               Summary of Needs
             </p>
-            <p className="ml-4 mb-4 text-base font-normal text-gray-500 text">
+            <p className="mb-4 ml-4 text-base font-normal text-gray-500 text">
               {client.summaryOfNeeds}
             </p>
           </div>
@@ -78,6 +78,8 @@ export const ClientViewPage = () => {
               client={client}
               assignedTasks={assignedTasks}
               completedTasks={completedTasks}
+              setCompletedTasks={setCompletedTasks}
+              uuid={uuid}
             />
             <TaskOverviewClientVarient
               assignedTasks={assignedTasks}
@@ -88,7 +90,7 @@ export const ClientViewPage = () => {
           </div>
           <ToastContainer
             toastClassName={() =>
-              "relative flex px-2 py-4 min-h-16 rounded-md justify-between overflow-hidden cursor-pointer bg-sky-200 text-black font-semibold"
+              'relative flex px-2 py-4 min-h-16 rounded-md justify-between overflow-hidden cursor-pointer bg-sky-200 text-black font-semibold'
             }
             position="top-center"
             autoClose={6000}
@@ -101,6 +103,6 @@ export const ClientViewPage = () => {
           />
         </div>
       </div>
-    );
+    )
   }
-};
+}
