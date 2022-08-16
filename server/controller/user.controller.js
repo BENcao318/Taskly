@@ -564,7 +564,6 @@ exports.sendTasksToClient = async (req, res) => {
       })
     }
   } catch (err) {
-    console.log('testtestsetest6666666666666666', err)
     res.status(500).send({
       message: `Error retrieving User with client email, ${err}`,
     })

@@ -1,43 +1,66 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { AssignedTasks } from "../components/AssignedTasks";
-import { TaskOverview } from "../components/TaskOverview";
-import { useContext } from "react";
-import { clientContext } from "../context/ClientContext";
-import { taskContext } from "../context/TaskContext";
-import serverAPI from "../hooks/useAxios";
-import { ToastContainer } from "react-toastify";
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { AssignedTasks } from '../components/AssignedTasks'
+import { TaskOverview } from '../components/TaskOverview'
+import { useContext } from 'react'
+import { clientContext } from '../context/ClientContext'
+import { taskContext } from '../context/TaskContext'
+import serverAPI from '../hooks/useAxios'
+import { ToastContainer } from 'react-toastify'
+import { Modal } from 'flowbite-react'
+import { EditClientModal } from '../components/EditClientModal'
+import { DeleteClientModal } from '../components/DeleteClientModal'
 
 export const ClientDetail = () => {
-  const { client, setClient } = useContext(clientContext);
-  const [completedTasks, setCompletedTasks] = useState([]);
-  const { assignedTasks, setAssignedTasks } = useContext(taskContext);
-  const { uuid } = useParams();
+  const { client, setClient, setEditClientInfo } = useContext(clientContext)
+  const [completedTasks, setCompletedTasks] = useState([])
+  const { assignedTasks, setAssignedTasks, setEditAssignedTasks } =
+    useContext(taskContext)
+  const { uuid } = useParams()
+
+  const [openEditClientModal, setOpenEditClientModal] = useState()
+  const [openDeleteClientModal, setOpenDeleteClientModal] = useState({
+    isOpen: false,
+    uuid: '',
+  })
+
+  const handleCloseEditClientModal = () => {
+    setOpenEditClientModal(false)
+    setEditClientInfo((prev) => ({
+      ...prev,
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
+      summaryOfNeeds: '',
+    }))
+    setEditAssignedTasks((prev) => [])
+  }
 
   useEffect(() => {
     serverAPI
       .get(`/users/client-info?client_uuid=${uuid}`)
       .then((response) => {
         if (response.data.success) {
-          setClient(response.data.clientInfo);
+          setClient(response.data.clientInfo)
         }
       })
       .catch((err) => {
-        console.log(err);
-      });
+        console.log(err)
+      })
 
     serverAPI
       .get(`/tasks/assigned?client_uuid=${uuid}`)
       .then((response) => {
         if (response.data.success) {
-          setAssignedTasks(response.data.assignedTasks);
-          setCompletedTasks(response.data.completedTasks);
+          setAssignedTasks(response.data.assignedTasks)
+          setCompletedTasks(response.data.completedTasks)
         }
       })
       .catch((err) => {
-        console.log(err);
-      });
-  }, [uuid]);
+        console.log(err)
+      })
+  }, [uuid, setAssignedTasks, setCompletedTasks, setClient])
 
   if (client && assignedTasks) {
     return (
@@ -46,13 +69,13 @@ export const ClientDetail = () => {
           <p className="mt-6 ml-4 text-2xl font-semibold text-gray-900">
             {client.firstName} {client.lastName}
           </p>
-          <p className="ml-4 mb-4 text-base font-normal text-gray-500 text">
+          <p className="mb-4 ml-4 text-base font-normal text-gray-500 text">
             {client.email} | {client.phoneNumber}
           </p>
           <p className="ml-4 text-base font-bold text-gray-900">
             Summary of Needs
           </p>
-          <p className="ml-4 mb-4 text-base font-normal text-gray-500 text">
+          <p className="mb-4 ml-4 text-base font-normal text-gray-500 text">
             {client.summaryOfNeeds}
           </p>
         </div>
@@ -67,11 +90,33 @@ export const ClientDetail = () => {
             client={client}
             completedTasks={completedTasks}
             uuid={uuid}
+            setOpenEditClientModal={setOpenEditClientModal}
+            setOpenDeleteClientModal={setOpenDeleteClientModal}
           />
         </div>
+        <Modal show={openEditClientModal} onClose={handleCloseEditClientModal}>
+          <Modal.Header />
+          <Modal.Body>
+            <EditClientModal setOpenEditClientModal={setOpenEditClientModal} />
+          </Modal.Body>
+        </Modal>
+
+        <Modal
+          show={openDeleteClientModal.isOpen}
+          onClose={() => setOpenDeleteClientModal(false)}
+        >
+          <Modal.Header />
+          <Modal.Body>
+            <DeleteClientModal
+              setOpenDeleteClientModal={setOpenDeleteClientModal}
+              openDeleteClientModal={openDeleteClientModal}
+            />
+          </Modal.Body>
+        </Modal>
+
         <ToastContainer
           toastClassName={() =>
-            "relative flex px-2 py-4 min-h-16 rounded-md justify-between overflow-hidden cursor-pointer bg-sky-200 text-black font-semibold"
+            'relative flex px-2 py-4 min-h-16 rounded-md justify-between overflow-hidden cursor-pointer bg-sky-200 text-black font-semibold'
           }
           position="top-center"
           autoClose={6000}
@@ -83,6 +128,6 @@ export const ClientDetail = () => {
           draggable
         />
       </div>
-    );
+    )
   }
-};
+}
