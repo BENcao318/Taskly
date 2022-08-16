@@ -47,7 +47,7 @@ export const LandingPage = ({ redirectPath }) => {
           </div>
           <Navbar.Collapse>
             <Navbar.Link href="#features">Features</Navbar.Link>
-            <Navbar.Link href="#">Pricing</Navbar.Link>
+            <Navbar.Link href="#Pricing">Pricing</Navbar.Link>
           </Navbar.Collapse>
         </React.Fragment>
       </Navbar>

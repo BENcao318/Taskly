@@ -7,7 +7,7 @@ import { BsFillChatSquareQuoteFill, BsFillChatDotsFill } from 'react-icons/bs'
 
 export const LandingPagePricingSection = ({ setOpenSignupModal }) => {
   return (
-    <section className="mt-24 bg-white dark:bg-gray-900">
+    <section className="mt-24 bg-white dark:bg-gray-900" id="Pricing">
       <div className="max-w-screen-xl px-4 py-8 mx-auto lg:py-16 lg:px-6">
         <div className="max-w-screen-md mx-auto mb-8 text-center lg:mb-12 lg:w-1/2">
           <h2 className="mb-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-white">

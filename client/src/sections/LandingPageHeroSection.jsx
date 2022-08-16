@@ -21,7 +21,7 @@ export const LandingPageHeroSection = ({
           <h1 className="text-6xl font-bold text-gray-900">businesses</h1>
         </div>
         <p className="text-lg font-normal text-gray-500">
-          Taskly is the ultimate productivity tool. Create cusom tasks, assign
+          Taskly is the ultimate productivity tool. Create custom tasks, assign
           them to your clients, track the status of outstanding tasks, send
           reminders, and manage client responses all on a single platform.
         </p>

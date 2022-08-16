@@ -23,6 +23,8 @@ router.post('/signin', users.signIn)
 
 router.post('/client/signin', users.clientSignIn)
 
+router.post('/client-security-status', users.clientIsAuth)
+
 router.post('/client/send-tasks', users.sendTasksToClient)
 
 router.delete('/client', users.deleteClient)

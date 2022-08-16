@@ -431,7 +431,13 @@ exports.clientSignIn = async (req, res) => {
       // const decryptedSecurityCode = helpers.decryption(client.password)
 
       if (securityCode === client.password) {
-        // req.session.client = client
+        req.session.client = {
+          uuid: client.uuid,
+          email: client.email,
+          first_name: client.first_name,
+          last_name: client.last_name,
+        }
+
         res.status(200).send({
           success: true,
           message: 'Client signin success',
@@ -566,6 +572,23 @@ exports.sendTasksToClient = async (req, res) => {
   } catch (err) {
     res.status(500).send({
       message: `Error retrieving User with client email, ${err}`,
+    })
+  }
+}
+
+exports.clientIsAuth = async (req, res) => {
+  const { clientUUID } = req.body
+  if (req.session.client.uuid === clientUUID) {
+    res.status(200).send({
+      success: true,
+      message: 'Client is signed in',
+      messge2: 'null',
+    })
+  } else {
+    res.status(200).send({
+      success: false,
+      message: 'Client is not signed in',
+      message2: '',
     })
   }
 }

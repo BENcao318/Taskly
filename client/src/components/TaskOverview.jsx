@@ -21,7 +21,7 @@ export function TaskOverview(props) {
   } = props
   const buttonRef = useRef(null)
   const [toggleActionMenu, setToggleActionMenu] = useState(false)
-  const { setEditClientInfo, setClientUUID } = useContext(clientContext)
+  const { setEditClientInfo } = useContext(clientContext)
 
   const { setEditAssignedTasks } = useContext(taskContext)
 
