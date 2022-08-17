@@ -17,9 +17,10 @@ module.exports = {
       [
         {
           uuid: 'b80c008b-466d-49ad-bdd7-7df4c41e451b',
-          first_name: 'Mike',
-          last_name: 'Wong',
-          email: 'mike@demo.com',
+          first_name: 'Ben',
+          last_name: 'Cao',
+          email: 'ben@demo.com',
+
           password:
             '$2b$10$p/qMLXlMz9/ZvE9/78x4Qe58JifScOdgOsRjaxWeeV.bnWidAkgXy', //password66
           admin_id: 1,
@@ -29,9 +30,9 @@ module.exports = {
         },
         {
           uuid: 'ff298498-ee8e-4bbb-a9d0-91a3ecf91b72',
-          first_name: 'Ben',
-          last_name: 'Cao',
-          email: 'ben@demo.com',
+          first_name: 'Mike',
+          last_name: 'Wong',
+          email: 'mike@demo.com',
           password:
             '$2b$10$p/qMLXlMz9/ZvE9/78x4Qe58JifScOdgOsRjaxWeeV.bnWidAkgXy',
           admin_id: 2,
