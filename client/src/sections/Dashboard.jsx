@@ -39,7 +39,7 @@ export const Dashboard = () => {
   }, [setClients])
 
   return (
-    <div className="grid grid-cols-2 grid-rows-2 gap-6 p-12 mx-auto place-content-center">
+    <div className="grid grid-cols-1 grid-rows-4 gap-6 p-12 mx-auto lg:grid-cols-2 lg:grid-rows-2 place-content-center">
       <ClientChart />
       <LatestClient />
       <CompletedTask completedTasks={completedTasks} />

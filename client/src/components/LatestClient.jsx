@@ -7,7 +7,7 @@ export const LatestClient = () => {
   const { clients } = useContext(clientContext)
 
   return (
-    <div className="relative overflow-x-auto border-2 border-gray-200 rounded-lg shadow-md sm:rounded-lg max-h-120 scrollbar-hide ">
+    <div className="relative overflow-x-auto border-2 border-gray-200 rounded-lg shadow-md sm:rounded-lg max-h-120 scrollbar-hide lg:min-w-100 min-w-80">
       <table className="w-full text-sm text-left text-gray-500">
         <caption className="p-4 font-serif text-xl font-semibold text-center text-gray-900 bg-white ">
           Latest Clients

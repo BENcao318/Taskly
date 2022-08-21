@@ -66,7 +66,7 @@ export const ClientChart = () => {
     ],
   }
   return (
-    <div className="relative flex flex-col items-center justify-center w-full p-4 overflow-x-auto border-2 border-gray-200 rounded-lg shadow-md">
+    <div className="relative flex flex-col items-center justify-center w-full p-4 overflow-x-auto border-2 border-gray-200 rounded-lg shadow-md lg:min-w-100 min-w-80">
       <h1 className="font-serif text-xl font-semibold">Tasks Summary</h1>
       <Bar options={options} data={data} className="mt-6" />
     </div>

@@ -14,13 +14,14 @@ export const HomePage = () => {
           <Outlet />
           <ToastContainer
             toastClassName={() =>
-              'relative flex px-2 py-4 min-h-16 rounded-md justify-between overflow-hidden cursor-pointer bg-sky-200 text-black font-semibold'
+              'relative flex px-2 py-4 min-h-16 rounded-md justify-between text-white overflow-hidden cursor-pointer bg-green-200 text-black font-semibold'
             }
             position="top-center"
-            autoClose={6000}
-            hideProgressBar={false}
+            autoClose={3600}
+            hideProgressBar={true}
             newestOnTop={false}
             closeOnClick
+            closeButton={false}
             rtl={false}
             pauseOnFocusLoss
             draggable
