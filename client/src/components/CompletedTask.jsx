@@ -2,7 +2,7 @@ import React from 'react'
 
 export const CompletedTask = ({ completedTasks }) => {
   return (
-    <div className="relative overflow-x-auto border-2 border-gray-200 rounded-lg shadow-md scrollbar-hide h-96 lg:min-w-100 min-w-80">
+    <div className="relative overflow-x-auto border-2 border-gray-200 rounded-lg shadow-md scrollbar-hide h-96">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <caption className="p-4 font-serif text-xl font-semibold text-center text-gray-900 bg-white dark:text-white dark:bg-gray-800">
           Completed Tasks

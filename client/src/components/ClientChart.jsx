@@ -31,7 +31,7 @@ export const ClientChart = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'right',
+        position: 'top',
       },
     },
     scales: {
@@ -54,19 +54,19 @@ export const ClientChart = () => {
     labels: clientLabels,
     datasets: [
       {
-        label: 'Completed Tasks',
+        label: 'Completed',
         data: clientNumberOfCompletedTasks,
-        backgroundColor: '#1A56DB',
+        backgroundColor: 'rgb(76, 196, 196)',
       },
       {
-        label: 'Uncompleted Tasks',
+        label: 'Uncompleted',
         data: clientNumberOfUncompletedTasks,
-        backgroundColor: '#B6FFFF',
+        backgroundColor: 'rgb(60, 162, 237)',
       },
     ],
   }
   return (
-    <div className="relative flex flex-col items-center justify-center w-full p-4 overflow-x-auto border-2 border-gray-200 rounded-lg shadow-md lg:min-w-100 min-w-80">
+    <div className="relative flex flex-col items-center justify-center w-full p-4 overflow-x-auto border-2 border-gray-200 rounded-lg shadow-md ">
       <h1 className="font-serif text-xl font-semibold">Tasks Summary</h1>
       <Bar options={options} data={data} className="mt-6" />
     </div>

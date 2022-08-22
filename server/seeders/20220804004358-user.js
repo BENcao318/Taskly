@@ -68,8 +68,9 @@ module.exports = {
           uuid: 'acfe6e3d-14e3-448a-9507-d52deb34ddab',
           first_name: 'Geneva',
           last_name: 'Zola',
-          email: 'geneva@demo.com',
-          password: '632012', //password66
+          email: 'bc6016@mun.ca',
+          password:
+            '{"iv":"37df132b51386275656f63edfc15686d","content":"66ef0dd174d8"}', //password66
           admin_id: null,
           client_id: 1,
           createdAt: new Date(),
@@ -81,7 +82,7 @@ module.exports = {
           last_name: 'Isbel',
           email: 'thornton@demo.com',
           password:
-            '$2b$10$p/qMLXlMz9/ZvE9/78x4Qe58JifScOdgOsRjaxWeeV.bnWidAkgXy',
+            '{"iv":"37df132b51386275656f63edfc15686d","content":"66ef0dd174d8"}',
           admin_id: null,
           client_id: 2,
           createdAt: new Date(),
@@ -93,7 +94,7 @@ module.exports = {
           last_name: 'Fredric',
           email: 'maverick@demo.com',
           password:
-            '$2b$10$p/qMLXlMz9/ZvE9/78x4Qe58JifScOdgOsRjaxWeeV.bnWidAkgXy',
+            '{"iv":"37df132b51386275656f63edfc15686d","content":"66ef0dd174d8"}',
           admin_id: null,
           client_id: 3,
           createdAt: new Date(),
@@ -105,7 +106,7 @@ module.exports = {
           last_name: 'Moira',
           email: 'thornton@demo.com',
           password:
-            '$2b$10$p/qMLXlMz9/ZvE9/78x4Qe58JifScOdgOsRjaxWeeV.bnWidAkgXy',
+            '{"iv":"37df132b51386275656f63edfc15686d","content":"66ef0dd174d8"}',
           admin_id: null,
           client_id: 4,
           createdAt: new Date(),
@@ -117,7 +118,7 @@ module.exports = {
           last_name: 'Melva',
           email: 'harland@demo.com',
           password:
-            '$2b$10$p/qMLXlMz9/ZvE9/78x4Qe58JifScOdgOsRjaxWeeV.bnWidAkgXy',
+            '{"iv":"37df132b51386275656f63edfc15686d","content":"66ef0dd174d8"}',
           admin_id: null,
           client_id: 5,
           createdAt: new Date(),
@@ -129,7 +130,7 @@ module.exports = {
           last_name: 'Genesis',
           email: 'lucky@demo.com',
           password:
-            '$2b$10$p/qMLXlMz9/ZvE9/78x4Qe58JifScOdgOsRjaxWeeV.bnWidAkgXy',
+            '{"iv":"37df132b51386275656f63edfc15686d","content":"66ef0dd174d8"}',
           admin_id: null,
           client_id: 6,
           createdAt: new Date(),

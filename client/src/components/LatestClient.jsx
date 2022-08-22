@@ -37,7 +37,7 @@ export const LatestClient = () => {
                     </div>
                   </div>
                 </th>
-                <td className="py-4 px-36"></td>
+                {/* <td className="py-4 px-36"></td> */}
 
                 <td className="w-full px-6 py-4 text-center">
                   {taskProgressTag(

@@ -73,7 +73,6 @@ exports.createClient = async (req, res) => {
         email: clientInfo.email.toLowerCase(),
       },
     })
-
     if (clientEmail.length !== 0) {
       return res.status(403).send({ message: 'Email already exist.' })
     }
@@ -85,21 +84,21 @@ exports.createClient = async (req, res) => {
       },
       attributes: ['admin_id'],
     })
-
     const clientData = await Client.create({
       admin_id: adminData.admin_id,
       phone_number: clientInfo.phoneNumber,
       summary_of_needs: clientInfo.summaryOfNeeds,
     })
 
-    const securityCode = helpers.generateRandomSecurityCode()
-    // const encryptedSecurityCode = helpers.encryption(securityCode)
+    // const securityCode = helpers.generateRandomSecurityCode()
+    const securityCode = '681639'
+    const encryptedSecurityCode = JSON.stringify(helpers.encrypt(securityCode))
 
     const userData = await User.create({
       first_name: clientInfo.firstName,
       last_name: clientInfo.lastName,
       email: clientInfo.email.toLowerCase(),
-      password: securityCode, //use this for sending secure code to the user
+      password: encryptedSecurityCode, //use this for sending secure code to the user
       admin_id: null,
       client_id: clientData.id,
     })
@@ -278,14 +277,20 @@ exports.findClientInfo = async (req, res) => {
 }
 
 exports.findAllClients = async (req, res) => {
-  const email = req.session.user.email
+  if (!req.session.user) {
+    return res.status(403).send({
+      success: false,
+      message: 'User not logged in',
+      messge2: null,
+    })
+  }
   // const email = 'ben@demo.com'
 
   try {
     const adminData = await User.findAll({
       raw: true,
       where: {
-        email: email,
+        email: req.session.user.email,
       },
     })
     const admin_id = adminData[0].admin_id
@@ -428,9 +433,9 @@ exports.clientSignIn = async (req, res) => {
     })
 
     if (client) {
-      // const decryptedSecurityCode = helpers.decryption(client.password)
+      const decryptedSecurityCode = helpers.decrypt(JSON.parse(client.password))
 
-      if (securityCode === client.password) {
+      if (securityCode === decryptedSecurityCode) {
         req.session.client = {
           uuid: client.uuid,
           email: client.email,
@@ -537,13 +542,13 @@ exports.deleteClient = async (req, res) => {
 }
 
 exports.sendTasksToClient = async (req, res) => {
-  // if (!req.session.user) {
-  //   return res.status(500).send({
-  //     success: false,
-  //     message: 'User is not authenticated to send tasks to client',
-  //     messge2: null,
-  //   })
-  // }
+  if (!req.session.user) {
+    return res.status(500).send({
+      success: false,
+      message: 'User is not authenticated to send tasks to client',
+      messge2: null,
+    })
+  }
   const { client_email } = req.body
   try {
     const clientData = await User.findOne({
@@ -554,10 +559,11 @@ exports.sendTasksToClient = async (req, res) => {
 
     if (clientData) {
       const clientUUID = clientData.uuid
-      const securityCode = clientData.password
-      // const decryptedSecurityCode = helpers.decryption(securityCode)
-      // const clientPage = `localhost:3000/client/view?client_uuid=${clientUUID}`
-      const sendEmail = helpers.sendEmail(clientUUID, securityCode)
+      const decryptedSecurityCode = helpers.decrypt(
+        JSON.parse(clientData.password)
+      )
+
+      helpers.sendEmail(clientUUID, decryptedSecurityCode, client_email)
 
       res.status(200).send({
         success: true,
