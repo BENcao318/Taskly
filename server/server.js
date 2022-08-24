@@ -14,6 +14,7 @@ const taskRouter = require('./routes/tasks')
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.set('trust proxy', 1)
 app.use(
   function (req, res, next) {
     const allowedDomains = [
@@ -46,13 +47,9 @@ app.use(
 app.use(
   session({
     secret: 'user-secret',
-    cookie: {
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-      maxAge: 60000000,
-      secure: process.env.NODE_ENV === 'production',
-    },
-    resave: true,
+    resave: false,
     saveUninitialized: false,
+    cookie: { secure: true },
   })
 )
 
