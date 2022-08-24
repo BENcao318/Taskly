@@ -395,6 +395,7 @@ exports.signIn = async (req, res) => {
         }
 
         req.session.user = userData
+        req.session.save()
         res.status(200).send({
           success: true,
           message: 'Login success',
