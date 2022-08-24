@@ -5,6 +5,8 @@
 Taskly is a task management system for small businesses.
 Taskly is the ultimate productivity tool. Create custom tasks, assign them to your clients, track the status of outstanding tasks, send reminders, and manage client responses all on a single platform.
 
+**Click here to check the live demo site** ➡️ https://joyful-axolotl-efcdda.netlify.app/
+
 ## Tech Stack
 
 - Express.js
