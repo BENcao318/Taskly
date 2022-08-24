@@ -46,6 +46,7 @@ app.use(
 )
 app.use(
   session({
+    proxy: true,
     secret: 'user-secret',
     resave: false,
     saveUninitialized: false,
