@@ -282,6 +282,7 @@ exports.findAllClients = async (req, res) => {
       success: false,
       message: 'User not logged in',
       messge2: null,
+      session: req.session,
     })
   }
   // const email = 'ben@demo.com'
