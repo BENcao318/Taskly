@@ -53,12 +53,17 @@ exports.sendEmail = (clientUUID, securityCode, email) => {
   const now = new Date()
   const date = now.toString()
 
+  const frontendLink =
+    process.env.NODE_ENV && process.env.NODE_ENV == 'production'
+      ? 'https://joyful-axolotl-efcdda.netlify.app/'
+      : 'http://localhost:3000'
+
   const mailOptions = {
     from: process.env.TRANSPORTER_USERNAME,
     to: 'bc6016@mun.ca',
     // to: email,
     subject: `Taskly - New Task Available ${date}`,
-    html: `<html><b>Hey there! </b><br> You have new tasks available <p><a href="http://localhost:3000/client/view/${clientUUID}">click here to access the page</a></p> <p>Your security code: <b>${securityCode}</b></p></html>`,
+    html: `<html><b>Hey there! </b><br> You have new tasks available <p><a href="${frontendLink}/client/view/${clientUUID}">click here to access the page</a></p> <p>Your security code: <b>${securityCode}</b></p></html>`,
   }
 
   transporter.sendMail(mailOptions, function (error, info) {
