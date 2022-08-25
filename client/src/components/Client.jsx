@@ -102,7 +102,6 @@ export const Client = ({
           } z-40 min-w-62 bg-white rounded-lg divide-y divide-gray-100 shadow-lg shadow-neutral-400 dark:bg-gray-700 fixed mt-2 right-24`}
         >
           <Transition
-            as="div"
             show={toggleActionMenu}
             enter="transform transition duration-[300ms]"
             enterFrom="opacity-0 scale-50 -translate-y-1/2"

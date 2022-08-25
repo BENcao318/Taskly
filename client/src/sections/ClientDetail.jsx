@@ -18,7 +18,7 @@ export const ClientDetail = () => {
     useContext(taskContext)
   const { uuid } = useParams()
 
-  const [openEditClientModal, setOpenEditClientModal] = useState()
+  const [openEditClientModal, setOpenEditClientModal] = useState(false)
   const [openDeleteClientModal, setOpenDeleteClientModal] = useState({
     isOpen: false,
     uuid: '',
@@ -94,12 +94,12 @@ export const ClientDetail = () => {
             setOpenDeleteClientModal={setOpenDeleteClientModal}
           />
         </div>
-        <Modal show={openEditClientModal} onClose={handleCloseEditClientModal}>
-          <Modal.Header />
-          <Modal.Body>
-            <EditClientModal setOpenEditClientModal={setOpenEditClientModal} />
-          </Modal.Body>
-        </Modal>
+
+        <EditClientModal
+          openEditClientModal={openEditClientModal}
+          setOpenEditClientModal={setOpenEditClientModal}
+          handleCloseEditClientModal={handleCloseEditClientModal}
+        />
 
         <Modal
           show={openDeleteClientModal.isOpen}
