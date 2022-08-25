@@ -14,36 +14,29 @@ const taskRouter = require('./routes/tasks')
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-// app.set('trust proxy', 1)
-app.use(
-  function (req, res, next) {
-    const allowedDomains = [
-      'http://localhost:3000',
-      'https://joyful-axolotl-efcdda.netlify.app',
-    ]
-    const origin = req.headers.origin
-    if (allowedDomains.indexOf(origin) > -1) {
-      res.setHeader('Access-Control-Allow-Origin', origin)
-    }
 
-    res.setHeader(
-      'Access-Control-Allow-Methods',
-      'GET, POST, OPTIONS, PUT, PATCH, DELETE'
-    )
-    res.setHeader(
-      'Access-Control-Allow-Headers',
-      'X-Requested-With,content-type, Accept'
-    )
-    res.setHeader('Access-Control-Allow-Credentials', true)
-
-    next()
+app.use(function (req, res, next) {
+  const allowedDomains = [
+    'http://localhost:3000',
+    'https://joyful-axolotl-efcdda.netlify.app',
+  ]
+  const origin = req.headers.origin
+  if (allowedDomains.indexOf(origin) > -1) {
+    res.setHeader('Access-Control-Allow-Origin', origin)
   }
-  // cors({
-  //   origin: '','',
-  //   methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE'],
-  //   credentials: true,
-  // })
-)
+
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+  )
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-Requested-With,content-type, Accept'
+  )
+  res.setHeader('Access-Control-Allow-Credentials', true)
+
+  next()
+})
 app.use(
   session({
     proxy: true,
@@ -55,7 +48,10 @@ app.use(
         process.env.NODE_ENV && process.env.NODE_ENV == 'production'
           ? true
           : false,
-      sameSite: 'none',
+      sameSite:
+        process.env.NODE_ENV && process.env.NODE_ENV == 'production'
+          ? 'none'
+          : 'lax',
     },
   })
 )

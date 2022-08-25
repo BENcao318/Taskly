@@ -1,188 +1,82 @@
-import React, { useContext } from 'react'
-import { toast } from 'react-toastify'
-import { clientContext } from '../context/ClientContext'
-import { taskContext } from '../context/TaskContext'
-import serverAPI from '../hooks/useAxios'
-import { EditAssignedTaskTags } from './EditAssignedTaskTags'
-import { EditAssignTaskInput } from './EditAssignTaskInput'
+import { Dialog, Transition } from '@headlessui/react'
+import React, { Fragment } from 'react'
+import { EditClientModalForm } from './EditClientModalForm'
 
-export const EditClientModal = ({ setOpenEditClientModal }) => {
-  const { editClientInfo, setEditClientInfo, setClients } =
-    useContext(clientContext)
-  const { editAssignedTasks, setEditAssignedTasks } = useContext(taskContext)
-
-  const changeClientInfoForm = (e) => {
-    const propertyName = e.target.id
-    setEditClientInfo((prev) => ({
-      ...prev,
-      [propertyName]: e.target.value,
-    }))
-  }
-
-  const handleUpdate = (e) => {
-    e.preventDefault()
-    serverAPI
-      .post('/users/update-client', {
-        updatedClientInfo: editClientInfo,
-        updatedAssignedTasks: editAssignedTasks,
-      })
-      .then((response) => {
-        if (response.data.success) {
-          setOpenEditClientModal(false)
-          setEditClientInfo((prev) => ({
-            ...prev,
-            firstName: '',
-            lastName: '',
-            email: '',
-            phoneNumber: '',
-            summaryOfNeeds: '',
-            uuid: '',
-          }))
-          setEditAssignedTasks((prev) => [])
-
-          serverAPI
-            .get('/users/clients')
-            .then((response) => {
-              if (response.data.success) {
-                setClients(response.data.clients)
-                toast.success('Client updated! 👌', {
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                })
-              }
-            })
-            .catch((err) => {
-              console.log(err)
-            })
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
+export const EditClientModal = ({
+  openEditClientModal,
+  setOpenEditClientModal,
+  handleCloseEditClientModal,
+}) => {
   return (
-    <form className="w-full ">
-      <div className="mb-6">
-        <p className="text-2xl dark:text-white">Edit client</p>
-      </div>
-      <div className="mb-6">
-        <label
-          htmlFor="firstName"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+    <>
+      <Transition show={openEditClientModal}>
+        <Dialog
+          as="div"
+          className="relative z-10"
+          open={openEditClientModal}
+          onClose={handleCloseEditClientModal}
         >
-          First name
-        </label>
-        <input
-          id="firstName"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="First name"
-          onChange={changeClientInfoForm}
-          value={editClientInfo.firstName}
-          required
-        />
-      </div>
-      <div className="mb-6">
-        <label
-          htmlFor="lastName"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >
-          Last name
-        </label>
-        <input
-          id="lastName"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Last name"
-          onChange={changeClientInfoForm}
-          value={editClientInfo.lastName}
-          required
-        />
-      </div>
-      <div className="mb-6">
-        <label
-          htmlFor="email"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >
-          Email
-        </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <svg
-              aria-hidden="true"
-              className="w-5 h-5 text-gray-500 dark:text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-            </svg>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex items-center justify-center min-h-full p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full max-w-lg p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-xl">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg font-medium leading-6 text-right text-gray-900"
+                  >
+                    <button
+                      type="button"
+                      className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                      onClick={() => {
+                        setOpenEditClientModal(false)
+                        handleCloseEditClientModal()
+                      }}
+                    >
+                      <svg
+                        aria-hidden="true"
+                        className="w-5 h-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                      <span className="sr-only">Close modal</span>
+                    </button>
+                  </Dialog.Title>
+                  <EditClientModalForm
+                    setOpenNewClientModal={setOpenEditClientModal}
+                  />
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
           </div>
-          <input
-            type="text"
-            id="email"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="name@example.com"
-            onChange={changeClientInfoForm}
-            value={editClientInfo.email}
-          />
-        </div>
-      </div>
-      <div className="mb-6">
-        <label
-          htmlFor="phoneNumber"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >
-          Phone number
-        </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <svg
-              aria-hidden="true"
-              className="w-5 h-5 text-gray-500 dark:text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-            </svg>
-          </div>
-          <input
-            type="text"
-            id="phoneNumber"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="xxx-xxx-xxxx"
-            onChange={changeClientInfoForm}
-            value={editClientInfo.phoneNumber}
-          />
-        </div>
-      </div>
-      <div className="mb-6">
-        <label
-          htmlFor="summaryOfNeeds"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >
-          Summary of needs
-        </label>
-        <textarea
-          id="summaryOfNeeds"
-          rows="4"
-          className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Write text here..."
-          onChange={changeClientInfoForm}
-          value={editClientInfo.summaryOfNeeds}
-        ></textarea>
-      </div>
-      <EditAssignTaskInput />
-      <EditAssignedTaskTags />
-      <button
-        type="submit"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        onClick={handleUpdate}
-      >
-        Update
-      </button>
-    </form>
+        </Dialog>
+      </Transition>
+    </>
   )
 }

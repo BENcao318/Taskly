@@ -2,15 +2,15 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Modal } from 'flowbite-react'
 import { ClientSectionBody } from '../components/ClientSectionBody'
 import { ClientSectionHeader } from '../components/ClientSectionHeader'
-import { NewClientModal } from '../components/NewClientModal'
 import { clientContext } from '../context/ClientContext'
 import { EditClientModal } from '../components/EditClientModal'
 import { DeleteClientModal } from '../components/DeleteClientModal'
 import { taskContext } from '../context/TaskContext'
+import { NewClientModal } from '../components/NewClientModal'
 
 export const ClientSection = () => {
-  const [openNewClientModal, setOpenNewClientModal] = useState()
-  const [openEditClientModal, setOpenEditClientModal] = useState()
+  const [openNewClientModal, setOpenNewClientModal] = useState(false)
+  const [openEditClientModal, setOpenEditClientModal] = useState(false)
   const [openDeleteClientModal, setOpenDeleteClientModal] = useState({
     isOpen: false,
     uuid: '',
@@ -69,19 +69,17 @@ export const ClientSection = () => {
         setOpenNewClientModal={setOpenNewClientModal}
       />
 
-      <Modal show={openNewClientModal} onClose={handleCloseNewClientModal}>
-        <Modal.Header />
-        <Modal.Body>
-          <NewClientModal setOpenNewClientModal={setOpenNewClientModal} />
-        </Modal.Body>
-      </Modal>
+      <NewClientModal
+        openNewClientModal={openNewClientModal}
+        setOpenNewClientModal={setOpenNewClientModal}
+        handleCloseNewClientModal={handleCloseNewClientModal}
+      />
 
-      <Modal show={openEditClientModal} onClose={handleCloseEditClientModal}>
-        <Modal.Header />
-        <Modal.Body>
-          <EditClientModal setOpenEditClientModal={setOpenEditClientModal} />
-        </Modal.Body>
-      </Modal>
+      <EditClientModal
+        openEditClientModal={openEditClientModal}
+        setOpenEditClientModal={setOpenEditClientModal}
+        handleCloseEditClientModal={handleCloseEditClientModal}
+      />
 
       <Modal
         show={openDeleteClientModal.isOpen}
