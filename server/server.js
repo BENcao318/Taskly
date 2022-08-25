@@ -25,6 +25,12 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', origin)
   }
 
+  // cors({
+  //   origin: '','',
+  //   methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE'],
+  //   credentials: true,
+  // })
+
   res.setHeader(
     'Access-Control-Allow-Methods',
     'GET, POST, OPTIONS, PUT, PATCH, DELETE'
@@ -49,9 +55,6 @@ app.use(
           ? true
           : false,
       sameSite: 'none',
-      // process.env.NODE_ENV && process.env.NODE_ENV == 'production'
-      //   ? 'none'
-      //   : 'lax',
     },
   })
 )
