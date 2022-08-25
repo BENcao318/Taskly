@@ -48,10 +48,10 @@ app.use(
         process.env.NODE_ENV && process.env.NODE_ENV == 'production'
           ? true
           : false,
-      sameSite:
-        process.env.NODE_ENV && process.env.NODE_ENV == 'production'
-          ? 'none'
-          : 'lax',
+      sameSite: 'none',
+      // process.env.NODE_ENV && process.env.NODE_ENV == 'production'
+      //   ? 'none'
+      //   : 'lax',
     },
   })
 )
