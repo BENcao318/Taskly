@@ -55,7 +55,7 @@ exports.sendEmail = (clientUUID, securityCode, email) => {
 
   const frontendLink =
     process.env.NODE_ENV && process.env.NODE_ENV == 'production'
-      ? 'https://joyful-axolotl-efcdda.netlify.app/'
+      ? 'https://joyful-axolotl-efcdda.netlify.app'
       : 'http://localhost:3000'
 
   const mailOptions = {
