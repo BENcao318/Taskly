@@ -7,7 +7,6 @@ import { clientContext } from '../context/ClientContext'
 import { taskContext } from '../context/TaskContext'
 import serverAPI from '../hooks/useAxios'
 import { ToastContainer } from 'react-toastify'
-import { Modal } from 'flowbite-react'
 import { EditClientModal } from '../components/EditClientModal'
 import { DeleteClientModal } from '../components/DeleteClientModal'
 
@@ -101,18 +100,10 @@ export const ClientDetail = () => {
           handleCloseEditClientModal={handleCloseEditClientModal}
         />
 
-        <Modal
-          show={openDeleteClientModal.isOpen}
-          onClose={() => setOpenDeleteClientModal(false)}
-        >
-          <Modal.Header />
-          <Modal.Body>
-            <DeleteClientModal
-              setOpenDeleteClientModal={setOpenDeleteClientModal}
-              openDeleteClientModal={openDeleteClientModal}
-            />
-          </Modal.Body>
-        </Modal>
+        <DeleteClientModal
+          setOpenDeleteClientModal={setOpenDeleteClientModal}
+          openDeleteClientModal={openDeleteClientModal}
+        />
 
         <ToastContainer
           toastClassName={() =>

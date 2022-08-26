@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Modal } from 'flowbite-react'
 import { TaskSectionBody } from '../components/TaskSectionBody'
 import { TaskSectionHeader } from '../components/TaskSectionHeader'
 import { DeleteTaskModal } from '../components/DeleteTaskModal'
@@ -32,24 +31,11 @@ export const TaskSection = () => {
         searchTaskText={searchTaskText}
         filteredTasks={filteredTasks}
       />
-      <Modal
-        show={openDeleteTaskModal.isOpen}
-        onClose={() =>
-          setOpenDeleteTaskModal((prev) => ({
-            ...prev,
-            isOpen: false,
-            id: '',
-          }))
-        }
-      >
-        <Modal.Header />
-        <Modal.Body>
-          <DeleteTaskModal
-            setOpenDeleteTaskModal={setOpenDeleteTaskModal}
-            openDeleteTaskModal={openDeleteTaskModal}
-          />
-        </Modal.Body>
-      </Modal>
+
+      <DeleteTaskModal
+        setOpenDeleteTaskModal={setOpenDeleteTaskModal}
+        openDeleteTaskModal={openDeleteTaskModal}
+      />
     </div>
   )
 }

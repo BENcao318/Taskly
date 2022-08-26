@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { ReactComponent as PencilLogo } from '../assets/pencil.svg'
-import { Navbar, Button, Footer, Modal } from 'flowbite-react'
+import { Navbar, Button, Footer } from 'flowbite-react'
 import { BsGithub } from 'react-icons/bs'
 import { SignupModal } from '../components/SignupModal'
 import { SigninModal } from '../components/SigninModal'
@@ -74,26 +74,18 @@ export const LandingPage = ({ redirectPath }) => {
           </Footer.LinkGroup>
         </Footer>
       </section>
-      <Modal show={openSignupModal} onClose={() => setOpenSignupModal(false)}>
-        <Modal.Header size="1x1" />
-        <Modal.Body>
-          <SignupModal
-            setOpenSigninModal={setOpenSigninModal}
-            setOpenSignupModal={setOpenSignupModal}
-            openSignupModal={openSignupModal}
-          />
-        </Modal.Body>
-      </Modal>
-      <Modal show={openSigninModal} onClose={() => setOpenSigninModal(false)}>
-        <Modal.Header />
-        <Modal.Body>
-          <SigninModal
-            setOpenSigninModal={setOpenSigninModal}
-            setOpenSignupModal={setOpenSignupModal}
-            openSigninModal={openSigninModal}
-          />
-        </Modal.Body>
-      </Modal>
+
+      <SignupModal
+        setOpenSigninModal={setOpenSigninModal}
+        setOpenSignupModal={setOpenSignupModal}
+        openSignupModal={openSignupModal}
+      />
+
+      <SigninModal
+        setOpenSigninModal={setOpenSigninModal}
+        setOpenSignupModal={setOpenSignupModal}
+        openSigninModal={openSigninModal}
+      />
     </div>
   )
 }

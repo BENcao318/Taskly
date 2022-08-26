@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Modal } from 'flowbite-react'
 import { ClientSectionBody } from '../components/ClientSectionBody'
 import { ClientSectionHeader } from '../components/ClientSectionHeader'
 import { clientContext } from '../context/ClientContext'
@@ -81,18 +80,10 @@ export const ClientSection = () => {
         handleCloseEditClientModal={handleCloseEditClientModal}
       />
 
-      <Modal
-        show={openDeleteClientModal.isOpen}
-        onClose={() => setOpenDeleteClientModal(false)}
-      >
-        <Modal.Header />
-        <Modal.Body>
-          <DeleteClientModal
-            setOpenDeleteClientModal={setOpenDeleteClientModal}
-            openDeleteClientModal={openDeleteClientModal}
-          />
-        </Modal.Body>
-      </Modal>
+      <DeleteClientModal
+        setOpenDeleteClientModal={setOpenDeleteClientModal}
+        openDeleteClientModal={openDeleteClientModal}
+      />
     </div>
   )
 }
