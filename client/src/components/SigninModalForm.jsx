@@ -57,6 +57,7 @@ export const SigninModalForm = ({ setOpenSigninModal, setOpenSignupModal }) => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting, resetForm }) => {
+          console.log('test')
           handleSubmit(values)
           setSubmitting(false)
           resetForm()
