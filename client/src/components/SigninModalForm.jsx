@@ -39,6 +39,14 @@ export const SigninModalForm = ({ setOpenSigninModal, setOpenSignupModal }) => {
     signIn(user)
   }
 
+  const handleLoginAsAGuest = () => {
+    const user = {
+      email: 'ben@demo.com',
+      password: 'password66',
+    }
+    signIn(user)
+  }
+
   const initialValues = {
     email: '',
     password: '',
@@ -57,7 +65,6 @@ export const SigninModalForm = ({ setOpenSigninModal, setOpenSignupModal }) => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting, resetForm }) => {
-          console.log('test')
           handleSubmit(values)
           setSubmitting(false)
           resetForm()
@@ -146,16 +153,24 @@ export const SigninModalForm = ({ setOpenSigninModal, setOpenSignupModal }) => {
               Login to your account
             </button>
 
-            <div>
-              <span className="text-gray-400">Not registered? </span>
+            <div className="flex justify-between">
+              <div>
+                <span className="text-gray-400">Not registered? </span>
+                <span
+                  className="font-semibold text-blue-400 cursor-pointer hover:underline hover:text-blue-600"
+                  onClick={() => {
+                    setOpenSigninModal(false)
+                    setOpenSignupModal(true)
+                  }}
+                >
+                  Signup here
+                </span>
+              </div>
               <span
-                className="font-semibold text-blue-400 cursor-pointer hover:underline hover:text-blue-600"
-                onClick={() => {
-                  setOpenSigninModal(false)
-                  setOpenSignupModal(true)
-                }}
+                className="px-4 py-2 text-sm font-medium text-center text-white rounded-full cursor-pointer bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                onClick={handleLoginAsAGuest}
               >
-                Signup here
+                Login as a guest
               </span>
             </div>
           </div>
