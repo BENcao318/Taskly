@@ -88,7 +88,7 @@ app.get('/me', isAuth, (req, res) => {
 })
 
 app.get('/', (req, res) => {
-  res.status(200).json({ message: 'Hi' })
+  res.status(200).json({ message: 'Root access to backend ' })
 })
 
 app.listen(PORT, async () => {
