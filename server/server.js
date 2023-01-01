@@ -24,7 +24,7 @@ app.use(function (req, res, next) {
   if (allowedDomains.indexOf(origin) > -1) {
     res.setHeader('Access-Control-Allow-Origin', origin)
   }
-
+  //set CORS 
   // cors({
   //   origin: '','',
   //   methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE'],
