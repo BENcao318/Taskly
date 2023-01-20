@@ -31,7 +31,7 @@ export const ClientSection = () => {
       phoneNumber: '',
       summaryOfNeeds: '',
     }))
-    setEditAssignedTasks((prev) => [])
+    setEditAssignedTasks(() => [])
   }
 
   const handleCloseNewClientModal = () => {

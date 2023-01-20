@@ -13,6 +13,7 @@ export const Dashboard = () => {
   const [completedTasks, setCompletedTasks] = useState([])
   const [uncompletedTasks, setUncompletedTasks] = useState([])
 
+  //Server request for client data
   useEffect(() => {
     serverAPI
       .get('/users/clients')

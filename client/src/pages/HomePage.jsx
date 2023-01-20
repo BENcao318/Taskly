@@ -14,7 +14,7 @@ export const HomePage = () => {
           <Outlet />
           <ToastContainer
             toastClassName={() =>
-              'relative flex px-2 py-4 min-h-16 rounded-md justify-between text-white overflow-hidden cursor-pointer bg-green-200 text-black font-semibold'
+              'relative flex px-2 py-4 min-h-16 rounded-md justify-between text-white overflow-hidden cursor-pointer bg-green-300 text-black font-semibold'
             }
             position="top-center"
             autoClose={3600}

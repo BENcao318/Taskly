@@ -38,7 +38,7 @@ export const LandingPage = ({ redirectPath }) => {
               className="block py-2 pl-3 pr-6 font-medium text-gray-700 rounded cursor-pointer hover:text-sky-600 dark:text-gray-400 dark:hover:text-white text-md dark:border-gray-700"
               onClick={() => setOpenSigninModal(true)}
             >
-              Log in
+              Log on
             </span>
             <Button onClick={() => setOpenSignupModal(true)}>
               Get started

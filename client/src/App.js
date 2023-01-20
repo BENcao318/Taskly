@@ -18,6 +18,7 @@ import { Dashboard } from './sections/Dashboard'
 
 const App = () => {
   return (
+    //React Router
     <Router>
       <Routes>
         <Route

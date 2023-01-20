@@ -32,7 +32,7 @@ export const NavBar = () => {
             onClick={() => navigate('/home')}
           >
             <PencilLogo />
-            <span className="self-center px-2 text-xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="self-center px-2 text-xl font-semibold whitespace-nowrap dark:text-white dark:text-xl">
               Taskly
             </span>
           </div>

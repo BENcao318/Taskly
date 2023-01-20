@@ -38,7 +38,7 @@ export const EditClientModal = ({ setOpenEditClientModal }) => {
             summaryOfNeeds: '',
             uuid: '',
           }))
-          setEditAssignedTasks((prev) => [])
+          setEditAssignedTasks(() => [])
 
           serverAPI
             .get('/users/clients')
