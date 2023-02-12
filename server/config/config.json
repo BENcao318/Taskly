@@ -1,14 +1,14 @@
 {
   "development": {
-    "username": "labber",
-    "password": "labber",
+    "username": "ben",
+    "password": "ben",
     "database": "taskly",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "labber",
-    "password": "labber",
+    "username": "ben",
+    "password": "caoshere",
     "database": "taskly",
     "host": "127.0.0.1",
     "dialect": "postgres"
