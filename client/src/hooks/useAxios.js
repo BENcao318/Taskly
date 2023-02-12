@@ -13,7 +13,7 @@ const getBaseUrl = () => {
 
   return url
 }
-
+//set up connections with axios create
 const serverAPI = axios.create({
   baseURL: getBaseUrl(),
   withCredentials: true,
