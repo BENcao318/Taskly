@@ -52,10 +52,38 @@ $ cd client
 $ npm install
 ```
 
-```
+
 - You would need sequelize to create the database and adding seeds
 - We recommand use sequelize cli to easily implement above process
-- You might also need to change the username and password in server/config/config.json in order to connect to your database. We use postgreSQL for this application
+- You also need to create a config.json file in server/config/ with your username and password in order to connect to your database. We use postgreSQL for this application
+``` json
+{
+  "development": {
+    "username": "your username",
+    "password": "your password",
+    "database": "taskly",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "your username",
+    "password": "your password",
+    "database": "taskly",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "HEROKU_POSTGRESQL_AQUA_URL",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
+}
+```
+```
 $ cd server
 $ npm install --save-dev sequelize-cli
 $ sequelize db:create
